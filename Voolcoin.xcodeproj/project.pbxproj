@@ -1,0 +1,783 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		692686FE2A15ED0400A9436E /* VCAdViewRepresantable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692686FD2A15ED0400A9436E /* VCAdViewRepresantable.swift */; };
+		692687012A16DAC500A9436E /* UINavigationController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692687002A16DAC500A9436E /* UINavigationController + Extension.swift */; };
+		692BA9C12A092FF100202993 /* VCTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692BA9C02A092FF100202993 /* VCTransactionModel.swift */; };
+		692BA9C42A09300100202993 /* VCDailyRewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692BA9C32A09300100202993 /* VCDailyRewardsViewModel.swift */; };
+		692BA9C82A09306600202993 /* VCSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692BA9C52A09306600202993 /* VCSettingsView.swift */; };
+		692BA9C92A09306600202993 /* VCProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692BA9C62A09306600202993 /* VCProfileView.swift */; };
+		692BA9CA2A09306600202993 /* VCTransactionVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692BA9C72A09306600202993 /* VCTransactionVieww.swift */; };
+		693164662A20AADA00FF37CB /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693164652A20AADA00FF37CB /* DatabaseViewModel.swift */; };
+		693164B82A215A3500FF37CB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 693164B72A215A3500FF37CB /* FirebaseAnalytics */; };
+		693164BA2A215A3500FF37CB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 693164B92A215A3500FF37CB /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		693164BC2A215A3500FF37CB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 693164BB2A215A3500FF37CB /* FirebaseAuth */; };
+		693164BE2A215A3500FF37CB /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 693164BD2A215A3500FF37CB /* FirebaseCrashlytics */; };
+		693164C02A215A3500FF37CB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 693164BF2A215A3500FF37CB /* FirebaseDatabase */; };
+		693164C22A215A3500FF37CB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 693164C12A215A3500FF37CB /* FirebaseFirestore */; };
+		693164C42A215A3500FF37CB /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 693164C32A215A3500FF37CB /* FirebaseFunctions */; };
+		693164C62A215A3500FF37CB /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 693164C52A215A3500FF37CB /* FirebaseMessaging */; };
+		693164C82A215A3500FF37CB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 693164C72A215A3500FF37CB /* FirebaseStorage */; };
+		6937AF392A073E5000466471 /* VCRateAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6937AF382A073E5000466471 /* VCRateAppView.swift */; };
+		6937AF3C2A074EAC00466471 /* VCCustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6937AF3B2A074EAC00466471 /* VCCustomTransition.swift */; };
+		6976D1DF2A02E4AD006C2CC5 /* VCDailyRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976D1DE2A02E4AD006C2CC5 /* VCDailyRewardView.swift */; };
+		6976D1E22A02E607006C2CC5 /* VCDailyRewardCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976D1E12A02E607006C2CC5 /* VCDailyRewardCardsView.swift */; };
+		6976D1E62A02EEA5006C2CC5 /* VCCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976D1E52A02EEA5006C2CC5 /* VCCardView.swift */; };
+		69ADAE3F2A03791A00843713 /* VCDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ADAE3E2A03791A00843713 /* VCDetailsView.swift */; };
+		8C03598D2A050F29002E164A /* VCLinearGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03598C2A050F29002E164A /* VCLinearGradientView.swift */; };
+		8C0359902A065C76002E164A /* videoAdInterstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03598F2A065C76002E164A /* videoAdInterstitial.swift */; };
+		8C0B14CC2A191D11005FA310 /* WelcomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */; };
+		8C0B14CE2A191DE8005FA310 /* SignInScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CD2A191DE8005FA310 /* SignInScreenView.swift */; };
+		8C0B14D02A192C26005FA310 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */; };
+		8C30018E2A0A3AA00081053A /* VCRewardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C30018D2A0A3AA00081053A /* VCRewardModel.swift */; };
+		8C3001902A0A4FD50081053A /* VCSettingsRenameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C30018F2A0A4FD50081053A /* VCSettingsRenameView.swift */; };
+		8C3001922A0A66FF0081053A /* VCSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3001912A0A66FE0081053A /* VCSegmentedControl.swift */; };
+		8C9052C42A1ECE2600869F75 /* +View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9052C32A1ECE2600869F75 /* +View.swift */; };
+		8CA5A9642A1E5A0C00BC5E7A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA5A9632A1E5A0C00BC5E7A /* GoogleSignIn */; };
+		8CA5A9662A1E5A0C00BC5E7A /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA5A9652A1E5A0C00BC5E7A /* GoogleSignInSwift */; };
+		8CA5A9682A1E5A3400BC5E7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CA5A9672A1E5A3400BC5E7A /* GoogleService-Info.plist */; };
+		8CA5A96B2A1E5DD900BC5E7A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA5A96A2A1E5DD900BC5E7A /* LoginViewModel.swift */; };
+		8CA5A96D2A1E66BF00BC5E7A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA5A96C2A1E66BF00BC5E7A /* CustomTextField.swift */; };
+		8CC82A682A1F7C40002B722B /* SignInWithGoogleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC82A672A1F7C40002B722B /* SignInWithGoogleViewModel.swift */; };
+		8CCA75312A0CABB200911B4F /* VoolcoinModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA752F2A0CABB200911B4F /* VoolcoinModel.xcdatamodeld */; };
+		8CCA75332A0CAF8300911B4F /* VoolcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA75322A0CAF8300911B4F /* VoolcoinManager.swift */; };
+		8CF5F9332A025DCA00CF6262 /* VoolcoinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9322A025DCA00CF6262 /* VoolcoinApp.swift */; };
+		8CF5F9352A025DCA00CF6262 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9342A025DCA00CF6262 /* ContentView.swift */; };
+		8CF5F9372A025DCB00CF6262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CF5F9362A025DCB00CF6262 /* Assets.xcassets */; };
+		8CF5F93A2A025DCB00CF6262 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CF5F9392A025DCB00CF6262 /* Preview Assets.xcassets */; };
+		8CF5F93C2A025DCB00CF6262 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F93B2A025DCB00CF6262 /* Persistence.swift */; };
+		8CF5F9632A026AF900CF6262 /* VCHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9622A026AF900CF6262 /* VCHomeView.swift */; };
+		8CF5F9652A03AF4900CF6262 /* VCTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF5F9642A03AF4900CF6262 /* VCTransactionView.swift */; };
+		ABEDEEB5BA21229E488BFD6D /* Pods_Voolcoin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765748938205ED86C82B864B /* Pods_Voolcoin.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2D0DEEB770AD2C352FB44BB8 /* Pods-Voolcoin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voolcoin.release.xcconfig"; path = "Target Support Files/Pods-Voolcoin/Pods-Voolcoin.release.xcconfig"; sourceTree = "<group>"; };
+		692686FD2A15ED0400A9436E /* VCAdViewRepresantable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAdViewRepresantable.swift; sourceTree = "<group>"; };
+		692687002A16DAC500A9436E /* UINavigationController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController + Extension.swift"; sourceTree = "<group>"; };
+		692BA9C02A092FF100202993 /* VCTransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCTransactionModel.swift; sourceTree = "<group>"; };
+		692BA9C32A09300100202993 /* VCDailyRewardsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCDailyRewardsViewModel.swift; sourceTree = "<group>"; };
+		692BA9C52A09306600202993 /* VCSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCSettingsView.swift; sourceTree = "<group>"; };
+		692BA9C62A09306600202993 /* VCProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCProfileView.swift; sourceTree = "<group>"; };
+		692BA9C72A09306600202993 /* VCTransactionVieww.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCTransactionVieww.swift; sourceTree = "<group>"; };
+		693164652A20AADA00FF37CB /* DatabaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
+		6937AF382A073E5000466471 /* VCRateAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRateAppView.swift; sourceTree = "<group>"; };
+		6937AF3B2A074EAC00466471 /* VCCustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCustomTransition.swift; sourceTree = "<group>"; };
+		6976D1DE2A02E4AD006C2CC5 /* VCDailyRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCDailyRewardView.swift; sourceTree = "<group>"; };
+		6976D1E12A02E607006C2CC5 /* VCDailyRewardCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCDailyRewardCardsView.swift; sourceTree = "<group>"; };
+		6976D1E52A02EEA5006C2CC5 /* VCCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCardView.swift; sourceTree = "<group>"; };
+		69ADAE3E2A03791A00843713 /* VCDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCDetailsView.swift; sourceTree = "<group>"; };
+		765748938205ED86C82B864B /* Pods_Voolcoin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Voolcoin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C03598C2A050F29002E164A /* VCLinearGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLinearGradientView.swift; sourceTree = "<group>"; };
+		8C03598E2A0658DE002E164A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8C03598F2A065C76002E164A /* videoAdInterstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videoAdInterstitial.swift; sourceTree = "<group>"; };
+		8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenView.swift; sourceTree = "<group>"; };
+		8C0B14CD2A191DE8005FA310 /* SignInScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenView.swift; sourceTree = "<group>"; };
+		8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		8C30018D2A0A3AA00081053A /* VCRewardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRewardModel.swift; sourceTree = "<group>"; };
+		8C30018F2A0A4FD50081053A /* VCSettingsRenameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSettingsRenameView.swift; sourceTree = "<group>"; };
+		8C3001912A0A66FE0081053A /* VCSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSegmentedControl.swift; sourceTree = "<group>"; };
+		8C9052C32A1ECE2600869F75 /* +View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+View.swift"; sourceTree = "<group>"; };
+		8CA5A9672A1E5A3400BC5E7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8CA5A9692A1E5B3A00BC5E7A /* Voolcoin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Voolcoin.entitlements; sourceTree = "<group>"; };
+		8CA5A96A2A1E5DD900BC5E7A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8CA5A96C2A1E66BF00BC5E7A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		8CC82A672A1F7C40002B722B /* SignInWithGoogleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogleViewModel.swift; sourceTree = "<group>"; };
+		8CCA75302A0CABB200911B4F /* VoolcoinModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VoolcoinModel.xcdatamodel; sourceTree = "<group>"; };
+		8CCA75322A0CAF8300911B4F /* VoolcoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoolcoinManager.swift; sourceTree = "<group>"; };
+		8CF5F92F2A025DCA00CF6262 /* Voolcoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voolcoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CF5F9322A025DCA00CF6262 /* VoolcoinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoolcoinApp.swift; sourceTree = "<group>"; };
+		8CF5F9342A025DCA00CF6262 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8CF5F9362A025DCB00CF6262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CF5F9392A025DCB00CF6262 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8CF5F93B2A025DCB00CF6262 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8CF5F9622A026AF900CF6262 /* VCHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCHomeView.swift; sourceTree = "<group>"; };
+		8CF5F9642A03AF4900CF6262 /* VCTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCTransactionView.swift; sourceTree = "<group>"; };
+		C0A2711AF2E7421102548890 /* Pods-Voolcoin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voolcoin.debug.xcconfig"; path = "Target Support Files/Pods-Voolcoin/Pods-Voolcoin.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8CF5F92C2A025DCA00CF6262 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABEDEEB5BA21229E488BFD6D /* Pods_Voolcoin.framework in Frameworks */,
+				693164BC2A215A3500FF37CB /* FirebaseAuth in Frameworks */,
+				693164BA2A215A3500FF37CB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				693164BE2A215A3500FF37CB /* FirebaseCrashlytics in Frameworks */,
+				8CA5A9642A1E5A0C00BC5E7A /* GoogleSignIn in Frameworks */,
+				693164C82A215A3500FF37CB /* FirebaseStorage in Frameworks */,
+				693164C22A215A3500FF37CB /* FirebaseFirestore in Frameworks */,
+				693164B82A215A3500FF37CB /* FirebaseAnalytics in Frameworks */,
+				693164C42A215A3500FF37CB /* FirebaseFunctions in Frameworks */,
+				693164C02A215A3500FF37CB /* FirebaseDatabase in Frameworks */,
+				693164C62A215A3500FF37CB /* FirebaseMessaging in Frameworks */,
+				8CA5A9662A1E5A0C00BC5E7A /* GoogleSignInSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		692686D62A10BD8A00A9436E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				692BA9C62A09306600202993 /* VCProfileView.swift */,
+				8C30018F2A0A4FD50081053A /* VCSettingsRenameView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		692686FC2A15ECCE00A9436E /* View Represantable */ = {
+			isa = PBXGroup;
+			children = (
+				692686FD2A15ED0400A9436E /* VCAdViewRepresantable.swift */,
+			);
+			path = "View Represantable";
+			sourceTree = "<group>";
+		};
+		692686FF2A16DAAA00A9436E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				692687002A16DAC500A9436E /* UINavigationController + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		692BA9BF2A092FF100202993 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				692BA9C02A092FF100202993 /* VCTransactionModel.swift */,
+				8C30018D2A0A3AA00081053A /* VCRewardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		692BA9C22A09300100202993 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				692BA9C32A09300100202993 /* VCDailyRewardsViewModel.swift */,
+				8CA5A96A2A1E5DD900BC5E7A /* LoginViewModel.swift */,
+				8CC82A672A1F7C40002B722B /* SignInWithGoogleViewModel.swift */,
+				693164652A20AADA00FF37CB /* DatabaseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6937AF362A073CC600466471 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				692BA9C52A09306600202993 /* VCSettingsView.swift */,
+				6937AF382A073E5000466471 /* VCRateAppView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		6937AF3A2A074E9100466471 /* CustomAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				6937AF3B2A074EAC00466471 /* VCCustomTransition.swift */,
+			);
+			path = CustomAnimation;
+			sourceTree = "<group>";
+		};
+		6976D1DC2A02E253006C2CC5 /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				692686D62A10BD8A00A9436E /* Profile */,
+				6937AF362A073CC600466471 /* Settings */,
+				692BA9C72A09306600202993 /* VCTransactionVieww.swift */,
+				8CF5F9622A026AF900CF6262 /* VCHomeView.swift */,
+			);
+			path = "Main Views";
+			sourceTree = "<group>";
+		};
+		6976D1DD2A02E25F006C2CC5 /* Submain Views */ = {
+			isa = PBXGroup;
+			children = (
+				6976D1DE2A02E4AD006C2CC5 /* VCDailyRewardView.swift */,
+				6976D1E52A02EEA5006C2CC5 /* VCCardView.swift */,
+				69ADAE3E2A03791A00843713 /* VCDetailsView.swift */,
+				8CF5F9642A03AF4900CF6262 /* VCTransactionView.swift */,
+				8C3001912A0A66FE0081053A /* VCSegmentedControl.swift */,
+				8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */,
+				8C0B14CD2A191DE8005FA310 /* SignInScreenView.swift */,
+				8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */,
+				8CA5A96C2A1E66BF00BC5E7A /* CustomTextField.swift */,
+			);
+			path = "Submain Views";
+			sourceTree = "<group>";
+		};
+		6976D1E02A02E5E9006C2CC5 /* CardViews */ = {
+			isa = PBXGroup;
+			children = (
+				6976D1E12A02E607006C2CC5 /* VCDailyRewardCardsView.swift */,
+			);
+			path = CardViews;
+			sourceTree = "<group>";
+		};
+		8C03598B2A050EFC002E164A /* CustomLinearGradient */ = {
+			isa = PBXGroup;
+			children = (
+				8C03598C2A050F29002E164A /* VCLinearGradientView.swift */,
+			);
+			path = CustomLinearGradient;
+			sourceTree = "<group>";
+		};
+		8CF5F9262A025DCA00CF6262 = {
+			isa = PBXGroup;
+			children = (
+				8CF5F9312A025DCA00CF6262 /* Voolcoin */,
+				8CF5F9302A025DCA00CF6262 /* Products */,
+				EA4AFDD170A7B56C03EB7EDA /* Pods */,
+				B84C69AC80BD7F2573279268 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8CF5F9302A025DCA00CF6262 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CF5F92F2A025DCA00CF6262 /* Voolcoin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8CF5F9312A025DCA00CF6262 /* Voolcoin */ = {
+			isa = PBXGroup;
+			children = (
+				8CA5A9692A1E5B3A00BC5E7A /* Voolcoin.entitlements */,
+				8C03598E2A0658DE002E164A /* Info.plist */,
+				8CA5A9672A1E5A3400BC5E7A /* GoogleService-Info.plist */,
+				692686FF2A16DAAA00A9436E /* Extensions */,
+				692BA9C22A09300100202993 /* ViewModel */,
+				692BA9BF2A092FF100202993 /* Model */,
+				8CF5F95F2A026AB500CF6262 /* View */,
+				8CF5F9322A025DCA00CF6262 /* VoolcoinApp.swift */,
+				8CF5F9342A025DCA00CF6262 /* ContentView.swift */,
+				8CF5F9362A025DCB00CF6262 /* Assets.xcassets */,
+				8CF5F93B2A025DCB00CF6262 /* Persistence.swift */,
+				8CF5F9382A025DCB00CF6262 /* Preview Content */,
+				8C03598F2A065C76002E164A /* videoAdInterstitial.swift */,
+				8CCA75322A0CAF8300911B4F /* VoolcoinManager.swift */,
+				8CCA752F2A0CABB200911B4F /* VoolcoinModel.xcdatamodeld */,
+				8C9052C32A1ECE2600869F75 /* +View.swift */,
+			);
+			path = Voolcoin;
+			sourceTree = "<group>";
+		};
+		8CF5F9382A025DCB00CF6262 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8CF5F9392A025DCB00CF6262 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8CF5F95F2A026AB500CF6262 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				692686FC2A15ECCE00A9436E /* View Represantable */,
+				6937AF3A2A074E9100466471 /* CustomAnimation */,
+				8C03598B2A050EFC002E164A /* CustomLinearGradient */,
+				6976D1E02A02E5E9006C2CC5 /* CardViews */,
+				6976D1DD2A02E25F006C2CC5 /* Submain Views */,
+				6976D1DC2A02E253006C2CC5 /* Main Views */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B84C69AC80BD7F2573279268 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				765748938205ED86C82B864B /* Pods_Voolcoin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA4AFDD170A7B56C03EB7EDA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C0A2711AF2E7421102548890 /* Pods-Voolcoin.debug.xcconfig */,
+				2D0DEEB770AD2C352FB44BB8 /* Pods-Voolcoin.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8CF5F92E2A025DCA00CF6262 /* Voolcoin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CF5F9422A025DCB00CF6262 /* Build configuration list for PBXNativeTarget "Voolcoin" */;
+			buildPhases = (
+				BA00F9BEC253B82EE7749544 /* [CP] Check Pods Manifest.lock */,
+				8CF5F92B2A025DCA00CF6262 /* Sources */,
+				8CF5F92C2A025DCA00CF6262 /* Frameworks */,
+				8CF5F92D2A025DCA00CF6262 /* Resources */,
+				79A1BAB50C543B7C07EECE81 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Voolcoin;
+			packageProductDependencies = (
+				8CA5A9632A1E5A0C00BC5E7A /* GoogleSignIn */,
+				8CA5A9652A1E5A0C00BC5E7A /* GoogleSignInSwift */,
+				693164B72A215A3500FF37CB /* FirebaseAnalytics */,
+				693164B92A215A3500FF37CB /* FirebaseAnalyticsWithoutAdIdSupport */,
+				693164BB2A215A3500FF37CB /* FirebaseAuth */,
+				693164BD2A215A3500FF37CB /* FirebaseCrashlytics */,
+				693164BF2A215A3500FF37CB /* FirebaseDatabase */,
+				693164C12A215A3500FF37CB /* FirebaseFirestore */,
+				693164C32A215A3500FF37CB /* FirebaseFunctions */,
+				693164C52A215A3500FF37CB /* FirebaseMessaging */,
+				693164C72A215A3500FF37CB /* FirebaseStorage */,
+			);
+			productName = Voolcoin;
+			productReference = 8CF5F92F2A025DCA00CF6262 /* Voolcoin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8CF5F9272A025DCA00CF6262 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					8CF5F92E2A025DCA00CF6262 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = 8CF5F92A2A025DCA00CF6262 /* Build configuration list for PBXProject "Voolcoin" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8CF5F9262A025DCA00CF6262;
+			packageReferences = (
+				8CA5A9622A1E5A0C00BC5E7A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 8CF5F9302A025DCA00CF6262 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8CF5F92E2A025DCA00CF6262 /* Voolcoin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8CF5F92D2A025DCA00CF6262 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CF5F93A2A025DCB00CF6262 /* Preview Assets.xcassets in Resources */,
+				8CF5F9372A025DCB00CF6262 /* Assets.xcassets in Resources */,
+				8CA5A9682A1E5A3400BC5E7A /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79A1BAB50C543B7C07EECE81 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Voolcoin/Pods-Voolcoin-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Voolcoin/Pods-Voolcoin-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Voolcoin/Pods-Voolcoin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA00F9BEC253B82EE7749544 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Voolcoin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8CF5F92B2A025DCA00CF6262 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CCA75312A0CABB200911B4F /* VoolcoinModel.xcdatamodeld in Sources */,
+				692BA9CA2A09306600202993 /* VCTransactionVieww.swift in Sources */,
+				8C30018E2A0A3AA00081053A /* VCRewardModel.swift in Sources */,
+				6976D1E62A02EEA5006C2CC5 /* VCCardView.swift in Sources */,
+				693164662A20AADA00FF37CB /* DatabaseViewModel.swift in Sources */,
+				8C0B14CE2A191DE8005FA310 /* SignInScreenView.swift in Sources */,
+				8C3001922A0A66FF0081053A /* VCSegmentedControl.swift in Sources */,
+				8CF5F93C2A025DCB00CF6262 /* Persistence.swift in Sources */,
+				8CC82A682A1F7C40002B722B /* SignInWithGoogleViewModel.swift in Sources */,
+				8C0359902A065C76002E164A /* videoAdInterstitial.swift in Sources */,
+				692BA9C12A092FF100202993 /* VCTransactionModel.swift in Sources */,
+				8CCA75332A0CAF8300911B4F /* VoolcoinManager.swift in Sources */,
+				8C0B14D02A192C26005FA310 /* CreateAccountView.swift in Sources */,
+				6937AF392A073E5000466471 /* VCRateAppView.swift in Sources */,
+				8C9052C42A1ECE2600869F75 /* +View.swift in Sources */,
+				6976D1E22A02E607006C2CC5 /* VCDailyRewardCardsView.swift in Sources */,
+				8C0B14CC2A191D11005FA310 /* WelcomeScreenView.swift in Sources */,
+				8CA5A96D2A1E66BF00BC5E7A /* CustomTextField.swift in Sources */,
+				692687012A16DAC500A9436E /* UINavigationController + Extension.swift in Sources */,
+				8CF5F9352A025DCA00CF6262 /* ContentView.swift in Sources */,
+				69ADAE3F2A03791A00843713 /* VCDetailsView.swift in Sources */,
+				6976D1DF2A02E4AD006C2CC5 /* VCDailyRewardView.swift in Sources */,
+				692BA9C42A09300100202993 /* VCDailyRewardsViewModel.swift in Sources */,
+				8C3001902A0A4FD50081053A /* VCSettingsRenameView.swift in Sources */,
+				692BA9C92A09306600202993 /* VCProfileView.swift in Sources */,
+				8CA5A96B2A1E5DD900BC5E7A /* LoginViewModel.swift in Sources */,
+				8CF5F9632A026AF900CF6262 /* VCHomeView.swift in Sources */,
+				692BA9C82A09306600202993 /* VCSettingsView.swift in Sources */,
+				8CF5F9652A03AF4900CF6262 /* VCTransactionView.swift in Sources */,
+				8CF5F9332A025DCA00CF6262 /* VoolcoinApp.swift in Sources */,
+				8C03598D2A050F29002E164A /* VCLinearGradientView.swift in Sources */,
+				6937AF3C2A074EAC00466471 /* VCCustomTransition.swift in Sources */,
+				692686FE2A15ED0400A9436E /* VCAdViewRepresantable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8CF5F9402A025DCB00CF6262 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8CF5F9412A025DCB00CF6262 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8CF5F9432A025DCB00CF6262 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0A2711AF2E7421102548890 /* Pods-Voolcoin.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Voolcoin/Voolcoin.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Voolcoin/Preview Content\"";
+				DEVELOPMENT_TEAM = 546KM6S3B9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Voolcoin/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insomnia.Voolcoin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8CF5F9442A025DCB00CF6262 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D0DEEB770AD2C352FB44BB8 /* Pods-Voolcoin.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Voolcoin/Voolcoin.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Voolcoin/Preview Content\"";
+				DEVELOPMENT_TEAM = 546KM6S3B9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Voolcoin/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insomnia.Voolcoin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8CF5F92A2A025DCA00CF6262 /* Build configuration list for PBXProject "Voolcoin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CF5F9402A025DCB00CF6262 /* Debug */,
+				8CF5F9412A025DCB00CF6262 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CF5F9422A025DCB00CF6262 /* Build configuration list for PBXNativeTarget "Voolcoin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CF5F9432A025DCB00CF6262 /* Debug */,
+				8CF5F9442A025DCB00CF6262 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		8CA5A9622A1E5A0C00BC5E7A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		693164B72A215A3500FF37CB /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		693164B92A215A3500FF37CB /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		693164BB2A215A3500FF37CB /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		693164BD2A215A3500FF37CB /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		693164BF2A215A3500FF37CB /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		693164C12A215A3500FF37CB /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		693164C32A215A3500FF37CB /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		693164C52A215A3500FF37CB /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		693164C72A215A3500FF37CB /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693164B62A215A3400FF37CB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		8CA5A9632A1E5A0C00BC5E7A /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CA5A9622A1E5A0C00BC5E7A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		8CA5A9652A1E5A0C00BC5E7A /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CA5A9622A1E5A0C00BC5E7A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		8CCA752F2A0CABB200911B4F /* VoolcoinModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8CCA75302A0CABB200911B4F /* VoolcoinModel.xcdatamodel */,
+			);
+			currentVersion = 8CCA75302A0CABB200911B4F /* VoolcoinModel.xcdatamodel */;
+			path = VoolcoinModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8CF5F9272A025DCA00CF6262 /* Project object */;
+}
