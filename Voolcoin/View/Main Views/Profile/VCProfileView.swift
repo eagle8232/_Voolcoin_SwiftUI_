@@ -14,8 +14,9 @@ struct VCProfileView: View {
     @State var endPoint: UnitPoint = .trailing
     
     @State var name = "Kamran"
-    @State var username = "kamran568973"
+    @State var username = ""
     @State var email = "kamran.babayev.23@mail.ru"
+    var userModel: VCUserModel?
     
     var body: some View {
         
@@ -25,44 +26,67 @@ struct VCProfileView: View {
                 
                 VCLinearGradientView(startPoint: startPoint, endPoint: endPoint)
                 
-                ScrollView {
-                    
-                    VStack {
-                        
-                        Circle()
-                            .overlay(content: {
-                                Text(String(name.first ?? " "))
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 50))
-                            })
-                            .frame(width: 150, height: 150)
-                            .foregroundColor(.gray.opacity(0.5))
-                        
-                        Text(name)
-                            .foregroundColor(.white)
-                            .font(.system(size: 30, weight: .bold, design: .default))
-                        
-                        VCSettingsRenameView(name: $name, username: $username, email: $email)
-
-                        Spacer(minLength: 25)
-                        
-                        Button {
-                            
-                        } label: {
-                            
-                            Capsule()
-                                .fill(.yellow.opacity(0.8))
-                                .frame(width: 275, height: 45)
-                                .overlay {
-                                    Text("Save")
-                                        .font(.system(size: 15))
-                                        .foregroundColor(.black)
+                //                ScrollView {
+                
+                VStack {
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color.gray.opacity(0.6))
+                        .frame(height: 150)
+                        .overlay {
+                            HStack(spacing: 20) {
+                                
+                                Circle()
+                                    .overlay(content: {
+                                        Text(String((userModel?.name ?? "unknown").capitalized.first ?? " "))
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 50))
+                                    })
+                                    .frame(width: 110, height: 110)
+                                    .foregroundColor(.gray.opacity(0.9))
+                                VStack(alignment: .leading) {
+                                    Text("Full Name")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 18, weight: .thin))
+                                    Text(userModel?.name ?? "unknown")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 18, weight: .regular))
+                                    Spacer()
+                                    Text("Email")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 18, weight: .thin))
+                                    Text(userModel?.email ?? "unknown")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 18, weight: .regular))
                                 }
+                                .padding(.vertical)
+                                
+                                //                        VCSettingsRenameView(name: $name, username: $username, email: $email)
+                                
+                            }
                         }
-
-                    }
-                    .padding()
+                        .padding()
+                        .shadow(color: .gray, radius: 10)
+                    
+                    Spacer()
                 }
+                    
+//                        Button {
+//
+//                        } label: {
+//
+//                            Capsule()
+//                                .fill(.yellow.opacity(0.8))
+//                                .frame(width: 275, height: 45)
+//                                .overlay {
+//                                    Text("Save")
+//                                        .font(.system(size: 15))
+//                                        .foregroundColor(.black)
+//                                }
+//                        }
+
+//                    }
+//                    .padding()
+                
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         

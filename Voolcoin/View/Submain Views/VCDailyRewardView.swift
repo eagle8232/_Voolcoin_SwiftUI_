@@ -41,17 +41,17 @@ struct VCDailyRewardView: View {
                     .padding(.horizontal)
                     .foregroundColor(.white)
                 
-
+                
                 
             }
             
             switch rewardsState {
             case .watched:
-                    HStack {
-                        VCBlockedCardView(rewardState: rewardsState)
-                        VCBlockedCardView(rewardState: rewardsState)
-                        VCBlockedCardView(rewardState: rewardsState)
-                    }
+                HStack {
+                    VCBlockedCardView(rewardState: rewardsState)
+                    VCBlockedCardView(rewardState: rewardsState)
+                    VCBlockedCardView(rewardState: rewardsState)
+                }
             case .unwatched:
                 VCDailyRewardCardsView()
                     .frame(width: 302, height: 165, alignment: .center)
@@ -60,7 +60,6 @@ struct VCDailyRewardView: View {
         
         .onAppear {
             watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
-            print(watchedAmount)
             
             if watchedAmount == 3 {
                 rewardsState = .watched

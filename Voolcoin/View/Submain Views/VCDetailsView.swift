@@ -11,13 +11,9 @@ struct VCDetailsView: View {
     
     @Binding var isPresentingTransactionsView: Bool
     @Binding var chosenType: TransactionType
-    @EnvironmentObject var transaction: VoolcoinModel
+    @Binding var transactions: [VCTransactionModel]
     
-    @FetchRequest(entity: VoolcoinModel.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
-    var transactions: FetchedResults<VoolcoinModel>
-
-    
-    var maxNumberOfTransactions: Int = 3
+    var maxNumberOfTransactionShown: Int = 0
     var body: some View {
         
         ZStack {
@@ -44,14 +40,12 @@ struct VCDetailsView: View {
                 }
                 
                 VStack {
-                    ForEach(0..<transactions.count) { index in
-                        if index < maxNumberOfTransactions {
-                            let transactionModel = transactions[index]
-                            VCTransactionView(chosenType: $chosenType)
-                                .environmentObject(transactionModel)
+                    ForEach(Array(transactions.enumerated()), id: \.1.date) { (index, transactionModel) in
+                        if index < 3 {
+                            VCTransactionView(chosenType: $chosenType, transaction: transactions[transactions.count - index - 1])
                         }
                     }
-                    
+
                 }
                 
             }
@@ -59,13 +53,13 @@ struct VCDetailsView: View {
             .background(Color.gray.opacity(0.2))
             .cornerRadius(20)
             
-            //                }
+            
         }
     }
 }
 
 struct VCDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        VCDetailsView(isPresentingTransactionsView: .constant(true), chosenType: .constant(.all))
+        VCDetailsView(isPresentingTransactionsView: .constant(true), chosenType: .constant(.all), transactions: .constant([VCTransactionModel(type: .income, amount: 0.0, date: "")]))
     }
 }

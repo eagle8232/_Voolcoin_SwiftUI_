@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct VCHomeView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -13,8 +14,8 @@ struct VCHomeView: View {
     @State var chosenType: TransactionType = .all
     @State var cardAmount: Double = 0.0
     
-    @FetchRequest(entity: VoolcoinModel.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
-    var transactions: FetchedResults<VoolcoinModel>
+    @State var transactions: [VCTransactionModel] = []
+    @State var userModel: VCUserModel?
     
     var body: some View {
         NavigationView {
@@ -25,7 +26,7 @@ struct VCHomeView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 12) {
                         HStack(spacing: 15) {
-                            NavigationLink(destination: VCProfileView()) {
+                            NavigationLink(destination: VCProfileView(userModel: userModel)) {
                                 RoundedRectangle(cornerRadius: 15)
                                     .frame(width: 50, height: 50)
                                     .foregroundColor(Color.gray.opacity(0.4))
@@ -46,7 +47,7 @@ struct VCHomeView: View {
                                     .fontWeight(.light)
                                     .foregroundColor(.white)
                                 
-                                Text("Kamran")
+                                Text(userModel?.name ?? "????")
                                     .font(.largeTitle.bold())
                                     .foregroundColor(.white)
                                 
@@ -72,11 +73,11 @@ struct VCHomeView: View {
                         
                         Spacer()
                         
-                        VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: $chosenType, cardAmount: cardAmount, lastIncome: transactions.first {$0.type == "Income"}?.amount ?? 0, lastOutcome: transactions.first {$0.type == "Outcome"}?.amount ?? 0)
+                        VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: $chosenType, cardAmount: cardAmount, lastIncome: transactions.last {$0.type.rawValue == "Income"}?.amount ?? 0, lastOutcome: transactions.last {$0.type.rawValue == "Outcome"}?.amount ?? 0)
                         
                         Spacer()
                         
-                        VCDetailsView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: .constant(.all))
+                        VCDetailsView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: .constant(.all), transactions: $transactions)
                         
                         Spacer()
                         
@@ -89,21 +90,72 @@ struct VCHomeView: View {
             .fullScreenCover(isPresented: $isPresentingTransactionsView, onDismiss: {
                 chosenType = .all
             }) {
-                VCTransactionVieww(isPresenting: $isPresentingTransactionsView, chosenType: $chosenType)
+                VCTransactionVieww(isPresenting: $isPresentingTransactionsView, chosenType: $chosenType, transactions: $transactions)
             }
             .onDisappear {
                 cardAmount = 0
                 print("on dissapear")
             }
+            .refreshable {
+                setData()
+            }
             .onAppear {
                 for i in 0..<transactions.count {
                     cardAmount += transactions[i].amount
                 }
-                print("on appear")
+                
+                setData()
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
+    }
+    
+    func fetchTransactions(completion: @escaping (([VCTransactionModel]?) -> Void)) {
+        var transactions: [VCTransactionModel] = []
+        if let userId = Auth.auth().currentUser?.uid {
+            print(userId)
+            DatabaseViewModel().fetchTransactionsFromFirestore(userId: userId) { entries, error in
+                if let entries = entries, error == nil {
+                    for entry in entries {
+                        let transaction = VCTransactionModel(type: TransactionType(rawValue: entry["type"] as? String ?? "Income") ?? .income, amount: entry["amount"] as? Double ?? 0.0, date: entry["date"] as? String ?? "")
+                        transactions.append(transaction)
+                    }
+                    completion(transactions)
+                    print(transactions)
+                }
+            }
+        }
+    }
+    
+    func fetchUserData(completion: @escaping ((VCUserModel?) -> Void)) {
+        var userModel: VCUserModel?
+        
+        if let userId = Auth.auth().currentUser?.uid, let email = Auth.auth().currentUser?.email {
+            DatabaseViewModel().fetchUserModel(userId: userId) { user, error in
+                if let user = user, error == nil {
+                    userModel = VCUserModel(name: user["name"] as! String, email: email)
+                    completion(userModel)
+                } else if let error = error {
+                    print(error)
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    func setData() {
+        fetchTransactions { transactions in
+            if let transactions {
+                self.transactions = transactions
+            }
+        }
+        
+        fetchUserData { userModel in
+            if let userModel {
+                self.userModel = userModel
+            }
+        }
     }
 }
 

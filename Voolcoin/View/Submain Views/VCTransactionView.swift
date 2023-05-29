@@ -10,33 +10,33 @@ import SwiftUI
 struct VCTransactionView: View {
     
     @Binding var chosenType: TransactionType
-    @EnvironmentObject var transaction: VoolcoinModel
+    var transaction: VCTransactionModel
     
     var widthSize: CGFloat = .infinity
     
     @State private var showTransaction: Bool = false
     
     var body: some View {
-        if transaction.type! == chosenType.rawValue || chosenType == .all {
+        if transaction.type == chosenType || chosenType == .all {
             HStack(spacing: 10) {
-                Image(systemName: transaction.type == "Income" ? "arrow.down" : "arrow.up")
-                    .foregroundColor(transaction.type == "Income" ? Color.green : Color.red)
+                Image(systemName: transaction.type == .income ? "arrow.down" : "arrow.up")
+                    .foregroundColor(transaction.type == .income ? Color.green : Color.red)
                     .frame(width: 40, height: 40)
                     .background(.black.opacity(0.7), in: Circle())
                 
                 VStack(alignment: .leading) {
-                    Text(transaction.type == "Income" ? "Income" : "Outcome")
+                    Text(transaction.type == .income ? "Income" : "Outcome")
                         .foregroundColor(.white.opacity(0.7))
                         .fontWeight(.medium)
-                    Text("\((String(format: "%.1f", transaction.amount) )) voolcoins")
+                    Text("\((String(format: "%.1f", transaction.amount))) voolcoins")
                         .font(.system(size: 15, weight: .semibold, design: .default))
                         .lineLimit(1)
                         .frame(maxWidth: 120, alignment: .leading)
-                        .foregroundColor(transaction.type == "Income" ? Color.green : Color.red)
+                        .foregroundColor(transaction.type == .income ? Color.green : Color.red)
                 }
                 
-                Text(getDate())
-                    .font(.system(size: 14))
+                Text(getDate() ?? "??? ?? ????")
+                    .font(.system(size: 18))
                     .fontWeight(.thin)
                     .opacity(0.7)
                     .foregroundColor(.white)
@@ -63,17 +63,27 @@ struct VCTransactionView: View {
         }
     }
     
-    func getDate() -> String {
+    func getDate() -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, EEEE"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = transaction.date
-        let dateString = dateFormatter.string(from: date!)
-        return dateString
+        
+        if let originalDate = dateFormatter.date(from: date) {
+            let newDateFormatter = DateFormatter()
+            newDateFormatter.dateFormat = "MMM dd, yyyy" // Specify the new date format
+            
+            let newDateString = newDateFormatter.string(from: originalDate)
+            return newDateString
+        } else {
+            print("Invalid date string")
+            return nil
+        }
+        
     }
 }
 
 struct VCTransactionView_Previews: PreviewProvider {
     static var previews: some View {
-        VCTransactionView(chosenType: .constant(.income))
+        VCTransactionView(chosenType: .constant(.income), transaction: VCTransactionModel(type: .income, amount: 0.0, date: ""))
     }
 }

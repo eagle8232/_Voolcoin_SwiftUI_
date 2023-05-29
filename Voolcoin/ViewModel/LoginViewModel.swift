@@ -48,6 +48,18 @@ class LoginViewModel: ObservableObject {
             }
             
             print("Logged in Success")
+            
+            guard let userId = result?.user.uid else {return}
+            
+            //Create and save username to database
+            DatabaseViewModel().saveUserModelToFirestore(userId: userId) { success, error in
+                if success {
+                    print("It succeeded")
+                } else if let error = error {
+                    print(error)
+                }
+            }
+            
             withAnimation(.easeInOut) {self.logStatus = true}
         }
     }
@@ -80,7 +92,16 @@ class LoginViewModel: ObservableObject {
                 }
                 
                 guard let user = res?.user else {return}
-                print(user)
+                
+                //Create and save username to database
+                DatabaseViewModel().saveUserModelToFirestore(userId: user.uid) { success, error in
+                    if success {
+                        print("It succeeded")
+                    } else if let error = error {
+                        print(error)
+                    }
+                }
+                
                 withAnimation(.easeInOut) {self.logStatus = true}
             }
         }

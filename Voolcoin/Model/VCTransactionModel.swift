@@ -17,7 +17,7 @@ struct VCTransactionModel: Codable, Hashable, Identifiable {
     var id: UUID?
     let type: TransactionType
     let amount: Double
-    let date: Date
+    let date: String
     
     func getReward() -> Double {
         let generateRanNum = Double.random(in: 0.1...10)

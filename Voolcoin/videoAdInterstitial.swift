@@ -90,20 +90,16 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
             dailyRewardVM.saveDefaultRewardInfo(rewardAmount: rewardAmount)
         }
         
+        let today = Date().toString(format: "yyyy-MM-dd HH:mm:ss")
+        
+        let transaction = VCTransactionModel(id: nil, type: .income, amount: rewardAmount, date: today)
+        
+        onDismiss?(transaction)
         
     }
     
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("Ad dismissed. Rewarding user.")
-        // Save to CoreData
-        var rewardAmount: Double {
-            let generateRanNum = Double.random(in: 0.1...10)
-            return generateRanNum
-        }
-        
-        let transaction = VCTransactionModel(id: nil, type: .income, amount: rewardAmount, date: Date())
-        
-        onDismiss?(transaction)
         
         // Reload ad for the next time
         loadAd()

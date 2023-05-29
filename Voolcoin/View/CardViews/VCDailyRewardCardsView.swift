@@ -40,7 +40,6 @@ struct VCDailyRewardCardsView: View {
                     if let rewardModel = rewardModel {
                         ForEach(Array(rewardModel.watchedCards.keys.sorted()), id: \.self) { cardKey in
                             let watchedCard = rewardModel.watchedCards[cardKey] ?? false
-//
                             let isShowCard = rewardModel.watchedCards["card\(Int(cardKey.dropFirst(4))! - 1)"] ?? true
                             
                             if isShowCard || isShowCardAfterTime {
@@ -92,7 +91,6 @@ struct VCDailyRewardCardsView: View {
                         Button {
                             intersitial?.showAd { transaction in
                                 guard let userId = Auth.auth().currentUser?.uid else {return}
-                                VoolcoinManager().addTransaction(type: transaction.type, amount: transaction.amount, date: transaction.date, context: viewContext)
                                 DatabaseViewModel().saveTransactionsToFirestore(userId: userId, transaction: transaction)
                             }
                             

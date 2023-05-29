@@ -21,12 +21,7 @@ struct VCTransactionVieww: View {
     
     @State private var currentDate = Date()
     
-    @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var transaction: VoolcoinModel
-    
-    @FetchRequest(entity: VoolcoinModel.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
-    var transactions: FetchedResults<VoolcoinModel>
-    
+    @Binding var transactions: [VCTransactionModel]
     
     @State var transactionModels: [VCTransactionModel] = []
     
@@ -75,10 +70,9 @@ struct VCTransactionVieww: View {
                     VCSegmentedControl(chosenType: $chosenType)
                     
                     ScrollView(showsIndicators: false) {
-                        ForEach(transactions) { transactionModel in
-                            if isSameDay(currentDate: currentDate, rewardedDate: transactionModel.date ?? Date()) {
-                                VCTransactionView(chosenType: $chosenType)
-                                    .environmentObject(transactionModel)
+                        ForEach(Array(transactions.enumerated()).reversed(), id: \.1.date) { (index, transactionModel) in
+                            if isSameDay(currentDateString: currentDate.toString(format: "yyyy-MM-dd HH:mm:ss"), rewardedDateString: transactionModel.date) {
+                                VCTransactionView(chosenType: $chosenType, transaction: transactionModel)
                             }
                         }
                         .ignoresSafeArea()
@@ -106,19 +100,17 @@ struct VCTransactionVieww: View {
                 .navigationTitle("Transactions")
                 .navigationBarTitleDisplayMode(.inline)
             }
-            .onAppear {
-                if let userId = Auth.auth().currentUser?.uid {
-                    DatabaseViewModel().fetchTransactions(userId: userId) { transactions in
-                        print(transactions)
-                    }
-                }
-            }
-            
         }
         
     }
     
-    func isSameDay(currentDate: Date, rewardedDate: Date) -> Bool {
+    func isSameDay(currentDateString: String, rewardedDateString: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        guard let currentDate = dateFormatter.date(from: currentDateString) else {return false}
+        guard let rewardedDate = dateFormatter.date(from: rewardedDateString) else {return false}
+        
         let calendar = Calendar.current
         
         let components1 = calendar.dateComponents([.day, .month, .year], from: currentDate)
@@ -130,6 +122,6 @@ struct VCTransactionVieww: View {
 
 struct VCTransactionVieww_Previews: PreviewProvider {
     static var previews: some View {
-        VCTransactionVieww(isPresenting: .constant(true), chosenType: .constant(.all))
+        VCTransactionVieww(isPresenting: .constant(true), chosenType: .constant(.all), transactions: .constant([VCTransactionModel(type: .income, amount: 5.43, date: "")]))
     }
 }
