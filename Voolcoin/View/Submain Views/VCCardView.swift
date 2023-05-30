@@ -27,10 +27,17 @@ struct VCCardView: View {
             
             VStack(spacing: 15) {
                 
-                Text("\((String(format: "%.1f", cardAmount) ))")
-                    .font(.system(size: 45, weight: .bold))
-                    .padding(.bottom, 5)
-                    .foregroundColor(.white)
+                HStack {
+                    
+                    Text("\((String(format: "%.1f", cardAmount) ))")
+                        .font(.system(size: 45, weight: .bold))
+                        .padding(.bottom, 5)
+                        .foregroundColor(.white)
+                    
+                    Text("≈ 0$")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 20))
+                }
                 
                 HStack(spacing: 15) {
                     RoundedRectangle(cornerRadius: 20)

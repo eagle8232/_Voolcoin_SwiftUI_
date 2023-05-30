@@ -174,15 +174,38 @@ extension DatabaseViewModel {
         
         dailyRewardsInfoRef.getDocument { document, error in
             if let document = document, document.exists, error == nil {
-                dailyRewardsInfoRef.updateData(dailyRewardsInfo)
+                dailyRewardsInfoRef.updateData(dailyRewardsInfo) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        print("Succeeded")
+                    }
+                }
             } else {
-                print(error?.localizedDescription)
+                dailyRewardsInfoRef.setData(dailyRewardsInfo) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        print("Succeeded")
+                    }
+                }
             }
         }
     }
     
-    func fetchDailyRewardsInfo() {
+    func fetchDailyRewardsInfo(userId: String, completion: @escaping (([String: Any])?, Error?) -> Void) {
+        let dailyRewardsInfoRef = db.collection("dailyRewardsInfo").document(userId)
         
+        dailyRewardsInfoRef.getDocument { document, error in
+            if let document = document, document.exists, error == nil {
+                if let data = document.data() {
+                    print(data)
+                    completion(data, nil)
+                } else if let error = error {
+                    completion(nil, error)
+                }
+            }
+        }
     }
     
 }

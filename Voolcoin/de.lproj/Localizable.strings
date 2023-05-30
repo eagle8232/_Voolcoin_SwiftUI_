@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  Voolcoin
+
+  Created by Babayev Kamran on 30.05.23.
+  
+*/
+
+"Welcome back" = "Welcome back";
+"Income" = "Income";
+"Outcome" = "Outcome";
+"Daily rewards" = "Daily rewards";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "The chance to win rewards from 0.1 to 10 voolcoins";
+"Transactions" = "Transactions";
+"See all" = "See all";
+"Next" = "Next";
+"Let's get started" = "Let's get started";
+"Sign In" = "Sign In";
+"Sign Out" = "Sign Out";
+"Sign in with Apple" = "Sign in with Apple";
+"Sign in with Google" = "Sign in with Google";
+"Phone Number" = "Phone Number";
+"Change" = "Change";
+"OTP Code" = "OTP Code";
+"Verify Code" = "Verify Code";
+"Get Code" = "Get Code";
+"You are completely safe." = "You are completely safe.";
+"Read our Terms & Conditions." = "Read our Terms & Conditions.";
+"Settings" = "Settings";
+"Invite Friends" = "Invite Friends";
+"Rate the App" = "Rate the App";
+"Terms & Conditions" = "Terms & Conditions";
+"Privacy & Policy" = "Privacy & Policy";
+"Delete Account" = "Delete Account";
+"Attention!" = "Attention!";
+
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Do you really want to delete your account? You lose all your information, without permission to return them back!";
+
+"Do you really want to sign out your account?" = "Do you really want to sign out your account?";
+
+"No" = "No";
+"Yes" = "Yes";
+"Transactions" = "Transactions";
+"Unlock voolcoins" = "Unlock voolcoins";
+"Claim" = "Claim";
+"Error" = "Error";
+"Reward not loaded. Please try again later." = "Reward not loaded. Please try again later.";
+"Added to wallet ✅" = "Added to wallet ✅";
+"Come back tomorrow" = "Come back tomorrow";
+"Unclock other card" = "Unclock other card";
+"My Profile" = "My Profile";
+
+
+

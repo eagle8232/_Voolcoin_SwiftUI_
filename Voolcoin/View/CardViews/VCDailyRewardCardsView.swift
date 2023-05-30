@@ -67,15 +67,22 @@ struct VCDailyRewardCardsView: View {
                 UserDefaults.standard.removeObject(forKey: "lastReward")
             }
             
+            fetchDailyRewards { rewardModel in
+                print(rewardModel)
+            }
             
             guard let watchedCards = UserDefaults.standard.object(forKey: "watchedCards") as? [String: Bool] else {return}
             guard let rewards = UserDefaults.standard.object(forKey: "rewards") as? [String: Double] else {return}
             let watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
            
-            rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewards, watchedAmount: watchedAmount, rewardedDate: Date())
+            let today = Date().toString(format: "yyyy-MM-dd HH:mm:ss")
+            rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewards, watchedAmount: watchedAmount, rewardedDate: today)
             
             isRewardLoaded = false
             
+            
+            
+//            DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: rewardModel ?? RewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: today))
             
         }
     }
@@ -92,6 +99,7 @@ struct VCDailyRewardCardsView: View {
                             intersitial?.showAd { transaction in
                                 guard let userId = Auth.auth().currentUser?.uid else {return}
                                 DatabaseViewModel().saveTransactionsToFirestore(userId: userId, transaction: transaction)
+//                                DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: <#T##RewardModel#>)
                             }
                             
                             isRewardLoaded = true
@@ -99,6 +107,11 @@ struct VCDailyRewardCardsView: View {
                         } label: {
                             
                             VStack {
+                                
+                                Image("key")
+                                    .resizable()
+                                    .frame(width: 38, height: 38)
+                                
                                 Text("Unlock voolcoins")
                                     .font(.system(size: 15, weight: .light, design: .default))
                                     .foregroundColor(.white)
@@ -111,15 +124,13 @@ struct VCDailyRewardCardsView: View {
                                             
                                             HStack(alignment: .center, spacing: 4) {
                                                 Text("Claim")
-                                                    .font(.system(size: 12))
+                                                    .font(.system(size: 10))
                                                     .foregroundColor(.black)
 
                                                 
                                                 Image(systemName: "play.circle")
                                                     .foregroundColor(.black)
                                             }
-
-                                            
                                         }
                                 }
                             }
@@ -140,8 +151,10 @@ struct VCDailyRewardCardsView: View {
                         
                         VStack {
                             Text("Added to wallet ✅")
-                                .font(.system(size: 15, weight: .light, design: .default))
+                                .font(.system(size: 14, weight: .regular, design: .default))
+                                .opacity(0.5)
                                 .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
                             
                         }
                         
@@ -162,6 +175,27 @@ struct VCDailyRewardCardsView: View {
         return false
     }
     
+    func fetchDailyRewards(completion: @escaping ((RewardModel?) -> Void)){
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        
+        DatabaseViewModel().fetchDailyRewardsInfo(userId: userId) { data, error in
+            if let data = data, error == nil {
+                
+                guard let rewardAmountCards = data["rewardAmountCards"] as? [String: Double],
+                      let watchedCards = data["watchedCards"] as? [String: Bool],
+                      let watchedAmount = data["watchedAmount"] as? Int,
+                      let rewardedDate = data["rewardedDate"] as? String else {return}
+                
+                let rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewardAmountCards, watchedAmount: watchedAmount, rewardedDate: rewardedDate)
+                
+                completion(rewardModel)
+            } else if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
 }
 
 struct VCBlockedCardView: View {
@@ -173,9 +207,18 @@ struct VCBlockedCardView: View {
             .blur(radius: 5)
             .frame(width: 95, height: 150)
             .overlay {
-                Text(rewardState == .watched ? "zamok" : "Unclock other card")
-                    .font(.system(size: 15, weight: .light, design: .default))
-                    .foregroundColor(.white)
+                VStack(spacing: 15) {
+                    
+                    Image("lock")
+                        .resizable()
+                        .frame(width: 38, height: 38)
+                        .opacity(0.5)
+                    Text(rewardState == .watched ? "Come back tomorrow" : "Unclock other card")
+                        .opacity(0.5)
+                        .font(.system(size: 13, weight: .light, design: .default))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                }
             }
             .cornerRadius(20)
     }

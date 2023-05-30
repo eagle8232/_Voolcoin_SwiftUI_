@@ -72,8 +72,12 @@ struct VCSettingsView: View {
 struct VCSettingsButtonsView: View {
     @Binding var isPresentingRateView: Bool
     @State var isSignOut: Bool = false
+    @State var isDeleted: Bool = false
     
     @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
+    
+    @StateObject var loginModel: LoginViewModel = .init()
     
     var body: some View {
         
@@ -169,7 +173,7 @@ struct VCSettingsButtonsView: View {
         
         VStack {
             Button {
-                
+                isDeleted = true
             } label: {
                 HStack {
                     Text("Delete Account")
@@ -185,6 +189,15 @@ struct VCSettingsButtonsView: View {
                         .opacity(0.3)
                 }
             }
+            .alert(isPresented: $isDeleted) {
+                Alert(title: Text("Attention!"), message: Text("Do you really want to delete your account? You lose all your information, without permission to return them back!"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
+                    loginModel.deleteAccount()
+                    nameStatus = false
+                    withAnimation(.easeInOut) {
+                        logStatus = false
+                    }
+                }))
+                    }
             .padding()
             .background(Color.gray.opacity(0.35))
             .cornerRadius(20)
@@ -210,6 +223,7 @@ struct VCSettingsButtonsView: View {
                 Alert(title: Text("Attention!"), message: Text("Do you really want to sign out your account?"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
                     try? Auth.auth().signOut()
                     GIDSignIn.sharedInstance.signOut()
+                    nameStatus = false
                     withAnimation(.easeInOut) {
                         logStatus = false
                     }

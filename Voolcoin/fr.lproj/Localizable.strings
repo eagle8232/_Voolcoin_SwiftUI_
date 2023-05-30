@@ -1,0 +1,53 @@
+/* 
+  Localizable.strings
+  Voolcoin
+
+  Created by Babayev Kamran on 30.05.23.
+  
+*/
+
+"Welcome back" = "Bienvenue à nouveau";
+"Income" = "Revenu";
+"Outcome" = "Résultats";
+"Daily rewards" = "Récompenses quotidiennes";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "La possibilité de gagner des récompenses de 0,1 à 10 voolcoins";
+"Transactions" = "Transactions";
+"See all" = "Voir tous";
+"Next" = "Suivant";
+"Let's get started" = "Commençons";
+"Sign In" = "S'inscrire";
+"Sign Out" = "se déconnecter";
+"Sign in with Apple" = "Sign in with Apple";
+"Sign in with Google" = "Sign in with Google";
+"Phone Number" = "Numéro de téléphone";
+"Change" = "Changer";
+"OTP Code" = "OTP Code";
+"Verify Code" = "Vérifier le code";
+"Get Code" = "Obtenir le code";
+"You are completely safe." = "Vous êtes en sécurité.";
+"Read our Terms & Conditions." = "Lisez nos conditions générales.";
+"Settings" = "Paramètres";
+"Invite Friends" = "Inviter des amis";
+"Rate the App" = "Évaluer l'application";
+"Terms & Conditions" = "Conditions générales d'utilisation";
+"Privacy & Policy" = "Vie privée et politique";
+"Delete Account" = "Supprimer le compte";
+"Attention!" = "Attention!";
+
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Voulez-vous vraiment supprimer votre compte ? Vous perdez toutes vos informations, sans avoir la permission de les restituer !";
+
+"Do you really want to sign out your account?" = "Voulez-vous vraiment vous déconnecter de votre compte ?";
+
+"No" = "Non";
+"Yes" = "Oui";
+"Unlock voolcoins" = "Débloquer les voolcoins";
+"Claim" = "Réclamation";
+"Error" = "Erreur";
+"Reward not loaded. Please try again later." = "La récompense n'a pas été chargée. Veuillez réessayer plus tard.";
+"Added to wallet ✅" = "Ajouté au portefeuille ✅";
+"Come back tomorrow" = "Revenez demain";
+"Unclock other card" = "Débloquer l'autre carte";
+"My Profile" = "Mon profil";
+
+
+

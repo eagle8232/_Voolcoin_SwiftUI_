@@ -16,5 +16,5 @@ struct RewardModel {
     let watchedCards: [String: Bool]
     let rewardAmount: [String: Double]
     let watchedAmount: Int
-    let rewardedDate: Date
+    let rewardedDate: String
 }

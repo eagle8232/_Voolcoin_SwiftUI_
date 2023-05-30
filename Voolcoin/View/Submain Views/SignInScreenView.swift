@@ -21,6 +21,8 @@ struct SignInScreenView: View {
     @StateObject var loginModel: LoginViewModel = .init()
     @FocusState var isEnabled: Bool
     
+    @State var goToNameCreation: Bool = false
+    
     var body: some View {
         
         ZStack {
@@ -127,7 +129,15 @@ struct SignInScreenView: View {
                         
                     }
                     
-                    Button(action: loginModel.showOTPField ? loginModel.verifyOTPCode : loginModel.getOTPCode) {
+                    Button {
+                        if loginModel.showOTPField {
+                            loginModel.verifyOTPCode { success in
+                                goToNameCreation = success ? true : false
+                            }
+                        } else {
+                            loginModel.getOTPCode()
+                        }
+                    } label: {
                         Text(loginModel.showOTPField ? "Verify Code" : "Get Code")
                             .font(.title3)
                             .fontWeight(.bold)
@@ -138,6 +148,10 @@ struct SignInScreenView: View {
                             .cornerRadius(50.0)
                             .shadow(color: Color.black.opacity(0.08), radius: 60, x: 0.0, y: 16)
                             .padding(.vertical)
+                    }
+                    
+                    .fullScreenCover(isPresented: $goToNameCreation) {
+                        VCNameCreationView()
                     }
                         
 //                        isPresentingTransactionsView = true
@@ -167,8 +181,10 @@ struct SignInScreenView: View {
                 Spacer()
                 Text("You are completely safe.")
                     .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
                 Text("Read our Terms & Conditions.")
                     .foregroundColor(.pink)
+                    .multilineTextAlignment(.center)
             }
             .alert(loginModel.errorMessage, isPresented: $loginModel.showError, actions: {
                 

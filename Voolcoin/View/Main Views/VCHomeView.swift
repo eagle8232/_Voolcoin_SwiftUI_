@@ -47,8 +47,9 @@ struct VCHomeView: View {
                                     .fontWeight(.light)
                                     .foregroundColor(.white)
                                 
-                                Text(userModel?.name ?? "????")
-                                    .font(.largeTitle.bold())
+                                Text(userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "????")")
+                                    .font(.system(size: 25, weight: .bold, design: .default))
+//                                    .font(.largeTitle.bold())
                                     .foregroundColor(.white)
                                 
                             }
@@ -90,7 +91,7 @@ struct VCHomeView: View {
             .fullScreenCover(isPresented: $isPresentingTransactionsView, onDismiss: {
                 chosenType = .all
             }) {
-                VCTransactionVieww(isPresenting: $isPresentingTransactionsView, chosenType: $chosenType, transactions: $transactions)
+                VCAllTransactionsView(isPresenting: $isPresentingTransactionsView, chosenType: $chosenType, transactions: $transactions)
             }
             .onDisappear {
                 cardAmount = 0

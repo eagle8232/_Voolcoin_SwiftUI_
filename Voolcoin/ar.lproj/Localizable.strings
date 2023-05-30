@@ -1,0 +1,53 @@
+/* 
+  Localizable.strings
+  Voolcoin
+
+  Created by Babayev Kamran on 30.05.23.
+  
+*/
+
+"Welcome back" = "مرحبًا بعودتك";
+"Income" = "دخل";
+"Outcome" = "حصيلة";
+"Daily rewards" = "المكافآت اليومية";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "فرصة لربح جوائز من 0.1 إلى 10 voolcoins";
+"Transactions" = "المعاملات";
+"See all" = "اظهار الكل";
+"Next" = "التالي";
+"Let's get started" = "هيا بنا نبدأ";
+"Sign In" = "تسجيل الدخول";
+"Sign Out" = "خروج";
+"Sign in with Apple" = "Sign in with Apple";
+"Sign in with Google" = "Sign in with Google";
+"Phone Number" = "رقم التليفون";
+"Change" = "يتغير";
+"OTP Code" = "OTP شفرة";
+"Verify Code" = "التحقق من كود";
+"Get Code" = "الحصول على رمز";
+"You are completely safe." = "أنت آمن تمامًا.";
+"Read our Terms & Conditions." = "اقرأ الشروط والأحكام الخاصة بنا.";
+"Settings" = "إعدادات";
+"Invite Friends" = "ادعو أصدقاء";
+"Rate the App" = "قيم التطبيق";
+"Terms & Conditions" = "البنود و الظروف";
+"Privacy & Policy" = "سياسة الخصوصية";
+"Delete Account" = "حذف الحساب";
+"Attention!" = "انتباه!";
+
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "هل تريد حقا حذف حسابك؟ تفقد كل معلوماتك دون إذن لإعادتها!";
+
+"Do you really want to sign out your account?" = "هل تريد حقًا تسجيل الخروج من حسابك؟";
+
+"No" = "لا";
+"Yes" = "نعم";
+"Unlock voolcoins" = "افتح voolcoins";
+"Claim" = "مطالبة";
+"Error" = "خطأ";
+"Reward not loaded. Please try again later." = "لم يتم تحميل المكافأة. الرجاء معاودة المحاولة في وقت لاحق.";
+"Added to wallet ✅" = "يضاف إلى المحفظة ✅";
+"Come back tomorrow" = "عد غدا";
+"Unclock other card" = "فتح بطاقة أخرى";
+"My Profile" = "ملفي";
+
+
+

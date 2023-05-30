@@ -22,10 +22,12 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
     
     @Published var nonce: String = ""
     
     @Published var isLoginSuccessed = false
+
     
     func appleAuthenticate(credential: ASAuthorizationAppleIDCredential) {
         
@@ -60,7 +62,7 @@ class LoginViewModel: ObservableObject {
                 }
             }
             
-            withAnimation(.easeInOut) {self.logStatus = true}
+            withAnimation(.easeInOut) {self.logStatus = true && self.nameStatus == true}
         }
     }
     
@@ -103,6 +105,7 @@ class LoginViewModel: ObservableObject {
                 }
                 
                 withAnimation(.easeInOut) {self.logStatus = true}
+                withAnimation(.easeInOut) {self.nameStatus = true}
             }
         }
     }
@@ -131,7 +134,7 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func verifyOTPCode() {
+    func verifyOTPCode(completion: @escaping ((Bool) -> Void)) {
         
         UIApplication.shared.closeKeyboard()
         
@@ -142,13 +145,31 @@ class LoginViewModel: ObservableObject {
                 try await Auth.auth().signIn(with: credential)
                 
                 print("Success")
+                
+                
                 await MainActor.run(body: {
                     withAnimation(.easeInOut) {logStatus = true}
                 })
                 
+                completion(true)
+                
             } catch {
                 await handleError(error: error)
+                completion(false) 
             }
+        }
+    }
+    
+    func deleteAccount() {
+        let user = Auth.auth().currentUser
+
+        user?.delete { error in
+          if let error = error {
+              print(error.localizedDescription)
+          } else {
+            print("Accout deleted")
+              self.logStatus = false
+          }
         }
     }
     

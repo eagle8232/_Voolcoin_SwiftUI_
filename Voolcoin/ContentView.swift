@@ -11,13 +11,16 @@ import CoreData
 struct ContentView: View {
     
     @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
     
     var body: some View {
         
-        if logStatus {
+        if logStatus && nameStatus {
             VCHomeView()
+                .preferredColorScheme(.dark)
         } else {
             WelcomeScreenView()
+                .preferredColorScheme(.light)
         }
 
     }

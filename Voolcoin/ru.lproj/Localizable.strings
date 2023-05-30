@@ -1,0 +1,53 @@
+/* 
+  Localizable.strings
+  Voolcoin
+
+  Created by Babayev Kamran on 30.05.23.
+  
+*/
+
+"Welcome back" = "С возвращением";
+"Income" = "Доход";
+"Outcome" = "Вывод";
+"Daily rewards" = "Ежедневные вознаграждения";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "Возможность выиграть вознаграждения от 0,1 до 10 voolcoins";
+"Transactions" = "Транзакции";
+"See all" = "Все";
+"Next" = "Далее";
+"Let's get started" = "Давайте приступим";
+"Sign In" = "Вход";
+"Sign Out" = "Выход";
+"Sign in with Apple" = "Войти с помощью Apple";
+"Sign in with Google" = "Войти с помощью Google";
+"Phone Number" = "Номер телефона";
+"Change" = "Изменить";
+"OTP Code" = "OTP Код";
+"Verify Code" = "Код подтверждения";
+"Get Code" = "Получить код";
+"You are completely safe." = "Вы в полной безопасности.";
+"Read our Terms & Conditions." = "Ознакомьтесь с нашими условиями и положениями.";
+"Settings" = "Настройки";
+"Invite Friends" = "Пригласить друзей";
+"Rate the App" = "Оцените приложение";
+"Terms & Conditions" = "Условия и положения";
+"Privacy & Policy" = "Политика и безопасность";
+"Delete Account" = "Удалить аккаунт";
+"Attention!" = "Внимание!";
+
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Вы действительно хотите удалить свой аккаунт? Вы потеряете всю свою информацию, без возможности вернуть ее обратно!";
+
+"Do you really want to sign out your account?" = "Вы действительно хотите выйти со своего аккаунта?";
+"No" = "Нет";
+"Yes" = "Да";
+"Unlock voolcoins" = "Открыть voolcoins";
+"Claim" = "Собрать";
+"Error" = "Ошибка";
+
+"Reward not loaded. Please try again later." = "Вознаграждение не загружено. Пожалуйста, повторите попытку позже.";
+
+"Added to wallet ✅" = "Добавлен в кошелёк ✅";
+"Come back tomorrow" = "Вернитесь завтра";
+"Unclock other card" = "Откройте другую карту";
+"My Profile" = "Мой профиль";
+
+
