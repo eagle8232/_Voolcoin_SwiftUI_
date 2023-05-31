@@ -11,8 +11,11 @@ import FirebaseAuth
 struct VCHomeView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var isPresentingTransactionsView: Bool = false
+    @State var errorHandling: Bool = false
+    
     @State var chosenType: TransactionType = .all
     @State var cardAmount: Double = 0.0
+    
     
     @State var transactions: [VCTransactionModel] = []
     @State var userModel: VCUserModel?
@@ -85,8 +88,12 @@ struct VCHomeView: View {
                         VCDailyRewardView()
                         
                     }
+                    .alert(isPresented: $errorHandling) {
+                        Alert(title: Text("atte"), message: Text("error"), dismissButton: .cancel(Text("OK")))
+                    }
                     .padding()
                 }
+
             }
             .fullScreenCover(isPresented: $isPresentingTransactionsView, onDismiss: {
                 chosenType = .all
@@ -124,6 +131,9 @@ struct VCHomeView: View {
                     }
                     completion(transactions)
                     print(transactions)
+                } else {
+                    errorHandling = true
+                    print("erroooooooooorrr in loading")
                 }
             }
         }
@@ -139,6 +149,8 @@ struct VCHomeView: View {
                     completion(userModel)
                 } else if let error = error {
                     print(error)
+                    errorHandling = true
+                    print("erroooooooooorrr in loading")
                     completion(nil)
                 }
             }
@@ -149,12 +161,16 @@ struct VCHomeView: View {
         fetchTransactions { transactions in
             if let transactions {
                 self.transactions = transactions
+            } else {
+//                errorHandling = true
             }
         }
         
         fetchUserData { userModel in
             if let userModel {
                 self.userModel = userModel
+            } else {
+//                errorHandling = true
             }
         }
     }

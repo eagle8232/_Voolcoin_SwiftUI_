@@ -40,6 +40,7 @@
 		8C0B14CC2A191D11005FA310 /* WelcomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */; };
 		8C0B14CE2A191DE8005FA310 /* SignInScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CD2A191DE8005FA310 /* SignInScreenView.swift */; };
 		8C0B14D02A192C26005FA310 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */; };
+		8C1B54E12A2756FA0054B95C /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B54E02A2756FA0054B95C /* LoaderView.swift */; };
 		8C30018E2A0A3AA00081053A /* VCRewardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C30018D2A0A3AA00081053A /* VCRewardModel.swift */; };
 		8C3001902A0A4FD50081053A /* VCSettingsRenameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C30018F2A0A4FD50081053A /* VCSettingsRenameView.swift */; };
 		8C3001922A0A66FF0081053A /* VCSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3001912A0A66FE0081053A /* VCSegmentedControl.swift */; };
@@ -50,7 +51,6 @@
 		8C9052C42A1ECE2600869F75 /* +View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9052C32A1ECE2600869F75 /* +View.swift */; };
 		8CA5A9682A1E5A3400BC5E7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CA5A9672A1E5A3400BC5E7A /* GoogleService-Info.plist */; };
 		8CA5A96B2A1E5DD900BC5E7A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA5A96A2A1E5DD900BC5E7A /* LoginViewModel.swift */; };
-		8CA5A96D2A1E66BF00BC5E7A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA5A96C2A1E66BF00BC5E7A /* CustomTextField.swift */; };
 		8CC82A682A1F7C40002B722B /* SignInWithGoogleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC82A672A1F7C40002B722B /* SignInWithGoogleViewModel.swift */; };
 		8CCA75312A0CABB200911B4F /* VoolcoinModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA752F2A0CABB200911B4F /* VoolcoinModel.xcdatamodeld */; };
 		8CCA75332A0CAF8300911B4F /* VoolcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA75322A0CAF8300911B4F /* VoolcoinManager.swift */; };
@@ -90,6 +90,7 @@
 		8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenView.swift; sourceTree = "<group>"; };
 		8C0B14CD2A191DE8005FA310 /* SignInScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenView.swift; sourceTree = "<group>"; };
 		8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		8C1B54E02A2756FA0054B95C /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		8C30018D2A0A3AA00081053A /* VCRewardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRewardModel.swift; sourceTree = "<group>"; };
 		8C30018F2A0A4FD50081053A /* VCSettingsRenameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSettingsRenameView.swift; sourceTree = "<group>"; };
 		8C3001912A0A66FE0081053A /* VCSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSegmentedControl.swift; sourceTree = "<group>"; };
@@ -110,7 +111,6 @@
 		8CA5A9672A1E5A3400BC5E7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8CA5A9692A1E5B3A00BC5E7A /* Voolcoin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Voolcoin.entitlements; sourceTree = "<group>"; };
 		8CA5A96A2A1E5DD900BC5E7A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		8CA5A96C2A1E66BF00BC5E7A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		8CC82A672A1F7C40002B722B /* SignInWithGoogleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogleViewModel.swift; sourceTree = "<group>"; };
 		8CCA75302A0CABB200911B4F /* VoolcoinModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VoolcoinModel.xcdatamodel; sourceTree = "<group>"; };
 		8CCA75322A0CAF8300911B4F /* VoolcoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoolcoinManager.swift; sourceTree = "<group>"; };
@@ -243,9 +243,9 @@
 				8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */,
 				8C0B14CD2A191DE8005FA310 /* SignInScreenView.swift */,
 				8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */,
-				8CA5A96C2A1E66BF00BC5E7A /* CustomTextField.swift */,
 				8C67250B2A25867E00B58A61 /* CustomIndicatorView.swift */,
 				8C67251B2A25CD7700B58A61 /* VCNameCreationView.swift */,
+				8C1B54E02A2756FA0054B95C /* LoaderView.swift */,
 			);
 			path = "Submain Views";
 			sourceTree = "<group>";
@@ -510,7 +510,6 @@
 				693164CC2A23EDF400FF37CB /* VCUserModel.swift in Sources */,
 				6976D1E22A02E607006C2CC5 /* VCDailyRewardCardsView.swift in Sources */,
 				8C0B14CC2A191D11005FA310 /* WelcomeScreenView.swift in Sources */,
-				8CA5A96D2A1E66BF00BC5E7A /* CustomTextField.swift in Sources */,
 				692687012A16DAC500A9436E /* UINavigationController + Extension.swift in Sources */,
 				8CF5F9352A025DCA00CF6262 /* ContentView.swift in Sources */,
 				69ADAE3F2A03791A00843713 /* VCDetailsView.swift in Sources */,
@@ -519,6 +518,7 @@
 				8C3001902A0A4FD50081053A /* VCSettingsRenameView.swift in Sources */,
 				692BA9C92A09306600202993 /* VCProfileView.swift in Sources */,
 				8CA5A96B2A1E5DD900BC5E7A /* LoginViewModel.swift in Sources */,
+				8C1B54E12A2756FA0054B95C /* LoaderView.swift in Sources */,
 				8CF5F9632A026AF900CF6262 /* VCHomeView.swift in Sources */,
 				8C67250A2A2584A600B58A61 /* PageIntroModel.swift in Sources */,
 				692BA9C82A09306600202993 /* VCSettingsView.swift in Sources */,

@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import GoogleSignIn
+import StoreKit
 
 struct VCSettingsView: View {
     
@@ -70,7 +71,9 @@ struct VCSettingsView: View {
 
 //MARK: - VCSettinsButtonsView
 struct VCSettingsButtonsView: View {
+    
     @Binding var isPresentingRateView: Bool
+    @State var isPresentingInviteFriends: Bool = false
     @State var isSignOut: Bool = false
     @State var isDeleted: Bool = false
     
@@ -79,11 +82,17 @@ struct VCSettingsButtonsView: View {
     
     @StateObject var loginModel: LoginViewModel = .init()
     
+    func openAppStore() {
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/your-app-id") { // Замените "your-app-id" на фактический идентификатор вашего приложения
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     var body: some View {
         
         VStack {
             Button {
-                
+                isPresentingInviteFriends = true
             } label: {
                 HStack {
                     Text("Invite Friends")
@@ -96,11 +105,16 @@ struct VCSettingsButtonsView: View {
                         .opacity(0.3)
                 }
             }
+            .alert(isPresented: $isPresentingInviteFriends) {
+                Alert(title: Text("Referral link"), message: Text("Coming soon... 😉"), dismissButton: .cancel(Text("OK")))
+            }
             .padding()
             .background(Color.gray.opacity(0.35))
             .cornerRadius(20)
+            
             Button {
-                isPresentingRateView = true
+                openAppStore()
+//                isPresentingRateView = true
             } label: {
                 HStack {
                     Text("Rate the App")

@@ -99,7 +99,6 @@ struct VCDailyRewardCardsView: View {
                             intersitial?.showAd { transaction in
                                 guard let userId = Auth.auth().currentUser?.uid else {return}
                                 DatabaseViewModel().saveTransactionsToFirestore(userId: userId, transaction: transaction)
-//                                DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: <#T##RewardModel#>)
                             }
                             
                             isRewardLoaded = true
@@ -150,7 +149,12 @@ struct VCDailyRewardCardsView: View {
                     .overlay {
                         
                         VStack {
-                            Text("Added to wallet ✅")
+                            
+                            Image("wallet")
+                                .resizable()
+                                .frame(width: 45, height: 45)
+                            
+                            Text("Added to wallet")
                                 .font(.system(size: 14, weight: .regular, design: .default))
                                 .opacity(0.5)
                                 .foregroundColor(.white)

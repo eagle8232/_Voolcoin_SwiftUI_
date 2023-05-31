@@ -6,16 +6,27 @@
 //
 
 import SwiftUI
+import Firebase
+import GoogleSignIn
 
 struct VCProfileView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @State var startPoint: UnitPoint = .topTrailing
     @State var endPoint: UnitPoint = .trailing
+    @State var isPresentingInviteFriends: Bool = false
     
-    @State var name = "Kamran"
-    @State var username = ""
-    @State var email = "kamran.babayev.23@mail.ru"
+    @State var isSignOut: Bool = false
+    @State var isDeleted: Bool = false
+    
+    @StateObject var loginModel: LoginViewModel = .init()
+    
+    @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
+    
+//    @State var name = "Kamran"
+//    @State var username = ""
+//    @State var email = "kamran.babayev.23@mail.ru"
     var userModel: VCUserModel?
     
     var body: some View {
@@ -26,88 +37,170 @@ struct VCProfileView: View {
                 
                 VCLinearGradientView(startPoint: startPoint, endPoint: endPoint)
                 
-                //                ScrollView {
-                
-                VStack {
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.gray.opacity(0.6))
-                        .frame(height: 150)
-                        .overlay {
-                            HStack(spacing: 20) {
+                ScrollView {
+                    
+                    VStack {
+                        RoundedRectangle(cornerRadius: 15)
+                            .fill(Color.gray.opacity(0.5))
+                            .frame(height: 150)
+                            .overlay {
                                 
-                                Circle()
-                                    .overlay(content: {
-                                        Text(String((userModel?.name ?? "unknown").capitalized.first ?? " "))
+                                HStack(spacing: 20) {
+                                    
+                                    Circle()
+                                        .overlay(content: {
+                                            Text(userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName")?.capitalized.first ?? " ")")
+                                                .foregroundColor(.white)
+                                                .font(.system(size: 40))
+                                        })
+                                        .frame(width: 100, height: 100)
+                                        .foregroundColor(.gray.opacity(0.9))
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text("Full Name:")
                                             .foregroundColor(.white)
-                                            .font(.system(size: 50))
-                                    })
-                                    .frame(width: 110, height: 110)
-                                    .foregroundColor(.gray.opacity(0.9))
-                                VStack(alignment: .leading) {
-                                    Text("Full Name")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 18, weight: .thin))
-                                    Text(userModel?.name ?? "unknown")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 18, weight: .regular))
-                                    Spacer()
-                                    Text("Email")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 18, weight: .thin))
-                                    Text(userModel?.email ?? "unknown")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 18, weight: .regular))
+                                            .font(.system(size: 18, weight: .thin))
+                                        
+                                        Text(userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "????")")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 18, weight: .regular))
+                                        
+                                        Spacer()
+                                        
+                                        Text("Email:")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 18, weight: .thin))
+                                        
+                                        Text(userModel?.email ?? "Sign in with phone")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 18, weight: .regular))
+                                    }
+                                    .padding(.vertical)
+                                    
                                 }
-                                .padding(.vertical)
-                                
-                                //                        VCSettingsRenameView(name: $name, username: $username, email: $email)
                                 
                             }
-                        }
-                        .padding()
-                        .shadow(color: .gray, radius: 10)
-                    
-                    Spacer()
-                }
-                    
-//                        Button {
-//
-//                        } label: {
-//
-//                            Capsule()
-//                                .fill(.yellow.opacity(0.8))
-//                                .frame(width: 275, height: 45)
-//                                .overlay {
-//                                    Text("Save")
-//                                        .font(.system(size: 15))
-//                                        .foregroundColor(.black)
-//                                }
-//                        }
-
-//                    }
-//                    .padding()
-                
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                            .padding()
                         
-                        Button {
-                            presentationMode.wrappedValue.dismiss()
-                        } label: {
-                            RoundedRectangle(cornerRadius: 15)
-                                .overlay {
-                                    Image(systemName: "arrow.left")
-                                        .foregroundColor(.white)
+                        //                    Spacer()
+                        Divider().background(Color.gray)
+                            .padding()
+                        
+                        VStack {
+                            
+                            Button {
+                                isPresentingInviteFriends = true
+                            } label: {
+                                HStack {
+                                    Text("Invite Friends")
+                                        .font(.system(size: 20, weight: .regular, design: .default))
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .resizable()
+                                        .frame(width: 8, height: 10)
+                                        .opacity(0.3)
                                 }
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.gray.opacity(0.4))
-
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.35))
+                            .cornerRadius(20)
+                            .alert(isPresented: $isPresentingInviteFriends) {
+                                Alert(title: Text("Referral link"), message: Text("Coming soon... 😉"), dismissButton: .cancel(Text("OK")))
+                            }
+                            
+                            Button {
+                                isDeleted = true
+                            } label: {
+                                HStack {
+                                    Text("Delete Account")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 20, weight: .regular, design: .default))
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .resizable()
+                                        .frame(width: 8, height: 10)
+                                        .foregroundColor(.white)
+                                        .opacity(0.3)
+                                }
+                            }
+                            .alert(isPresented: $isDeleted) {
+                                Alert(title: Text("Attention!"), message: Text("Do you really want to delete your account? You lose all your information, without permission to return them back!"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
+                                    loginModel.deleteAccount()
+                                    nameStatus = false
+                                    withAnimation(.easeInOut) {
+                                        logStatus = false
+                                    }
+                                }))
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.35))
+                            .cornerRadius(20)
+                            
+                            Button {
+                                isSignOut = true
+                            } label: {
+                                HStack {
+                                    
+                                    Text("Sign Out")
+                                    
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .resizable()
+                                        .frame(width: 8, height: 10)
+                                        .foregroundColor(.red)
+                                        .opacity(0.5)
+                                }
+                            }
+                            .alert(isPresented: $isSignOut) {
+                                Alert(title: Text("Attention!"), message: Text("Do you really want to sign out your account?"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
+                                    try? Auth.auth().signOut()
+                                    GIDSignIn.sharedInstance.signOut()
+                                    nameStatus = false
+                                    withAnimation(.easeInOut) {
+                                        logStatus = false
+                                    }
+                                }))
+                            }
+                            
+                            .padding()
+                            .background(Color.red.opacity(0.35))
+                            .cornerRadius(20)
+                            .foregroundColor(.red)
+                        }
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(.white)
+                        .padding()
+                        
+                        Spacer()
+                    }
+                    
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            
+                            Button {
+                                presentationMode.wrappedValue.dismiss()
+                            } label: {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .overlay {
+                                        Image(systemName: "arrow.left")
+                                            .foregroundColor(.white)
+                                    }
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(Color.gray.opacity(0.4))
+                                
+                            }
+                            
                         }
                         
                     }
-                    
+                    .navigationTitle("My Profile")
+                    .navigationBarTitleDisplayMode(.inline)
                 }
-                .navigationTitle("My Profile")
-                .navigationBarTitleDisplayMode(.inline)
             }
         }
         .navigationBarBackButtonHidden()
