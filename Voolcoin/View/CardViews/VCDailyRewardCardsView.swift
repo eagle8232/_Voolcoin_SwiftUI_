@@ -26,11 +26,13 @@ struct VCDailyRewardCardsView: View {
     @State var isRewardLoaded = false
     @State var rewardedDate: Date = Date()
     
+    let today = Date().toString(format: "yyyy-MM-dd HH:mm:ss")
     
     var intersitial: Rewarded?
     
-    init() {
+    init(rewardModel: RewardModel?) {
         intersitial = Rewarded()
+        self.rewardModel = rewardModel
     }
     
     var body: some View {
@@ -58,31 +60,36 @@ struct VCDailyRewardCardsView: View {
             }
         }
         .onAppear {
-            let lasRewardedDate = UserDefaults.standard.object(forKey: "lastReward") as? Date
             
-            if timeDifference(date1: Date(), date2: lasRewardedDate ?? Date()) {
-                isShowCardAfterTime = true
+            if rewardModel == nil {
+                let lastRewardedDate = UserDefaults.standard.object(forKey: "lastReward") as? Date
                 
-                VCDailyRewardsViewModel().saveDefaultRewardInfo()
-                UserDefaults.standard.removeObject(forKey: "lastReward")
+                if timeDifference(date1: Date(), date2: lastRewardedDate ?? Date(timeIntervalSinceNow: 300)) {
+                    isShowCardAfterTime = true
+                    
+                    rewardModel = VCDailyRewardsViewModel().saveDefaultRewardInfo()
+                    UserDefaults.standard.removeObject(forKey: "lastReward")
+                }
+                
+                guard let watchedCards = UserDefaults.standard.object(forKey: "watchedCards") as? [String: Bool] else {return}
+                guard let rewards = UserDefaults.standard.object(forKey: "rewards") as? [String: Double] else {return}
+                let watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
+                
+                rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewards, watchedAmount: watchedAmount, rewardedDate: today)
+                
+                isRewardLoaded = false
+            } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = DateFormatKey.wholeFormat.rawValue
+                let date = dateFormatter.date(from: rewardModel?.rewardedDate ?? "")
+                
+                if timeDifference(date1: Date(), date2: date ?? Date()) {
+                    isShowCardAfterTime = true
+                    
+                    rewardModel = VCDailyRewardsViewModel().saveDefaultRewardInfo()
+                    UserDefaults.standard.removeObject(forKey: "lastReward")
+                }
             }
-            
-            fetchDailyRewards { rewardModel in
-                print(rewardModel)
-            }
-            
-            guard let watchedCards = UserDefaults.standard.object(forKey: "watchedCards") as? [String: Bool] else {return}
-            guard let rewards = UserDefaults.standard.object(forKey: "rewards") as? [String: Double] else {return}
-            let watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
-           
-            let today = Date().toString(format: "yyyy-MM-dd HH:mm:ss")
-            rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewards, watchedAmount: watchedAmount, rewardedDate: today)
-            
-            isRewardLoaded = false
-            
-            
-            
-//            DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: rewardModel ?? RewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: today))
             
         }
     }
@@ -96,9 +103,15 @@ struct VCDailyRewardCardsView: View {
                     .frame(width: 95, height: 150)
                     .overlay {
                         Button {
-                            intersitial?.showAd { transaction in
+                            intersitial?.showAd { transaction, rewardModel  in    
+                                
                                 guard let userId = Auth.auth().currentUser?.uid else {return}
                                 DatabaseViewModel().saveTransactionsToFirestore(userId: userId, transaction: transaction)
+                                
+                                print(rewardModel)
+                                DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: rewardModel)
+                                
+                                self.rewardModel = rewardModel
                             }
                             
                             isRewardLoaded = true
@@ -166,6 +179,7 @@ struct VCDailyRewardCardsView: View {
                     .cornerRadius(20)
             }
         }
+    
     }
     
     func timeDifference(date1: Date, date2: Date) -> Bool {
@@ -177,27 +191,6 @@ struct VCDailyRewardCardsView: View {
         }
         
         return false
-    }
-    
-    func fetchDailyRewards(completion: @escaping ((RewardModel?) -> Void)){
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-        DatabaseViewModel().fetchDailyRewardsInfo(userId: userId) { data, error in
-            if let data = data, error == nil {
-                
-                guard let rewardAmountCards = data["rewardAmountCards"] as? [String: Double],
-                      let watchedCards = data["watchedCards"] as? [String: Bool],
-                      let watchedAmount = data["watchedAmount"] as? Int,
-                      let rewardedDate = data["rewardedDate"] as? String else {return}
-                
-                let rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewardAmountCards, watchedAmount: watchedAmount, rewardedDate: rewardedDate)
-                
-                completion(rewardModel)
-            } else if let error = error {
-                print("Error: \(error.localizedDescription)")
-                completion(nil)
-            }
-        }
     }
     
 }
@@ -230,6 +223,6 @@ struct VCBlockedCardView: View {
 
 struct VCDailyRewardCardsView_Previews: PreviewProvider {
     static var previews: some View {
-        VCDailyRewardCardsView()
+        VCDailyRewardCardsView(rewardModel: RewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: ""))
     }
 }

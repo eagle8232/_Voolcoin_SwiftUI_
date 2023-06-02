@@ -19,6 +19,7 @@ struct VCHomeView: View {
     
     @State var transactions: [VCTransactionModel] = []
     @State var userModel: VCUserModel?
+    @State var rewardModel: RewardModel?
     
     var body: some View {
         NavigationView {
@@ -85,7 +86,7 @@ struct VCHomeView: View {
                         
                         Spacer()
                         
-                        VCDailyRewardView()
+                        VCDailyRewardView(rewardModel: $rewardModel)
                         
                     }
                     .alert(isPresented: $errorHandling) {
@@ -106,13 +107,19 @@ struct VCHomeView: View {
             }
             .refreshable {
                 setData()
-            }
-            .onAppear {
+                
+                cardAmount = 0
                 for i in 0..<transactions.count {
                     cardAmount += transactions[i].amount
                 }
-                
+            }
+            .onAppear {
                 setData()
+                
+                
+                for i in 0..<transactions.count {
+                    cardAmount += transactions[i].amount
+                }
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -157,6 +164,27 @@ struct VCHomeView: View {
         }
     }
     
+    func fetchDailyRewards(completion: @escaping ((RewardModel?) -> Void)){
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        
+        DatabaseViewModel().fetchDailyRewardsInfo(userId: userId) { data, error in
+            if let data = data, error == nil {
+                
+                guard let rewardAmountCards = data["rewardAmountCards"] as? [String: Double],
+                      let watchedCards = data["watchedCards"] as? [String: Bool],
+                      let watchedAmount = data["watchedAmount"] as? Int,
+                      let rewardedDate = data["rewardedDate"] as? String else {return}
+                
+                let rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewardAmountCards, watchedAmount: watchedAmount, rewardedDate: rewardedDate)
+                
+                completion(rewardModel)
+            } else if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
     func setData() {
         fetchTransactions { transactions in
             if let transactions {
@@ -171,6 +199,14 @@ struct VCHomeView: View {
                 self.userModel = userModel
             } else {
 //                errorHandling = true
+            }
+        }
+        
+        fetchDailyRewards { rewardModel in
+            if let rewardModel = rewardModel {
+                self.rewardModel = rewardModel
+            } else {
+                
             }
         }
     }

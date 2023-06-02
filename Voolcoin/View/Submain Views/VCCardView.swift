@@ -28,15 +28,14 @@ struct VCCardView: View {
             VStack(spacing: 15) {
                 
                 HStack {
-                    
                     Text("\((String(format: "%.1f", cardAmount) ))")
                         .font(.system(size: 45, weight: .bold))
                         .padding(.bottom, 5)
                         .foregroundColor(.white)
                     
-                    Text("≈ 0$")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 20))
+                    Text("≈ $\((String(format: "%.1f", cardAmount * 0.001) ))")
+                        .foregroundColor(Color(.gray).opacity(0.8))
+                        .font(.system(size: 21))
                 }
                 
                 HStack(spacing: 15) {

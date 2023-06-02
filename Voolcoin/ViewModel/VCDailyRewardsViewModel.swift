@@ -8,7 +8,7 @@
 import Foundation
 
 class VCDailyRewardsViewModel {
-    func saveDefaultRewardInfo(rewardAmount: Double? = 0) {
+    func saveDefaultRewardInfo(rewardAmount: Double? = 0) -> RewardModel {
         let watchedCards = ["card1": rewardAmount != 0 ? true : false, "card2": false, "card3": false]
         let rewards = ["card1": rewardAmount, "card2": 0, "card3": 0]
         let watchedAmount = 1
@@ -18,6 +18,9 @@ class VCDailyRewardsViewModel {
         UserDefaults.standard.set(rewards, forKey: "rewards")
         UserDefaults.standard.set(watchedAmount, forKey: "watchedAmount")
         UserDefaults.standard.set(Date(), forKey: "rewardedDate")
+        
+        let rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewards, watchedAmount: watchedAmount, rewardedDate: Date().toString(format: DateFormatKey.wholeFormat.rawValue))
+        return rewardModel
     }
     
     func saveRewardInfo(watchedCards: [String: Bool], rewards: [String: Double], watchedAmount: Int) {

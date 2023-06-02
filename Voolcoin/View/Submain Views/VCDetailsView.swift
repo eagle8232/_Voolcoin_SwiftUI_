@@ -13,6 +13,7 @@ struct VCDetailsView: View {
     @Binding var chosenType: TransactionType
     @Binding var transactions: [VCTransactionModel]
     
+    
     var maxNumberOfTransactionShown: Int = 0
     var body: some View {
         

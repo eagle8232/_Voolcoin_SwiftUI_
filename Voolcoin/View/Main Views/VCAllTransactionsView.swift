@@ -75,10 +75,9 @@ struct VCAllTransactionsView: View {
                                 VCTransactionView(chosenType: $chosenType, transaction: transactionModel)
                             }
                         }
-                        .ignoresSafeArea()
+                        
                     }
-                    
-                    .padding(.bottom, 30)
+                    .ignoresSafeArea()
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {

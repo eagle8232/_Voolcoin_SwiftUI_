@@ -8,15 +8,16 @@
 import SwiftUI
 
 enum RewardsState {
-case watched
+    case watched
     case unwatched
 }
 
 struct VCDailyRewardView: View {
     @State var watchedAmount: Int = 0
-//        @State private var showAd = false
+    //        @State private var showAd = false
     
     @State private var rewardsState: RewardsState = .unwatched
+    @Binding var rewardModel: RewardModel?
     
     var body: some View {
         
@@ -53,13 +54,17 @@ struct VCDailyRewardView: View {
                     VCBlockedCardView(rewardState: rewardsState)
                 }
             case .unwatched:
-                VCDailyRewardCardsView()
+                VCDailyRewardCardsView(rewardModel: rewardModel)
                     .frame(width: 302, height: 165, alignment: .center)
             }
         }
         
         .onAppear {
-            watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
+            if let rewardModel = rewardModel {
+                watchedAmount = rewardModel.watchedAmount
+            } else {
+                watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
+            }
             
             if watchedAmount == 3 {
                 rewardsState = .watched
@@ -69,31 +74,31 @@ struct VCDailyRewardView: View {
         .background(Color.gray.opacity(0.1))
         .cornerRadius(20)
         
-
+        
     }
 }
+
+struct VCDailyRewardsState: View {
+    var watchedAmount = 0
     
-    struct VCDailyRewardsState: View {
-        var watchedAmount = 0
-        
-        var body: some View {
-            ZStack {
-                Capsule()
-                    .fill(watchedAmount == 3 ? .green : .yellow)
-                    .frame(width: 85, height: 30)
-                    .overlay {
-                        Text("\(watchedAmount)/3 Rewards")
-                            .font(.system(size: 12))
-                            .foregroundColor(.black)
-                    }
-            }
+    var body: some View {
+        ZStack {
+            Capsule()
+                .fill(watchedAmount == 3 ? .green : .yellow)
+                .frame(width: 85, height: 30)
+                .overlay {
+                    Text("\(watchedAmount)/3 Rewards")
+                        .font(.system(size: 12))
+                        .foregroundColor(.black)
+                }
         }
     }
-    
-    
-    
-    struct VCDailyRewardView_Previews: PreviewProvider {
-        static var previews: some View {
-            VCDailyRewardView()
-        }
+}
+
+
+
+struct VCDailyRewardView_Previews: PreviewProvider {
+    static var previews: some View {
+        VCDailyRewardView(rewardModel: .constant(RewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: "")))
     }
+}

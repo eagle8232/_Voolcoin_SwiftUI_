@@ -8,17 +8,20 @@
 import GoogleMobileAds
 import SwiftUI
 import UIKit
-import CoreData
 
 
 final class Rewarded: NSObject, GADFullScreenContentDelegate {
     
     @Published private var isRewardLoaded = true
     
+    let today = Date().toString(format: "yyyy-MM-dd HH:mm:ss")
+    
+    var rewardModel: RewardModel?
+    
     var rewardedAd: GADInterstitialAd?
     var dailyRewardVM = VCDailyRewardsViewModel()
     
-    var onDismiss: ((VCTransactionModel) -> Void)?
+    var onDismiss: ((VCTransactionModel, RewardModel) -> Void)?
     
     
     
@@ -49,7 +52,7 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
         }
     }
     
-    func showAd(onDismiss: @escaping (VCTransactionModel) -> Void) {
+    func showAd(onDismiss: @escaping (VCTransactionModel, RewardModel) -> Void) {
         if let ad = rewardedAd {
             let root = UIApplication.shared.windows.first?.rootViewController
             ad.present(fromRootViewController: root!)
@@ -86,15 +89,16 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
             }
             watchedAmount += 1
             dailyRewardVM.saveRewardInfo(watchedCards: self.watchedCards, rewards: self.rewards, watchedAmount: watchedAmount)
+            
+            rewardModel = RewardModel(watchedCards: self.watchedCards, rewardAmount: self.rewards, watchedAmount: self.watchedAmount, rewardedDate: today)
         } else {
-            dailyRewardVM.saveDefaultRewardInfo(rewardAmount: rewardAmount)
+            rewardModel = dailyRewardVM.saveDefaultRewardInfo(rewardAmount: rewardAmount)
         }
-        
-        let today = Date().toString(format: "yyyy-MM-dd HH:mm:ss")
         
         let transaction = VCTransactionModel(id: nil, type: .income, amount: rewardAmount, date: today)
         
-        onDismiss?(transaction)
+        
+        onDismiss?(transaction, rewardModel ?? RewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: ""))
         
     }
     

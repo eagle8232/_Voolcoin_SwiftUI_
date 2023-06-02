@@ -35,6 +35,8 @@ struct VCTransactionView: View {
                         .foregroundColor(transaction.type == .income ? Color.green : Color.red)
                 }
                 
+                Spacer()
+                
                 Text(getDate() ?? "??? ?? ????")
                     .font(.system(size: 18))
                     .fontWeight(.thin)
