@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct VCDetailsView: View {
-    
+
     @Binding var isPresentingTransactionsView: Bool
     @Binding var chosenType: TransactionType
-    @Binding var transactions: [VCTransactionModel]
+    var transactions: [VCTransactionModel]
     
     
     var maxNumberOfTransactionShown: Int = 0
@@ -61,6 +61,6 @@ struct VCDetailsView: View {
 
 struct VCDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        VCDetailsView(isPresentingTransactionsView: .constant(true), chosenType: .constant(.all), transactions: .constant([VCTransactionModel(type: .income, amount: 0.0, date: "")]))
+        VCDetailsView(isPresentingTransactionsView: .constant(true), chosenType: .constant(.all), transactions: [VCTransactionModel(type: .income, amount: 0.0, date: "")])
     }
 }

@@ -12,7 +12,7 @@ enum RewardType {
     case notrewarded
 }
 
-struct RewardModel {
+struct VCRewardModel {
     let watchedCards: [String: Bool]
     let rewardAmount: [String: Double?]
     let watchedAmount: Int

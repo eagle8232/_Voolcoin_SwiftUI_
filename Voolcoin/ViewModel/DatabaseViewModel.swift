@@ -168,8 +168,9 @@ extension DatabaseViewModel {
     
     //MARK: - Save & fetch daily rewards info -
     
-    func saveDailyRewardsInfoToFirestore(userId: String, dailyRewardsModel: RewardModel) {
+    func saveDailyRewardsInfoToFirestore(userId: String, dailyRewardsModel: VCRewardModel) {
         let dailyRewardsInfoRef = db.collection("dailyRewardsInfo").document(userId)
+        print(dailyRewardsModel)
         let dailyRewardsInfo = ["watchedCards": dailyRewardsModel.watchedCards, "rewardAmountCards": dailyRewardsModel.rewardAmount, "rewardedDate": dailyRewardsModel.rewardedDate, "watchedAmount": dailyRewardsModel.watchedAmount] as [String : Any]
         
         dailyRewardsInfoRef.getDocument { document, error in
@@ -204,6 +205,73 @@ extension DatabaseViewModel {
                 } else if let error = error {
                     completion(nil, error)
                 }
+            }
+        }
+    }
+    
+}
+
+//MARK: - Fetching data from Firebase with Models
+
+extension DatabaseViewModel {
+    
+    //Fetching transactions
+    func fetchTransactions(completion: @escaping (([VCTransactionModel]?, Bool) -> Void)) {
+        var transactions: [VCTransactionModel] = []
+        if let userId = Auth.auth().currentUser?.uid {
+            print(userId)
+            DatabaseViewModel().fetchTransactionsFromFirestore(userId: userId) { entries, error in
+                if let entries = entries, error == nil {
+                    for entry in entries {
+                        let transaction = VCTransactionModel(type: TransactionType(rawValue: entry["type"] as? String ?? "Income") ?? .income, amount: entry["amount"] as? Double ?? 0.0, date: entry["date"] as? String ?? "")
+                        transactions.append(transaction)
+                    }
+                    completion(transactions, true)
+                    print(transactions)
+                } else {
+                    print("erroooooooooorrr in loading")
+                    completion(nil, false)
+                }
+            }
+        }
+    }
+    
+    //Fetching user data
+    func fetchUserData(completion: @escaping ((VCUserModel?, Bool) -> Void)) {
+        var userModel: VCUserModel?
+        
+        if let userId = Auth.auth().currentUser?.uid, let email = Auth.auth().currentUser?.email {
+            DatabaseViewModel().fetchUserModel(userId: userId) { user, error in
+                if let user = user, error == nil {
+                    userModel = VCUserModel(name: user["name"] as! String, email: email)
+                    completion(userModel, true)
+                } else if let error = error {
+                    print(error)
+                    print("erroooooooooorrr in loading")
+                    completion(nil, false)
+                }
+            }
+        }
+    }
+    
+    //Fetching daily rewards
+    func fetchDailyRewards(completion: @escaping ((VCRewardModel?, Bool) -> Void)){
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        
+        DatabaseViewModel().fetchDailyRewardsInfo(userId: userId) { data, error in
+            if let data = data, error == nil {
+                
+                guard let rewardAmountCards = data["rewardAmountCards"] as? [String: Double],
+                      let watchedCards = data["watchedCards"] as? [String: Bool],
+                      let watchedAmount = data["watchedAmount"] as? Int,
+                      let rewardedDate = data["rewardedDate"] as? String else {return}
+                
+                let rewardModel = VCRewardModel(watchedCards: watchedCards, rewardAmount: rewardAmountCards, watchedAmount: watchedAmount, rewardedDate: rewardedDate)
+                
+                completion(rewardModel, true)
+            } else if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(nil, false)
             }
         }
     }

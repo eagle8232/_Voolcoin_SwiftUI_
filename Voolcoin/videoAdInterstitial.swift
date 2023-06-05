@@ -14,14 +14,16 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     
     @Published private var isRewardLoaded = true
     
+    var rewardAmount: Double = Double.random(in: 0.1...10)
+    
     let today = Date().toString(format: "yyyy-MM-dd HH:mm:ss")
     
-    var rewardModel: RewardModel?
+    var rewardModel: VCRewardModel?
     
     var rewardedAd: GADInterstitialAd?
     var dailyRewardVM = VCDailyRewardsViewModel()
     
-    var onDismiss: ((VCTransactionModel, RewardModel) -> Void)?
+    var onDismiss: ((VCTransactionModel, VCRewardModel) -> Void)?
     
     
     
@@ -52,7 +54,7 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
         }
     }
     
-    func showAd(onDismiss: @escaping (VCTransactionModel, RewardModel) -> Void) {
+    func showAd(onDismiss: @escaping (VCTransactionModel, VCRewardModel) -> Void) {
         if let ad = rewardedAd {
             let root = UIApplication.shared.windows.first?.rootViewController
             ad.present(fromRootViewController: root!)
@@ -67,11 +69,6 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     
     func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
-        
-        var rewardAmount: Double {
-            let generateRanNum = Double.random(in: 0.1...10)
-            return generateRanNum
-        }
         
         if let watchedCards = UserDefaults.standard.object(forKey: "watchedCards") as? [String: Bool],
            let rewards = UserDefaults.standard.object(forKey: "rewards") as? [String: Double], watchedCards["card1"]! {
@@ -90,15 +87,14 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
             watchedAmount += 1
             dailyRewardVM.saveRewardInfo(watchedCards: self.watchedCards, rewards: self.rewards, watchedAmount: watchedAmount)
             
-            rewardModel = RewardModel(watchedCards: self.watchedCards, rewardAmount: self.rewards, watchedAmount: self.watchedAmount, rewardedDate: today)
+            rewardModel = VCRewardModel(watchedCards: self.watchedCards, rewardAmount: self.rewards, watchedAmount: self.watchedAmount, rewardedDate: today)
         } else {
             rewardModel = dailyRewardVM.saveDefaultRewardInfo(rewardAmount: rewardAmount)
         }
         
         let transaction = VCTransactionModel(id: nil, type: .income, amount: rewardAmount, date: today)
         
-        
-        onDismiss?(transaction, rewardModel ?? RewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: ""))
+        onDismiss?(transaction, rewardModel ?? VCRewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: ""))
         
     }
     

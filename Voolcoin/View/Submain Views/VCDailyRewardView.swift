@@ -13,11 +13,10 @@ enum RewardsState {
 }
 
 struct VCDailyRewardView: View {
-    @State var watchedAmount: Int = 0
-    //        @State private var showAd = false
-    
     @State private var rewardsState: RewardsState = .unwatched
-    @Binding var rewardModel: RewardModel?
+    var rewardModel: VCRewardModel?
+    var isShowCardAfterTime: Bool?
+    var isDataFetched: Bool?
     
     var body: some View {
         
@@ -31,7 +30,7 @@ struct VCDailyRewardView: View {
                         .padding()
                         .foregroundColor(.white)
                     
-                    VCDailyRewardsState(watchedAmount: watchedAmount)
+                    VCDailyRewardsState(watchedAmount: rewardModel?.watchedAmount ?? 0)
                         .padding(.trailing)
                 }
                 
@@ -41,33 +40,18 @@ struct VCDailyRewardView: View {
                     .opacity(0.7)
                     .padding(.horizontal)
                     .foregroundColor(.white)
-                
-                
-                
             }
             
             switch rewardsState {
             case .watched:
                 HStack {
-                    VCBlockedCardView(rewardState: rewardsState)
-                    VCBlockedCardView(rewardState: rewardsState)
-                    VCBlockedCardView(rewardState: rewardsState)
+                    VCBlockedCardView(rewardState: (rewardModel?.watchedAmount ?? 0) == 3 ? .watched : .unwatched)
+                    VCBlockedCardView(rewardState: (rewardModel?.watchedAmount ?? 0) == 3 ? .watched : .unwatched)
+                    VCBlockedCardView(rewardState: (rewardModel?.watchedAmount ?? 0) == 3 ? .watched : .unwatched)
                 }
             case .unwatched:
-                VCDailyRewardCardsView(rewardModel: rewardModel)
+                VCDailyRewardCardsView(rewardModel: rewardModel, isShowCardAfterTime: isShowCardAfterTime, isDataFetched: isDataFetched)
                     .frame(width: 302, height: 165, alignment: .center)
-            }
-        }
-        
-        .onAppear {
-            if let rewardModel = rewardModel {
-                watchedAmount = rewardModel.watchedAmount
-            } else {
-                watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
-            }
-            
-            if watchedAmount == 3 {
-                rewardsState = .watched
             }
         }
         .padding(.bottom)
@@ -99,6 +83,6 @@ struct VCDailyRewardsState: View {
 
 struct VCDailyRewardView_Previews: PreviewProvider {
     static var previews: some View {
-        VCDailyRewardView(rewardModel: .constant(RewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: "")))
+        VCDailyRewardView()
     }
 }

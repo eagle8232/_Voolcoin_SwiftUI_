@@ -16,7 +16,7 @@ struct VoolcoinApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @StateObject var manager: VoolcoinManager = VoolcoinManager()
-
+    
     init() {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
     }

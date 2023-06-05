@@ -14,12 +14,10 @@ struct VCHomeView: View {
     @State var errorHandling: Bool = false
     
     @State var chosenType: TransactionType = .all
-    @State var cardAmount: Double = 0.0
     
+    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     
-    @State var transactions: [VCTransactionModel] = []
-    @State var userModel: VCUserModel?
-    @State var rewardModel: RewardModel?
+    private let dataGroup = DispatchGroup()
     
     var body: some View {
         NavigationView {
@@ -30,7 +28,7 @@ struct VCHomeView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 12) {
                         HStack(spacing: 15) {
-                            NavigationLink(destination: VCProfileView(userModel: userModel)) {
+                            NavigationLink(destination: VCProfileView(userModel: firebaseDBManager.userModel)) {
                                 RoundedRectangle(cornerRadius: 15)
                                     .frame(width: 50, height: 50)
                                     .foregroundColor(Color.gray.opacity(0.4))
@@ -51,7 +49,7 @@ struct VCHomeView: View {
                                     .fontWeight(.light)
                                     .foregroundColor(.white)
                                 
-                                Text(userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "????")")
+                                Text(firebaseDBManager.userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "????")")
                                     .font(.system(size: 25, weight: .bold, design: .default))
 //                                    .font(.largeTitle.bold())
                                     .foregroundColor(.white)
@@ -78,15 +76,15 @@ struct VCHomeView: View {
                         
                         Spacer()
                         
-                        VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: $chosenType, cardAmount: cardAmount, lastIncome: transactions.last {$0.type.rawValue == "Income"}?.amount ?? 0, lastOutcome: transactions.last {$0.type.rawValue == "Outcome"}?.amount ?? 0)
+                        VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: $chosenType, lastIncome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Income"}?.amount ?? 0, lastOutcome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Outcome"}?.amount ?? 0)
                         
                         Spacer()
                         
-                        VCDetailsView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: .constant(.all), transactions: $transactions)
+                        VCDetailsView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: .constant(.all), transactions: firebaseDBManager.transactions ?? [])
                         
                         Spacer()
                         
-                        VCDailyRewardView(rewardModel: $rewardModel)
+                        VCDailyRewardView(rewardModel: firebaseDBManager.rewardModel, isShowCardAfterTime: firebaseDBManager.isShowCardAfterTime, isDataFetched: firebaseDBManager.isDataFetched)
                         
                     }
                     .alert(isPresented: $errorHandling) {
@@ -99,116 +97,14 @@ struct VCHomeView: View {
             .fullScreenCover(isPresented: $isPresentingTransactionsView, onDismiss: {
                 chosenType = .all
             }) {
-                VCAllTransactionsView(isPresenting: $isPresentingTransactionsView, chosenType: $chosenType, transactions: $transactions)
-            }
-            .onDisappear {
-                cardAmount = 0
-                print("on dissapear")
+                VCAllTransactionsView(isPresenting: $isPresentingTransactionsView, chosenType: $chosenType, transactions: firebaseDBManager.transactions ?? [])
             }
             .refreshable {
-                setData()
-                
-                cardAmount = 0
-                for i in 0..<transactions.count {
-                    cardAmount += transactions[i].amount
-                }
-            }
-            .onAppear {
-                setData()
-                
-                
-                for i in 0..<transactions.count {
-                    cardAmount += transactions[i].amount
-                }
+                firebaseDBManager.fetchData()
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
-    }
-    
-    func fetchTransactions(completion: @escaping (([VCTransactionModel]?) -> Void)) {
-        var transactions: [VCTransactionModel] = []
-        if let userId = Auth.auth().currentUser?.uid {
-            print(userId)
-            DatabaseViewModel().fetchTransactionsFromFirestore(userId: userId) { entries, error in
-                if let entries = entries, error == nil {
-                    for entry in entries {
-                        let transaction = VCTransactionModel(type: TransactionType(rawValue: entry["type"] as? String ?? "Income") ?? .income, amount: entry["amount"] as? Double ?? 0.0, date: entry["date"] as? String ?? "")
-                        transactions.append(transaction)
-                    }
-                    completion(transactions)
-                    print(transactions)
-                } else {
-                    errorHandling = true
-                    print("erroooooooooorrr in loading")
-                }
-            }
-        }
-    }
-    
-    func fetchUserData(completion: @escaping ((VCUserModel?) -> Void)) {
-        var userModel: VCUserModel?
-        
-        if let userId = Auth.auth().currentUser?.uid, let email = Auth.auth().currentUser?.email {
-            DatabaseViewModel().fetchUserModel(userId: userId) { user, error in
-                if let user = user, error == nil {
-                    userModel = VCUserModel(name: user["name"] as! String, email: email)
-                    completion(userModel)
-                } else if let error = error {
-                    print(error)
-                    errorHandling = true
-                    print("erroooooooooorrr in loading")
-                    completion(nil)
-                }
-            }
-        }
-    }
-    
-    func fetchDailyRewards(completion: @escaping ((RewardModel?) -> Void)){
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-        DatabaseViewModel().fetchDailyRewardsInfo(userId: userId) { data, error in
-            if let data = data, error == nil {
-                
-                guard let rewardAmountCards = data["rewardAmountCards"] as? [String: Double],
-                      let watchedCards = data["watchedCards"] as? [String: Bool],
-                      let watchedAmount = data["watchedAmount"] as? Int,
-                      let rewardedDate = data["rewardedDate"] as? String else {return}
-                
-                let rewardModel = RewardModel(watchedCards: watchedCards, rewardAmount: rewardAmountCards, watchedAmount: watchedAmount, rewardedDate: rewardedDate)
-                
-                completion(rewardModel)
-            } else if let error = error {
-                print("Error: \(error.localizedDescription)")
-                completion(nil)
-            }
-        }
-    }
-    
-    func setData() {
-        fetchTransactions { transactions in
-            if let transactions {
-                self.transactions = transactions
-            } else {
-//                errorHandling = true
-            }
-        }
-        
-        fetchUserData { userModel in
-            if let userModel {
-                self.userModel = userModel
-            } else {
-//                errorHandling = true
-            }
-        }
-        
-        fetchDailyRewards { rewardModel in
-            if let rewardModel = rewardModel {
-                self.rewardModel = rewardModel
-            } else {
-                
-            }
-        }
     }
 }
 

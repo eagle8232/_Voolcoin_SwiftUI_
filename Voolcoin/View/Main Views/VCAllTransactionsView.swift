@@ -21,7 +21,7 @@ struct VCAllTransactionsView: View {
     
     @State private var currentDate = Date()
     
-    @Binding var transactions: [VCTransactionModel]
+    var transactions: [VCTransactionModel]
     
     @State var transactionModels: [VCTransactionModel] = []
     
@@ -121,6 +121,6 @@ struct VCAllTransactionsView: View {
 
 struct VCTransactionVieww_Previews: PreviewProvider {
     static var previews: some View {
-        VCAllTransactionsView(isPresenting: .constant(true), chosenType: .constant(.all), transactions: .constant([VCTransactionModel(type: .income, amount: 5.43, date: "")]))
+        VCAllTransactionsView(isPresenting: .constant(true), chosenType: .constant(.all), transactions: [VCTransactionModel(type: .income, amount: 5.43, date: "")])
     }
 }
