@@ -46,9 +46,10 @@ struct VCDailyRewardCardView: View {
                                 firebaseDBManager.rewardState = (rewardModel.watchedCards["card3"] ?? false) ? .watched : .unwatched
                                 firebaseDBManager.calculateCardAmount()
                                 
+                                adManager.intersitial = Rewarded()
                                 
                             }
-                            isRewardLoaded = true
+                            
                             
                         } label: {
                             

@@ -12,49 +12,49 @@ import GoogleMobileAds
 import FirebaseAuth
 
 struct VCDailyRewardCardsView: View {
-    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     @EnvironmentObject var adManager: AdManager
     
     var rewardModel: VCRewardModel?
-    
-    @State var isShowCardAfterTime: Bool?
-    
-    @State var isRewardLoaded = false
+    var isShowCardAfterTime: Bool = false
     
     var body: some View {
         ZStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-//                    if let rewardModel = rewardModel {
-//                    ForEach(Array(rewardModel?.watchedCards.keys.sorted() ?? []), id: \.self) { cardKey in
-//                            let watchedCard = rewardModel?.watchedCards[cardKey] ?? false
-//                        let isShowCard = rewardModel?.watchedCards["card\(Int(cardKey.dropFirst(4))! - 1)"] ?? true
-                            
-//                            if isShowCard || (isShowCardAfterTime != nil) {
-//                                cardView(watchedCard: watchedCard)
-//                            } else {
-//                                VCBlockedCardView()
-//                            }
- 
-                    
-                        
-//                    ForEach(Array(rewardModel?.watchedCards.keys.sorted() ?? []), id: \.self) { cardKey in
-                    VCDailyRewardCardView(isWatchedCard: rewardModel?.watchedCards["card1"] ?? false, tappedCards: .tappedCard1)
-                    VCDailyRewardCardView(isWatchedCard: rewardModel?.watchedCards["card2"] ?? false, tappedCards: .tappedCard2)
-                    VCDailyRewardCardView(isWatchedCard: rewardModel?.watchedCards["card3"] ?? false, tappedCards: .tappedCard3)
-//                    }
-                            
-                }
-//                    } else {
-//                        cardView(watchedCard: false)
-//                        VCBlockedCardView()
-//                        VCBlockedCardView()
-//                    }
+                    DailyRewards(rewardModel: rewardModel, isShowCardAfterTime: isShowCardAfterTime)
                     
                 }
             }
         }
+    }
     
+}
+
+struct DailyRewards: View {
+    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
+    var rewardModel: VCRewardModel?
+    var isShowCardAfterTime: Bool = false
+    
+    var body: some View {
+        if let rewardModel = rewardModel {
+            ForEach(Array(rewardModel.watchedCards.keys.sorted()), id: \.self) { cardKey in
+                let watchedCard = rewardModel.watchedCards[cardKey] ?? false
+                let isShowCard = rewardModel.watchedCards["card\(Int(cardKey.dropFirst(4))! - 1)"] ?? true
+                
+                if isShowCard || isShowCardAfterTime {
+                    VCDailyRewardCardView(isWatchedCard: watchedCard)
+                } else {
+                    VCBlockedCardView()
+                }
+                
+            }
+            
+        } else {
+            VCDailyRewardCardView(isWatchedCard: false)
+            VCBlockedCardView()
+            VCBlockedCardView()
+        }
+    }
 }
 
 struct VCBlockedCardView: View {

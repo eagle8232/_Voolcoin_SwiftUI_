@@ -18,7 +18,13 @@ class DatabaseViewModel {
     func saveTransactionsToFirestore(userId: String, transaction: VCTransactionModel) {
         let transactionRef = db.collection("transactions").document(userId)
         
-        let transactionArray = [["amount": transaction.amount, "type": transaction.type.rawValue, "date": transaction.date] as [String: Any]]
+        let transactionArray = [
+            [
+                "amount": transaction.amount,
+                "type": transaction.type.rawValue,
+                "date": transaction.date
+            ] as [String: Any]
+        ]
         
         transactionRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -171,7 +177,12 @@ extension DatabaseViewModel {
     func saveDailyRewardsInfoToFirestore(userId: String, dailyRewardsModel: VCRewardModel) {
         let dailyRewardsInfoRef = db.collection("dailyRewardsInfo").document(userId)
         print(dailyRewardsModel)
-        let dailyRewardsInfo = ["watchedCards": dailyRewardsModel.watchedCards, "rewardAmountCards": dailyRewardsModel.rewardAmount, "rewardedDate": dailyRewardsModel.rewardedDate, "watchedAmount": dailyRewardsModel.watchedAmount] as [String : Any]
+        let dailyRewardsInfo = [
+            "watchedCards": dailyRewardsModel.watchedCards,
+            "rewardAmountCards": dailyRewardsModel.rewardAmount,
+            "rewardedDate": dailyRewardsModel.rewardedDate,
+            "watchedAmount": dailyRewardsModel.watchedAmount
+        ] as [String : Any]
         
         dailyRewardsInfoRef.getDocument { document, error in
             if let document = document, document.exists, error == nil {
