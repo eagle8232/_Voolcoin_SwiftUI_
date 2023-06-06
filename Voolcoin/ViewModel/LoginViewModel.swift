@@ -95,11 +95,13 @@ class LoginViewModel: ObservableObject {
                 
                 guard let user = res?.user else {return}
                 
+                completion(true)
+                
                 //Create and save username to database
                 DatabaseViewModel().saveUserModelToFirestore(userId: user.uid) { success, error in
                     if success {
                         print("It succeeded")
-                        completion(success)
+                        completion(true)
                     } else if let error = error {
                         print(error)
                     }
@@ -163,12 +165,13 @@ class LoginViewModel: ObservableObject {
     
     func deleteAccount() {
         let user = Auth.auth().currentUser
-
+        
         user?.delete { error in
           if let error = error {
               print(error.localizedDescription)
           } else {
             print("Accout deleted")
+              DatabaseViewModel().deleteUser(userId: user?.uid ?? "")
               self.logStatus = false
           }
         }

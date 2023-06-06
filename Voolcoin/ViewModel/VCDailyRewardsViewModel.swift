@@ -22,14 +22,15 @@ class VCDailyRewardsViewModel {
         
         let rewardModel = VCRewardModel(watchedCards: watchedCards, rewardAmount: rewards, watchedAmount: watchedAmount, rewardedDate: Date().toString(format: DateFormatKey.wholeFormat.rawValue))
         
-        if let userId = Auth.auth().currentUser?.uid, rewardAmount == 0 {
-            DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: rewardModel)
-        }
         return rewardModel
     }
     
     func saveRewardInfo(watchedCards: [String: Bool], rewards: [String: Double], watchedAmount: Int) {
         //Save
+        setUserDefaults(watchedCards: watchedCards, rewards: rewards, watchedAmount: watchedAmount)
+    }
+    
+    func setUserDefaults(watchedCards: [String: Bool], rewards: [String: Double], watchedAmount: Int ) {
         UserDefaults.standard.set(watchedCards, forKey: "watchedCards")
         UserDefaults.standard.set(rewards, forKey: "rewards")
         UserDefaults.standard.set(watchedAmount, forKey: "watchedAmount")

@@ -92,7 +92,7 @@ struct VCHomeView: View {
                     }
                     .padding()
                 }
-
+                
             }
             .fullScreenCover(isPresented: $isPresentingTransactionsView, onDismiss: {
                 chosenType = .all
@@ -102,6 +102,7 @@ struct VCHomeView: View {
             .refreshable {
                 firebaseDBManager.fetchData()
             }
+            
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)

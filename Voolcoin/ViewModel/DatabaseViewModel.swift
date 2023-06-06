@@ -17,7 +17,6 @@ class DatabaseViewModel {
     
     func saveTransactionsToFirestore(userId: String, transaction: VCTransactionModel) {
         let transactionRef = db.collection("transactions").document(userId)
-        
         let transactionArray = [
             [
                 "amount": transaction.amount,
@@ -240,7 +239,7 @@ extension DatabaseViewModel {
                     completion(transactions, true)
                     print(transactions)
                 } else {
-                    print("erroooooooooorrr in loading")
+                    print("erroooooooooorrr in transactions")
                     completion(nil, false)
                 }
             }
@@ -258,7 +257,7 @@ extension DatabaseViewModel {
                     completion(userModel, true)
                 } else if let error = error {
                     print(error)
-                    print("erroooooooooorrr in loading")
+                    print("erroooooooooorrr in user data")
                     completion(nil, false)
                 }
             }
@@ -271,7 +270,6 @@ extension DatabaseViewModel {
         
         DatabaseViewModel().fetchDailyRewardsInfo(userId: userId) { data, error in
             if let data = data, error == nil {
-                
                 guard let rewardAmountCards = data["rewardAmountCards"] as? [String: Double],
                       let watchedCards = data["watchedCards"] as? [String: Bool],
                       let watchedAmount = data["watchedAmount"] as? Int,
@@ -282,9 +280,19 @@ extension DatabaseViewModel {
                 completion(rewardModel, true)
             } else if let error = error {
                 print("Error: \(error.localizedDescription)")
+                print("erroooooooooorrr in daily rewards")
                 completion(nil, false)
             }
         }
     }
     
+    func deleteUser(userId: String) {
+        let dailyRewardsInfoRef = db.collection("dailyRewardsInfo").document(userId)
+        let userRef = db.collection("user").document(userId)
+        let transactionRef = db.collection("transactions").document(userId)
+        
+        dailyRewardsInfoRef.delete()
+        userRef.delete()
+        transactionRef.delete()
+    }
 }

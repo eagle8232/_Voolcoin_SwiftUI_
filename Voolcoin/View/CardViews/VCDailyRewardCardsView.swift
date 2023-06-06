@@ -19,11 +19,8 @@ struct VCDailyRewardCardsView: View {
     
     var body: some View {
         ZStack {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    DailyRewards(rewardModel: rewardModel, isShowCardAfterTime: isShowCardAfterTime)
-                    
-                }
+            HStack {
+                DailyRewards(rewardModel: rewardModel, isShowCardAfterTime: isShowCardAfterTime)
             }
         }
     }
@@ -41,15 +38,16 @@ struct DailyRewards: View {
                 let watchedCard = rewardModel.watchedCards[cardKey] ?? false
                 let isShowCard = rewardModel.watchedCards["card\(Int(cardKey.dropFirst(4))! - 1)"] ?? true
                 
+                
+                
                 if isShowCard || isShowCardAfterTime {
                     VCDailyRewardCardView(isWatchedCard: watchedCard)
                 } else {
                     VCBlockedCardView()
                 }
-                
             }
-            
         } else {
+            //This will show, when a user opens the app for the first time with new registered email
             VCDailyRewardCardView(isWatchedCard: false)
             VCBlockedCardView()
             VCBlockedCardView()

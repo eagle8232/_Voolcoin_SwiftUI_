@@ -20,52 +20,70 @@ class FirebaseDBManager: ObservableObject {
     @Published var isDataFetched: Bool = false
     @Published var isShowCardAfterTime: Bool = false
     
-    let dataGroup = DispatchGroup()
     
     init() {
         fetchData()
     }
     
     func fetchData() {
+        
+        let dataGroup = DispatchGroup()
+        let databaseViewModel = DatabaseViewModel()
+        
         dataGroup.enter()
-        DatabaseViewModel().fetchTransactions { transactions, success in
-            defer { self.dataGroup.leave() }
-            if let transactions {
-                self.transactions = transactions
-                self.errorHandling = !success
-            } else {
-                
+        databaseViewModel.fetchTransactions { [weak self] transactions, success in
+            defer { dataGroup.leave() }
+            DispatchQueue.main.async {
+                if let transactions = transactions {
+                    self?.transactions = transactions
+                    self?.errorHandling = !success
+                } else {
+                    // New user
+                    self?.transactions = []
+                    print("transactions mode worked")
+                }
             }
         }
         
         dataGroup.enter()
-        DatabaseViewModel().fetchUserData { userModel, success in
-            defer { self.dataGroup.leave() }
-            if let userModel {
-                self.userModel = userModel
-                self.errorHandling = !success
-            } else {
-                // Handle error
+        databaseViewModel.fetchUserData { [weak self] userModel, success in
+            defer { dataGroup.leave() }
+            DispatchQueue.main.async {
+                if let userModel = userModel {
+                    self?.userModel = userModel
+                    self?.errorHandling = !success
+                } else {
+                    // Handle error
+                    print("user data mode worked")
+                }
             }
         }
+        
         
         dataGroup.enter()
-        DatabaseViewModel().fetchDailyRewards { rewardModel, success in
-            defer { self.dataGroup.leave() }
-            if let rewardModel = rewardModel {
-                self.rewardModel = rewardModel
-                self.errorHandling = !success
-            } else {
-                // Handle error
+        databaseViewModel.fetchDailyRewards { [weak self] rewardModel, success in
+            defer { dataGroup.leave() }
+            DispatchQueue.main.async {
+                if let rewardModel = rewardModel {
+                    self?.rewardModel = rewardModel
+                    self?.errorHandling = !success
+                    print("rewardModel has data")
+                } else {
+                    // Handle error
+                    self?.rewardModel = VCDailyRewardsViewModel().saveDefaultRewardInfo()
+                    print("saveDefaultRewardInfo")
+                }
             }
         }
         
-        dataGroup.notify(queue: .main) {
-            self.calculateCardAmount()
-            self.calculateDailyRewardsCardTime()
-            self.isDataFetched = true
+        dataGroup.notify(queue: .main) { [weak self] in
+            print("notified")
+            self?.calculateCardAmount()
+            self?.calculateDailyRewardsCardTime()
+            self?.isDataFetched = true
         }
     }
+
     
     func calculateCardAmount() {
         cardAmount = transactions?.reduce(0) { $0 + $1.amount } ?? 0
@@ -97,5 +115,14 @@ class FirebaseDBManager: ObservableObject {
         }
         
         return false
+    }
+    
+    func setDefaultValue() {
+        self.rewardModel = VCDailyRewardsViewModel().saveDefaultRewardInfo()
+        rewardState = .unwatched
+        userModel = nil
+        rewardModel = nil
+        transactions = nil
+        cardAmount = 0
     }
 }

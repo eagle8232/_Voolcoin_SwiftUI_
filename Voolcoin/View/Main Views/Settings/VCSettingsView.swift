@@ -237,6 +237,7 @@ struct VCSettingsButtonsView: View {
                 Alert(title: Text("Attention!"), message: Text("Do you really want to sign out your account?"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
                     try? Auth.auth().signOut()
                     GIDSignIn.sharedInstance.signOut()
+                    firebaseDBManager.setDefaultValue()
                     nameStatus = false
                     withAnimation(.easeInOut) {
                         logStatus = false
