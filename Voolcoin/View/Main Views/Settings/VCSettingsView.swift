@@ -11,7 +11,6 @@ import GoogleSignIn
 import StoreKit
 
 struct VCSettingsView: View {
-    
     @State var isPresentingRateView: Bool = false
     @Environment(\.presentationMode) var presentationMode
     @State var startPoint: UnitPoint = .leading
@@ -71,6 +70,7 @@ struct VCSettingsView: View {
 
 //MARK: - VCSettinsButtonsView
 struct VCSettingsButtonsView: View {
+    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     
     @Binding var isPresentingRateView: Bool
     @State var isPresentingInviteFriends: Bool = false

@@ -14,6 +14,7 @@ import GoogleSignInSwift
 
 
 struct SignInScreenView: View {
+    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     @State private var phoneNumber: String = ""
     @State private var otpCode: String = ""
     @State var isPresentingTransactionsView: Bool = false
@@ -78,7 +79,11 @@ struct SignInScreenView: View {
                         .padding(.vertical)
                         .overlay {
                             GoogleSignInButton {
-                                loginModel.signInWithGoogle()
+                                loginModel.signInWithGoogle { success in
+                                    if success {
+                                        firebaseDBManager.fetchData()
+                                    }
+                                }
                             }
                             .frame(width: 255)
                             .blendMode(.overlay)

@@ -49,7 +49,7 @@ struct VCHomeView: View {
                                     .fontWeight(.light)
                                     .foregroundColor(.white)
                                 
-                                Text(firebaseDBManager.userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "????")")
+                                Text(firebaseDBManager.userModel?.name ?? "")
                                     .font(.system(size: 25, weight: .bold, design: .default))
 //                                    .font(.largeTitle.bold())
                                     .foregroundColor(.white)
@@ -76,7 +76,7 @@ struct VCHomeView: View {
                         
                         Spacer()
                         
-                        VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: $chosenType, lastIncome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Income"}?.amount ?? 0, lastOutcome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Outcome"}?.amount ?? 0)
+                        VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: $chosenType, incomeTransaction: firebaseDBManager.transactions?.last {$0.type.rawValue == "Income"} ?? VCTransactionModel(type: .income, amount: 0, date: ""), outcomeTransaction: firebaseDBManager.transactions?.last {$0.type.rawValue == "Outcome"} ?? VCTransactionModel(type: .income, amount: 0, date: ""), cardAmount: firebaseDBManager.cardAmount)
                         
                         Spacer()
                         
@@ -84,7 +84,7 @@ struct VCHomeView: View {
                         
                         Spacer()
                         
-                        VCDailyRewardView(rewardModel: firebaseDBManager.rewardModel, isShowCardAfterTime: firebaseDBManager.isShowCardAfterTime, isDataFetched: firebaseDBManager.isDataFetched)
+                        VCDailyRewardView(rewardsState: firebaseDBManager.rewardState, rewardModel: firebaseDBManager.rewardModel, isShowCardAfterTime: firebaseDBManager.isShowCardAfterTime, isDataFetched: firebaseDBManager.isDataFetched)
                         
                     }
                     .alert(isPresented: $errorHandling) {

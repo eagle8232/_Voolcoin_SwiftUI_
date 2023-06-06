@@ -13,7 +13,7 @@ enum RewardsState {
 }
 
 struct VCDailyRewardView: View {
-    @State private var rewardsState: RewardsState = .unwatched
+    var rewardsState: RewardsState = .unwatched
     var rewardModel: VCRewardModel?
     var isShowCardAfterTime: Bool?
     var isDataFetched: Bool?
@@ -45,12 +45,12 @@ struct VCDailyRewardView: View {
             switch rewardsState {
             case .watched:
                 HStack {
-                    VCBlockedCardView(rewardState: (rewardModel?.watchedAmount ?? 0) == 3 ? .watched : .unwatched)
-                    VCBlockedCardView(rewardState: (rewardModel?.watchedAmount ?? 0) == 3 ? .watched : .unwatched)
-                    VCBlockedCardView(rewardState: (rewardModel?.watchedAmount ?? 0) == 3 ? .watched : .unwatched)
+                    VCBlockedCardView(rewardState: rewardsState)
+                    VCBlockedCardView(rewardState: rewardsState)
+                    VCBlockedCardView(rewardState: rewardsState)
                 }
             case .unwatched:
-                VCDailyRewardCardsView(rewardModel: rewardModel, isShowCardAfterTime: isShowCardAfterTime, isDataFetched: isDataFetched)
+                VCDailyRewardCardsView(rewardModel: rewardModel, isShowCardAfterTime: isShowCardAfterTime ?? false)
                     .frame(width: 302, height: 165, alignment: .center)
             }
         }

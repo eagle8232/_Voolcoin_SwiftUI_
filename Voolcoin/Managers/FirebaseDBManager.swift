@@ -12,6 +12,8 @@ class FirebaseDBManager: ObservableObject {
     @Published var userModel: VCUserModel?
     @Published var rewardModel: VCRewardModel?
     
+    @Published var rewardState: RewardsState = .unwatched
+    
     @Published var cardAmount: Double = 0.0
     @Published var errorHandling: Bool = false
     
@@ -74,15 +76,15 @@ class FirebaseDBManager: ObservableObject {
         dateFormatter.dateFormat = DateFormatKey.wholeFormat.rawValue
         let date = dateFormatter.date(from: rewardModel?.rewardedDate ?? "")
         
-        if timeDifference(date1: Date(), date2: date ?? Date()) {
+        if timeDifference(date1: Date(), date2: date ?? Date()) && rewardModel?.watchedAmount == 3 {
             isShowCardAfterTime = true
             
             rewardModel = VCDailyRewardsViewModel().saveDefaultRewardInfo()
             UserDefaults.standard.removeObject(forKey: "lastReward")
         }
         
-        
-        
+        //Change status of rewardState
+        rewardState = (rewardModel?.watchedAmount ?? 0) == 3 ? .watched : .unwatched
     }
     
     

@@ -66,7 +66,7 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func signInWithGoogle() {
+    func signInWithGoogle(completion: @escaping ((Bool) -> Void)) {
         guard let clientID = FirebaseApp.app()?.options.clientID else {return}
         
         let config = GIDConfiguration(clientID: clientID)
@@ -89,7 +89,7 @@ class LoginViewModel: ObservableObject {
             Auth.auth().signIn(with: credential) { res, error in
                 if let error = error {
                     print(error.localizedDescription)
-                    
+                    completion(false)
                     return
                 }
                 
@@ -99,6 +99,7 @@ class LoginViewModel: ObservableObject {
                 DatabaseViewModel().saveUserModelToFirestore(userId: user.uid) { success, error in
                     if success {
                         print("It succeeded")
+                        completion(success)
                     } else if let error = error {
                         print(error)
                     }

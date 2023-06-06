@@ -14,6 +14,7 @@ struct ContentView: View {
     @AppStorage("name_status") var nameStatus: Bool = false
     
     var firebaseDBManager = FirebaseDBManager()
+    var adManager = AdManager()
     
     var body: some View {
         
@@ -21,10 +22,12 @@ struct ContentView: View {
             VCHomeView()
                 .preferredColorScheme(.dark)
                 .environmentObject(firebaseDBManager)
+                .environmentObject(adManager)
                 
         } else {
             WelcomeScreenView()
                 .preferredColorScheme(.light)
+                .environmentObject(firebaseDBManager)
         }
 
     }

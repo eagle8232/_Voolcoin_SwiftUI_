@@ -9,13 +9,13 @@ import SwiftUI
 
 
 struct VCCardView: View {
-    @EnvironmentObject var firebaseDMManager: FirebaseDBManager
-    
     @Binding var isPresentingTransactionsView: Bool
     @Binding var chosenType: TransactionType
+    
+    var incomeTransaction: VCTransactionModel?
+    var outcomeTransaction: VCTransactionModel?
+    
     var cardAmount: Double = 0.0
-    var lastIncome: Double = 0.0
-    var lastOutcome: Double = 0.0
     
     var body: some View {
         
@@ -30,12 +30,12 @@ struct VCCardView: View {
             VStack(spacing: 15) {
                 
                 HStack {
-                    Text("\((String(format: "%.1f", firebaseDMManager.cardAmount) ))")
+                    Text("\((String(format: "%.1f", cardAmount) ))")
                         .font(.system(size: 45, weight: .bold))
                         .padding(.bottom, 5)
                         .foregroundColor(.white)
                     
-                    Text("≈ $\((String(format: "%.1f", firebaseDMManager.cardAmount * 0.001) ))")
+                    Text("≈ $\((String(format: "%.1f", cardAmount * 0.001) ))")
                         .foregroundColor(Color(.gray).opacity(0.8))
                         .font(.system(size: 21))
                 }
@@ -64,7 +64,7 @@ struct VCCardView: View {
                                         .opacity(0.9)
                                         .foregroundColor(.white)
                                     
-                                    Text("\((String(format: "%.1f", lastIncome) ))")
+                                    Text("\((String(format: "%.1f", incomeTransaction?.amount ?? 0) ))")
                                         .font(.callout)
                                         .fontWeight(.semibold)
                                         .lineLimit(1)
@@ -101,7 +101,7 @@ struct VCCardView: View {
                                         .opacity(0.9)
                                         .foregroundColor(.white)
                                     
-                                    Text("\((String(format: "%.1f", lastOutcome) ))")
+                                    Text("\((String(format: "%.1f", outcomeTransaction?.amount ?? 0.0) ))")
                                         .font(.callout)
                                         .fontWeight(.semibold)
                                         .lineLimit(1)
