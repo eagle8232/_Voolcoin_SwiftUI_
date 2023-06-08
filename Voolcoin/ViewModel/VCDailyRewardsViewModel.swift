@@ -9,7 +9,9 @@ import Foundation
 import FirebaseAuth
 
 class VCDailyRewardsViewModel {
-    func saveDefaultRewardInfo(rewardAmount: Double? = 0) -> VCRewardModel {
+    func saveDefaultRewardInfo(rewardAmount: Double? = 0) -> VCRewardModel? {
+        guard let rewardAmount = rewardAmount else {return nil}
+        
         let watchedCards = ["card1": rewardAmount != 0 ? true : false, "card2": false, "card3": false]
         let rewards = ["card1": rewardAmount, "card2": 0, "card3": 0]
         let watchedAmount = rewardAmount != 0 ? 1 : 0

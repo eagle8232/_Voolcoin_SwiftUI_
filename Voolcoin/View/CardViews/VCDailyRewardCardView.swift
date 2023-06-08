@@ -32,7 +32,12 @@ struct VCDailyRewardCardView: View {
                     .frame(width: 95, height: 150)
                     .overlay {
                         Button {
-                            adManager.intersitial?.showAd { transaction, rewardModel  in
+                            guard let watchedCards = firebaseDBManager.rewardModel?.watchedCards,
+                                  let rewardAmount = firebaseDBManager.rewardModel?.rewardAmount,
+                                  let watchedAmount = firebaseDBManager.rewardModel?.watchedAmount else {
+                                return
+                            }
+                            adManager.intersitial?.showAd(watchedCards: watchedCards, rewards: rewardAmount, watchedAmount: watchedAmount, onDismiss: {  transaction, rewardModel  in
                                 
                                 guard let userId = Auth.auth().currentUser?.uid else {return}
                                 
@@ -50,7 +55,7 @@ struct VCDailyRewardCardView: View {
                                 
                                 adManager.intersitial = Rewarded()
                                 
-                            }
+                            })
                             
                             
                         } label: {

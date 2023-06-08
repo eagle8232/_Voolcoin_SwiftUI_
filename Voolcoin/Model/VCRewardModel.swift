@@ -14,7 +14,7 @@ enum RewardType {
 
 struct VCRewardModel {
     let watchedCards: [String: Bool]
-    let rewardAmount: [String: Double?]
+    let rewardAmount: [String: Double]
     let watchedAmount: Int
     let rewardedDate: String
 }

@@ -22,7 +22,7 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     
     var rewardModel: VCRewardModel?
     
-    var rewardedAd: GADInterstitialAd?
+    var rewardedAd: GADRewardedInterstitialAd?
     var dailyRewardVM = VCDailyRewardsViewModel()
     
     var onDismiss: ((VCTransactionModel, VCRewardModel) -> Void)?
@@ -34,6 +34,14 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     @Published var rewards: [String: Double] = [:]
     @Published var adDismissed = false
     
+    
+    //ca-app-pub-1633444832866213/7626120561
+    
+    let adUnitId: String = "ca-app-pub-1633444832866213/7626120561"
+    //ca-app-pub-1633444832866213/3064074930 ad reward
+    //ca-app-pub-1633444832866213/1743161545 int ad
+    //ca-app-pub-7829184150158566/3060985751 - for kamraniosdeveloper@gmail.com
+    //for testing: ca-app-pub-3940256099942544/1712485313
     override init() {
         super.init()
         loadAd()
@@ -41,10 +49,12 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     
     
     func loadAd() {
+        
         let request = GADRequest()
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["eabfbb8f46892d02e3ce765b77e9752e"]
         
-        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-1633444832866213/1743161545", request: request) { (ad, error) in
+//        GADInterstitialAd
+        GADRewardedInterstitialAd.load(withAdUnitID: adUnitId, request: request) { ad, error in
             if let error = error {
                 self.isRewardLoaded = false
                 print("Loading failed with error: \(error)")
@@ -72,25 +82,39 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
         }
     }
     
-    func showAd(onDismiss: @escaping (VCTransactionModel, VCRewardModel) -> Void) {
-        if let ad = rewardedAd {
-            let root = UIApplication.shared.windows.first?.rootViewController
-            ad.present(fromRootViewController: root!)
-            self.onDismiss = onDismiss
-            self.isRewardLoaded = true
-        } else {
-            print("Ad wasn't ready")
-            self.isRewardLoaded = false
-            
+    func showAd(watchedCards: [String : Bool], rewards: [String : Double], watchedAmount: Int, onDismiss: @escaping (VCTransactionModel, VCRewardModel) -> Void) {
+        guard let rewardedInterstitialAd = rewardedAd else {
+            isRewardLoaded = false
+            return print("Ad wasn't ready.")
         }
+        let root = UIApplication.shared.windows.first?.rootViewController
+        
+        rewardedInterstitialAd.present(fromRootViewController: root!) {
+            let reward = rewardedInterstitialAd.adReward
+            self.onDismiss = onDismiss
+            self.rewardTheUser(watchedCards: watchedCards, rewards: rewards, watchedAmount: watchedAmount)
+            self.isRewardLoaded = true
+        }
+        
     }
     
     func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        watchedAmount = UserDefaults.standard.integer(forKey: "watchedAmount")
         
-        if let watchedCards = UserDefaults.standard.object(forKey: "watchedCards") as? [String: Bool],
-           let rewards = UserDefaults.standard.object(forKey: "rewards") as? [String: Double], watchedCards["card1"]! {
-            
+    }
+    
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad dismissed. Rewarding user.")
+        
+        // Reload ad for the next time
+        
+        loadAd()
+    }
+    
+    func rewardTheUser(watchedCards: [String: Bool], rewards: [String: Double], watchedAmount: Int) {
+        self.watchedAmount = watchedAmount
+        
+        
+        if (watchedCards["card1"] ?? false) {
             self.watchedCards = watchedCards
             self.rewards = rewards
             
@@ -102,7 +126,9 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
                 self.rewards["card3"] = rewardAmount
                 UserDefaults.standard.set(Date(), forKey: "lastReward")
             }
-            watchedAmount += 1
+            
+            self.watchedAmount += 1
+            
             dailyRewardVM.saveRewardInfo(watchedCards: self.watchedCards, rewards: self.rewards, watchedAmount: watchedAmount)
             
             rewardModel = VCRewardModel(watchedCards: self.watchedCards, rewardAmount: self.rewards, watchedAmount: self.watchedAmount, rewardedDate: today)
@@ -110,16 +136,10 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
             rewardModel = dailyRewardVM.saveDefaultRewardInfo(rewardAmount: rewardAmount)
         }
         
+        print(rewardModel)
+        
         let transaction = VCTransactionModel(id: nil, type: .income, amount: rewardAmount, date: today)
         
         onDismiss?(transaction, rewardModel ?? VCRewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: ""))
-        
-    }
-    
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad dismissed. Rewarding user.")
-        
-        // Reload ad for the next time
-        loadAd()
     }
 }
