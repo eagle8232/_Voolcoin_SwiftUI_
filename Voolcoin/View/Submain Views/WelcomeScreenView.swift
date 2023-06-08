@@ -58,11 +58,11 @@ struct IntroView: View {
                 Spacer(minLength: 0)
                 
                 Text(intro.title)
-                    .font(.system(size: 40))
+                    .font(.system(size: 38))
                     .fontWeight(.bold)
                 
                 Text(intro.subTitle)
-                    .font(.system(size: 15, weight: .light, design: .default))
+                    .font(.system(size: 14, weight: .light, design: .default))
                     .foregroundColor(.black)
                     .padding(.top, 15)
                 

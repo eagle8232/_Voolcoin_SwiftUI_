@@ -33,10 +33,6 @@ struct VCSettingsView: View {
                     endPoint = .bottomLeading
                 }
             }
-            .sheet(isPresented: $isPresentingRateView) {
-                VCRateAppView(isPresenting: $isPresentingRateView)
-                    .transition(.customSlide(leading: true))
-            }
             
         }
         .navigationTitle("Settings")
@@ -60,11 +56,6 @@ struct VCSettingsView: View {
             }
         }
         
-//        .gesture(DragGesture().onEnded { value in
-//            if value.translation.width > 30 {
-//                presentationMode.wrappedValue.dismiss()
-//            }
-//        })
     }
 }
 
@@ -76,11 +67,14 @@ struct VCSettingsButtonsView: View {
     @State var isPresentingInviteFriends: Bool = false
     @State var isSignOut: Bool = false
     @State var isDeleted: Bool = false
+    @State var isError: Bool = false
+    
+    @State var error: Error? = nil
     
     @AppStorage("log_status") var logStatus: Bool = false
-    @AppStorage("name_status") var nameStatus: Bool = false
     
     @StateObject var loginModel: LoginViewModel = .init()
+    
     
     func openAppStore() {
         if let url = URL(string: "itms-apps://itunes.apple.com/app/your-app-id") { // Замените "your-app-id" на фактический идентификатор вашего приложения
@@ -106,7 +100,7 @@ struct VCSettingsButtonsView: View {
                 }
             }
             .alert(isPresented: $isPresentingInviteFriends) {
-                Alert(title: Text("Referral link"), message: Text("Coming soon... 😉"), dismissButton: .cancel(Text("OK")))
+                Alert(title: Text("Referral link"), message: Text("Coming soon..."), dismissButton: .cancel(Text("OK")))
             }
             .padding()
             .background(Color.gray.opacity(0.35))
@@ -205,10 +199,16 @@ struct VCSettingsButtonsView: View {
             }
             .alert(isPresented: $isDeleted) {
                 Alert(title: Text("Attention!"), message: Text("Do you really want to delete your account? You lose all your information, without permission to return them back!"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
-                    loginModel.deleteAccount()
-                    nameStatus = false
-                    withAnimation(.easeInOut) {
-                        logStatus = false
+                    loginModel.deleteAccount { error in
+                        if let error = error {
+                            isError = true
+                            self.error = error
+                        } else {
+                            firebaseDBManager.setDefaultValue()
+                            withAnimation(.easeInOut) {
+                                logStatus = false
+                            }
+                        }
                     }
                 }))
                     }
@@ -238,7 +238,6 @@ struct VCSettingsButtonsView: View {
                     try? Auth.auth().signOut()
                     GIDSignIn.sharedInstance.signOut()
                     firebaseDBManager.setDefaultValue()
-                    nameStatus = false
                     withAnimation(.easeInOut) {
                         logStatus = false
                     }
@@ -250,9 +249,14 @@ struct VCSettingsButtonsView: View {
             .cornerRadius(20)
             .foregroundColor(.red)
         }
-        
         .font(.system(size: 20, weight: .semibold))
         .padding()
+        .alert("Error", isPresented: $isError) {
+            Text("Good")
+        } message: {
+            Text(error?.localizedDescription ?? "Ooops, something went wrong.")
+        }
+
         Spacer()
     }
 }

@@ -27,6 +27,7 @@ struct VCAllTransactionsView: View {
     
     
     var body: some View {
+        
         NavigationView {
             
             ZStack {
@@ -69,10 +70,39 @@ struct VCAllTransactionsView: View {
                     
                     VCSegmentedControl(chosenType: $chosenType)
                     
+                    
                     ScrollView(showsIndicators: false) {
                         ForEach(Array(transactions.enumerated()).reversed(), id: \.1.date) { (index, transactionModel) in
                             if isSameDay(currentDateString: currentDate.toString(format: "yyyy-MM-dd HH:mm:ss"), rewardedDateString: transactionModel.date) {
                                 VCTransactionView(chosenType: $chosenType, transaction: transactionModel)
+                            } else {
+                                
+                                VStack(alignment: .center) {
+                                    HStack(spacing: 10) {
+                                        Image(systemName: "xmark")
+                                            .foregroundColor(Color.red)
+                                            .frame(width: 40, height: 40)
+                                            .background(.black.opacity(0.7), in: Circle())
+
+                                        VStack(alignment: .leading) {
+                                            Text("No transactions yet")
+                                                .foregroundColor(.white.opacity(0.7))
+                                                .fontWeight(.medium)
+
+                                            Text("0 voolcoins")
+                                                .font(.system(size: 15, weight: .semibold, design: .default))
+                                                .lineLimit(1)
+                                                .foregroundColor(Color.red)
+                                        }
+
+
+                                    }
+                                    .frame(width: 283, height: 45, alignment: .center)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.35))
+                                    .cornerRadius(20)
+                                }
+                                
                             }
                         }
                         

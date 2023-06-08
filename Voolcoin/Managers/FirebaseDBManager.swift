@@ -40,6 +40,7 @@ class FirebaseDBManager: ObservableObject {
                 } else {
                     // New user
                     self?.transactions = []
+                    self?.isDataFetched = true
                     print("transactions mode worked")
                 }
             }
@@ -54,6 +55,7 @@ class FirebaseDBManager: ObservableObject {
                     self?.errorHandling = !success
                 } else {
                     // Handle error
+                    self?.isDataFetched = true
                     print("user data mode worked")
                 }
             }
@@ -71,6 +73,7 @@ class FirebaseDBManager: ObservableObject {
                 } else {
                     // Handle error
                     self?.rewardModel = VCDailyRewardsViewModel().saveDefaultRewardInfo()
+                    self?.isDataFetched = true
                     print("saveDefaultRewardInfo")
                 }
             }
@@ -112,6 +115,7 @@ class FirebaseDBManager: ObservableObject {
         
         if let minutes = components.minute {
             return abs(minutes) >= 5
+//            return abs(minutes) >= 1440
         }
         
         return false

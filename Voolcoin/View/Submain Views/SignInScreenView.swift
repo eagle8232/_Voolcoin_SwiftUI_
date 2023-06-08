@@ -14,15 +14,12 @@ import GoogleSignInSwift
 
 
 struct SignInScreenView: View {
+    
     @EnvironmentObject var firebaseDBManager: FirebaseDBManager
-    @State private var phoneNumber: String = ""
-    @State private var otpCode: String = ""
     @State var isPresentingTransactionsView: Bool = false
     
     @StateObject var loginModel: LoginViewModel = .init()
     @FocusState var isEnabled: Bool
-    
-    @State var goToNameCreation: Bool = false
     
     var body: some View {
         
@@ -33,6 +30,11 @@ struct SignInScreenView: View {
                 Spacer()
                 
                 VStack {
+                    
+                    Image("voolcoin_icon")
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                    
                     Text("Sign In")
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -89,97 +91,13 @@ struct SignInScreenView: View {
                             .blendMode(.overlay)
                         }
                     
-                    
-                    VStack(spacing: -10) {
-                        
-                        TextField("Phone Number", text: $loginModel.mobileNumber)
-                            .disabled(loginModel.showOTPField)
-                            .focused($isEnabled)
-                            .opacity (loginModel.showOTPField ? 0.4 : 1)
-                            .overlay(alignment: .trailing, content: {
-                                Button("Change") {
-                                    withAnimation(.easeInOut) {
-                                        loginModel.showOTPField = false
-                                        loginModel.otpCode = ""
-                                        loginModel.CLIENT_CODE = ""
-                                    }
-                                }
-                                .font(.caption)
-                                .foregroundColor(.black)
-                                .opacity(loginModel.showOTPField ? 1 : 0)
-                                .padding(.trailing,15)
-                            })
-                            .font(.title3)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.white)
-                            .foregroundColor(.black)
-                            .cornerRadius(50.0)
-                            .shadow(color: Color.black.opacity(0.08), radius: 60, x: 0.0, y: 16)
-                            .padding(.vertical)
-                        
-                        TextField("OTP Code", text: $loginModel.otpCode)
-                            .disabled(!loginModel.showOTPField)
-                            .opacity (!loginModel.showOTPField ? 0.4 : 1)
-                            .keyboardType(.numberPad)
-                            .focused($isEnabled)
-                            .font(.title3)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.white)
-                            .foregroundColor(.black)
-                            .cornerRadius(50.0)
-                            .shadow(color: Color.black.opacity(0.08), radius: 60, x: 0.0, y: 16)
-                            .padding(.vertical)
-                        
-                    }
-                    
-                    Button {
-                        if loginModel.showOTPField {
-                            loginModel.verifyOTPCode { success in
-                                goToNameCreation = success ? true : false
-                            }
-                        } else {
-                            loginModel.getOTPCode()
-                        }
-                    } label: {
-                        Text(loginModel.showOTPField ? "Verify Code" : "Get Code")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.white)
-                            .cornerRadius(50.0)
-                            .shadow(color: Color.black.opacity(0.08), radius: 60, x: 0.0, y: 16)
-                            .padding(.vertical)
-                    }
-                    
-                    .fullScreenCover(isPresented: $goToNameCreation) {
-                        VCNameCreationView()
-                    }
-                        
-//                        isPresentingTransactionsView = true
-                        
-                    
-//                    NavigationLink(
-//                        destination: VCHomeView().navigationBarHidden(true),
-//                        label: {
-//                            Text("Login")
-//                                .font(.title3)
-//                                .fontWeight(.bold)
-//                                .foregroundColor(.black)
-//                                .padding()
-//                                .frame(maxWidth: .infinity)
-//                                .background(Color.white)
-//                                .cornerRadius(50.0)
-//                                .shadow(color: Color.black.opacity(0.08), radius: 60, x: 0.0, y: 16)
-//                                .padding(.vertical)
-//                        })
-//                    .navigationBarBackButtonHidden(true)
-//                    .navigationBarHidden(true)
-                    
                 }
+                
+                Spacer()
+                
+                Text("If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com")
+                    .multilineTextAlignment(.center)
+                    .font(.system(size: 15, weight: .regular, design: .default))
                 
                 Spacer()
                 Divider()
@@ -187,9 +105,15 @@ struct SignInScreenView: View {
                 Text("You are completely safe.")
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
-                Text("Read our Terms & Conditions.")
-                    .foregroundColor(.pink)
-                    .multilineTextAlignment(.center)
+                
+                Button {
+                    
+                } label: {
+                    Text("Read our Terms & Conditions.")
+                        .foregroundColor(.pink)
+                        .multilineTextAlignment(.center)
+                }
+
             }
             .alert(loginModel.errorMessage, isPresented: $loginModel.showError, actions: {
                 

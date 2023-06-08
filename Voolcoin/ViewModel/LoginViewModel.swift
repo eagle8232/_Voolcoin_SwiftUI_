@@ -12,17 +12,17 @@ import AuthenticationServices
 import GoogleSignIn
 
 class LoginViewModel: ObservableObject {
-    @Published var mobileNumber: String = ""
-    @Published var otpCode: String = ""
+//    @Published var mobileNumber: String = ""
+//    @Published var otpCode: String = ""
     
     @Published var CLIENT_CODE: String = ""
-    @Published var showOTPField: Bool = false
+//    @Published var showOTPField: Bool = false
     
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
     
     @AppStorage("log_status") var logStatus: Bool = false
-    @AppStorage("name_status") var nameStatus: Bool = false
+//    @AppStorage("name_status") var nameStatus: Bool = false
     
     @Published var nonce: String = ""
     
@@ -62,7 +62,7 @@ class LoginViewModel: ObservableObject {
                 }
             }
             
-            withAnimation(.easeInOut) {self.logStatus = true && self.nameStatus == true}
+            withAnimation(.easeInOut) {self.logStatus = true}
         }
     }
     
@@ -108,72 +108,73 @@ class LoginViewModel: ObservableObject {
                 }
                 
                 withAnimation(.easeInOut) {self.logStatus = true}
-                withAnimation(.easeInOut) {self.nameStatus = true}
             }
         }
     }
     
-    func getOTPCode() {
-        
-        UIApplication.shared.closeKeyboard()
-        
-        Task {
-            do {
-                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-                
-                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+\(mobileNumber)", uiDelegate: nil)
-                await MainActor.run(body: {
-                    CLIENT_CODE = code
-                    
-                    withAnimation(.easeInOut) {
-                        showOTPField = true
-                    }
-                    
-                })
-                
-            } catch {
-                await handleError(error: error)
-            }
-        }
-    }
+//    func getOTPCode() {
+//
+//        UIApplication.shared.closeKeyboard()
+//
+//        Task {
+//            do {
+//                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+//
+//                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+\(mobileNumber)", uiDelegate: nil)
+//                await MainActor.run(body: {
+//                    CLIENT_CODE = code
+//
+//                    withAnimation(.easeInOut) {
+//                        showOTPField = true
+//                    }
+//
+//                })
+//
+//            } catch {
+//                await handleError(error: error)
+//            }
+//        }
+//    }
     
-    func verifyOTPCode(completion: @escaping ((Bool) -> Void)) {
-        
-        UIApplication.shared.closeKeyboard()
-        
-        Task {
-            do {
-                let credential = PhoneAuthProvider.provider().credential(withVerificationID: CLIENT_CODE, verificationCode: otpCode)
-                
-                try await Auth.auth().signIn(with: credential)
-                
-                print("Success")
-                
-                
-                await MainActor.run(body: {
-                    withAnimation(.easeInOut) {logStatus = true}
-                })
-                
-                completion(true)
-                
-            } catch {
-                await handleError(error: error)
-                completion(false) 
-            }
-        }
-    }
+//    func verifyOTPCode(completion: @escaping ((Bool) -> Void)) {
+//        
+//        UIApplication.shared.closeKeyboard()
+//        
+//        Task {
+//            do {
+//                let credential = PhoneAuthProvider.provider().credential(withVerificationID: CLIENT_CODE, verificationCode: otpCode)
+//                
+//                try await Auth.auth().signIn(with: credential)
+//                
+//                print("Success")
+//                
+//                
+//                await MainActor.run(body: {
+//                    withAnimation(.easeInOut) {logStatus = true}
+//                })
+//                
+//                completion(true)
+//                
+//            } catch {
+//                await handleError(error: error)
+//                completion(false)
+//            }
+    //        }
+    //    }
     
-    func deleteAccount() {
+    func deleteAccount(completion: @escaping ((Error?) -> Void)) {
         let user = Auth.auth().currentUser
         
         user?.delete { error in
-          if let error = error {
-              print(error.localizedDescription)
-          } else {
-            print("Accout deleted")
-              DatabaseViewModel().deleteUser(userId: user?.uid ?? "")
-              self.logStatus = false
-          }
+            if let error = error {
+                print(error.localizedDescription)
+                completion(error)
+            } else {
+                print("Accout deleted")
+                completion(nil)
+                DatabaseViewModel().deleteUser(userId: user?.uid ?? "")
+                self.logStatus = false
+            }
         }
     }
     
