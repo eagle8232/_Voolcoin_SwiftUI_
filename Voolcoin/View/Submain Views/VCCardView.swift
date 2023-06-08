@@ -44,7 +44,7 @@ struct VCCardView: View {
                         
                     }
                     
-                    Text("≈ $\((String(format: "%.1f", firebaseDMManager.cardAmount * 0.001) ))")
+                    Text("≈ $\((String(format: "%.1f", firebaseDMManager.cardAmount * 0) ))")
                         .foregroundColor(Color(.gray).opacity(0.8))
                         .font(.system(size: 21))
                 }

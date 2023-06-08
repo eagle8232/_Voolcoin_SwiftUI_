@@ -114,8 +114,8 @@ class FirebaseDBManager: ObservableObject {
         let components = calendar.dateComponents([.minute], from: date1, to: date2)
         
         if let minutes = components.minute {
-            return abs(minutes) >= 5
-//            return abs(minutes) >= 1440
+//            return abs(minutes) >= 5
+            return abs(minutes) >= 1440
         }
         
         return false
