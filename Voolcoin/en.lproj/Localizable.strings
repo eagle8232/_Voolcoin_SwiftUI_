@@ -19,11 +19,7 @@
 "Sign Out" = "Sign Out";
 "Sign in with Apple" = "Sign in with Apple";
 "Sign in with Google" = "Sign in with Google";
-"Phone Number" = "Phone Number";
-"Change" = "Change";
-"OTP Code" = "OTP Code";
-"Verify Code" = "Verify Code";
-"Get Code" = "Get Code";
+
 "You are completely safe." = "You are completely safe.";
 "Read our Terms & Conditions." = "Read our Terms & Conditions.";
 "Settings" = "Settings";
@@ -44,7 +40,7 @@
 "Claim" = "Claim";
 "Error" = "Error";
 "Reward not loaded. Please try again later." = "Reward not loaded. Please try again later.";
-"Added to wallet ✅" = "Added to wallet ✅";
+
 "Come back tomorrow" = "Come back tomorrow";
 "Unclock other card" = "Unclock other card";
 "My Profile" = "My Profile";
@@ -59,3 +55,6 @@
 "Thank you for choosing us, let’s get started" = "Thank you for choosing us, let’s get started";
 "Welcome to Voolcoin" = "Welcome to Voolcoin";
 "If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com";
+
+"Referral link" = "Referral link";
+"Coming soon..." = "Coming soon...";

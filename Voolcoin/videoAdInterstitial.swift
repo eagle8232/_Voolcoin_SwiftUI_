@@ -8,6 +8,8 @@
 import GoogleMobileAds
 import SwiftUI
 import UIKit
+import AppTrackingTransparency
+import AdSupport
 
 
 final class Rewarded: NSObject, GADFullScreenContentDelegate {
@@ -41,11 +43,27 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     func loadAd() {
         let request = GADRequest()
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["eabfbb8f46892d02e3ce765b77e9752e"]
+        
         GADInterstitialAd.load(withAdUnitID:"ca-app-pub-1633444832866213/1743161545", request: request) { (ad, error) in
             if let error = error {
                 self.isRewardLoaded = false
                 print("Loading failed with error: \(error)")
             } else {
+                ATTrackingManager.requestTrackingAuthorization { status in
+                    switch status {
+                    case .notDetermined:
+                        print("notDetermined")
+                    case .restricted:
+                        print("restricted")
+                    case .denied:
+                        print("denied")
+                    case .authorized:
+                        print("authorized")
+                        print(ASIdentifierManager.shared().advertisingIdentifier)
+                    @unknown default:
+                        print("unknown")
+                    }
+                }
                 print("Loading Succeeded")
                 self.isRewardLoaded = true
                 self.rewardedAd = ad

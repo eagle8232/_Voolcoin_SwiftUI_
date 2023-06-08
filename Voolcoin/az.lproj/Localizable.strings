@@ -6,58 +6,55 @@
   
 */
 
-"Welcome back" = "Welcome back";
-"Income" = "Income";
-"Outcome" = "Outcome";
-"Daily rewards" = "Daily rewards";
-"The chance to win rewards from 0.1 to 10 voolcoins" = "The chance to win rewards from 0.1 to 10 voolcoins";
-"Transactions" = "Transactions";
-"See all" = "See all";
-"Next" = "Next";
-"Let's get started" = "Let's get started";
-"Sign In" = "Sign In";
-"Sign Out" = "Sign Out";
-"Sign in with Apple" = "Sign in with Apple";
-"Sign in with Google" = "Sign in with Google";
-"Phone Number" = "Phone Number";
-"Change" = "Change";
-"OTP Code" = "OTP Code";
-"Verify Code" = "Verify Code";
-"Get Code" = "Get Code";
-"You are completely safe." = "You are completely safe.";
-"Read our Terms & Conditions." = "Read our Terms & Conditions.";
-"Settings" = "Settings";
-"Invite Friends" = "Invite Friends";
-"Rate the App" = "Rate the App";
-"Terms & Conditions" = "Terms & Conditions";
-"Privacy & Policy" = "Privacy & Policy";
-"Delete Account" = "Delete Account";
-"Attention!" = "Attention!";
+"Welcome back" = "Xoş gəlmisiniz!";
+"Income" = "Gəlir";
+"Outcome" = "Çıxarış";
+"Daily rewards" = "Gündəlik mükafatlar!";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "0,1 ilə 10 voolkoin arasında mükafat qazanmaq şansı";
+"Transactions" = "Əməliyyatlar";
+"See all" = "Hamısı";
+"Next" = "Növbəti";
+"Let's get started" = "Başlayaq";
+"Sign In" = "Daxil ol";
+"Sign Out" = "Çıxış";
+"Sign in with Apple" = "Apple ilə daxil olun";
+"Sign in with Google" = "Google ilə daxil olun";
 
-"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Do you really want to delete your account? You lose all your information, without permission to return them back!";
+"You are completely safe." = "Siz tam olaraq güvəndəsiniz.";
+"Read our Terms & Conditions." = "Qayda və Şərtlərimizi oxuyun.";
+"Settings" = "Parametrlər";
+"Invite Friends" = "Dostları Dəvət Etmək";
+"Rate the App" = "Tətbiqi qiymətləndirin";
+"Terms & Conditions" = "Şərtlər və qaydalar";
+"Privacy & Policy" = "Gizlilik Siyasəti";
+"Delete Account" = "Hesabı Sil";
+"Attention!" = "Diqqət!";
 
-"Do you really want to sign out your account?" = "Do you really want to sign out your account?";
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Həqiqətən hesabınızı silmək istəyirsiniz? Siz onları geri qaytarmaq icazəsi olmadan bütün məlumatlarınızı itirirsiniz!";
 
-"No" = "No";
-"Yes" = "Yes";
-"Transactions" = "Transactions";
-"Unlock voolcoins" = "Unlock voolcoins";
-"Claim" = "Claim";
-"Error" = "Error";
-"Reward not loaded. Please try again later." = "Reward not loaded. Please try again later.";
-"Added to wallet ✅" = "Added to wallet ✅";
-"Come back tomorrow" = "Come back tomorrow";
-"Unclock other card" = "Unclock other card";
-"My Profile" = "My Profile";
+"Do you really want to sign out your account?" = "Həqiqətən hesabınızdan çıxmaq istəyirsiniz?";
+"No" = "Xeyr";
+"Yes" = "Bəli";
+"Unlock voolcoins" = "Voolkoinlərin kilidini açın";
+"Claim" = "Toplayın";
+"Error" = "Səhv";
 
+"Reward not loaded. Please try again later." = "Mükafat yüklənmədi. Zəhmət olmasa bir az sonra yenidən cəhd edin.";
 
-"No transactions yet" = "No transactions yet";
-"Your next generation of financial platform" = "Your next generation of financial platform";
-"Making money has never been so easy" = "Making money has never been so easy";
-"Watch ads and make money" = "Watch ads and make money";
-"Watch the ads and earn voolcoins, which you can then exchange into real money*" = "Watch the ads and earn voolcoins, which you can then exchange into real money*";
-"Coin exchange will be implemented in future updates" = "Coin exchange will be implemented in future updates";
-"This is just the beginning" = "This is just the beginning";
-"Thank you for choosing us, let’s get started" = "Thank you for choosing us, let’s get started";
-"Welcome to Voolcoin" = "Welcome to Voolcoin";
-"If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com";
+"Come back tomorrow" = "Sabah qayıdın";
+"Unclock other card" = "Digər kartı açın";
+"My Profile" = "Mənim Hesabım";
+
+"No transactions yet" = "Əməliyyat yoxdur";
+"Your next generation of financial platform" = "Sizin gələcək nəsil maliyyə platformanız";
+"Making money has never been so easy" = "Pul qazanmaq heç bu qədər asan olmamışdı";
+"Watch ads and make money" = "Reklamlara baxın və pul qazanın";
+"Watch the ads and earn voolcoins, which you can then exchange into real money*" = "Reklamlara baxın və sonra real pula çevirə biləcəyiniz voolkoinlər qazanın*";
+"Coin exchange will be implemented in future updates" = "Pul dəyişimi gələcək yeniləmələrdə həyata keçiriləcək";
+"This is just the beginning" = "Bu hələ başlanğıcdır";
+"Thank you for choosing us, let’s get started" = "Bizi seçdiyiniz üçün təşəkkür edirik, gəlin başlayaq";
+"Welcome to Voolcoin" = "Voolcoin-ə xoş gəlmisiniz";
+"If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "Məhsulumuzu təkmilləşdirmək üçün hər hansı probleminiz və ya təklifiniz varsa, bizə e-poçt göndərin: voolcoinsomnia@gmail.com";
+
+"Referral link" = "İstinad linki";
+"Coming soon..." = "Tezliklə...";

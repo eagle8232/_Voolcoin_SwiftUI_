@@ -11,7 +11,7 @@ import GoogleSignIn
 struct VCProfileView: View {
     
     @Binding var isShowingProfileView: Bool
-    @State private var curHeight: CGFloat = 400
+    @State private var curHeight: CGFloat = 450
     
     let minHeight: CGFloat = 440
     let maxHeight: CGFloat = 480

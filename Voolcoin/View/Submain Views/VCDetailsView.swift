@@ -43,7 +43,13 @@ struct VCDetailsView: View {
                 VStack {
                     ForEach(Array(transactions.enumerated()), id: \.1.date) { (index, transactionModel) in
                         if index < 3 {
-                            VCTransactionView(chosenType: $chosenType, transaction: transactions[transactions.count - index - 1])
+                            
+                            Button {
+                                isPresentingTransactionsView = true
+                                chosenType = .income
+                            } label: {
+                                VCTransactionView(chosenType: $chosenType, transaction: transactions[transactions.count - index - 1])
+                            }
                         }
                     }
 

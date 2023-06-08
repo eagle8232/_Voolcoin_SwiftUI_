@@ -19,11 +19,7 @@
 "Sign Out" = "Выход";
 "Sign in with Apple" = "Войти с помощью Apple";
 "Sign in with Google" = "Войти с помощью Google";
-"Phone Number" = "Номер телефона";
-"Change" = "Изменить";
-"OTP Code" = "OTP Код";
-"Verify Code" = "Код подтверждения";
-"Get Code" = "Получить код";
+
 "You are completely safe." = "Вы в полной безопасности.";
 "Read our Terms & Conditions." = "Ознакомьтесь с нашими условиями и положениями.";
 "Settings" = "Настройки";
@@ -45,7 +41,7 @@
 
 "Reward not loaded. Please try again later." = "Вознаграждение не загружено. Пожалуйста, повторите попытку позже.";
 
-"Added to wallet ✅" = "Добавлен в кошелёк ✅";
+
 "Come back tomorrow" = "Вернитесь завтра";
 "Unclock other card" = "Откройте другую карту";
 "My Profile" = "Мой профиль";
@@ -61,3 +57,5 @@
 "Welcome to Voolcoin" = "Добро пожаловать в Voolcoin";
 "If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "Если у вас есть проблемы или предложения по улучшению нашего продукта, напишите нам на почту: voolcoinsomnia@gmail.com";
 
+"Referral link" = "Реферальная ссылка";
+"Coming soon..." = "Скоро...";
