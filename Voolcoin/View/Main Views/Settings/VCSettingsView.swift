@@ -17,23 +17,19 @@ struct VCSettingsView: View {
     @State var endPoint: UnitPoint = .bottom
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                VCLinearGradientView(startPoint: startPoint, endPoint: endPoint)
-                    .ignoresSafeArea()
-                
-                VStack {
-                    VCSettingsButtonsView(isPresentingRateView: $isPresentingRateView)
-                }
-            }
+        ZStack {
+            VCLinearGradientView(startPoint: startPoint, endPoint: endPoint)
+                .ignoresSafeArea()
             
-            .onAppear {
-                withAnimation(.linear) {
-                    startPoint = .topTrailing
-                    endPoint = .bottomLeading
-                }
+            VStack {
+                VCSettingsButtonsView(isPresentingRateView: $isPresentingRateView)
             }
-            
+        }
+        .onAppear {
+            withAnimation(.linear) {
+                startPoint = .topTrailing
+                endPoint = .bottomLeading
+            }
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
@@ -75,189 +71,188 @@ struct VCSettingsButtonsView: View {
     
     @StateObject var loginModel: LoginViewModel = .init()
     
+    @State private var email: String = "voolcoinsomnia@gmail.com"
     
-    func openAppStore() {
+    var body: some View {
+        
+        ZStack {
+            
+            ScrollView {
+                
+                VStack {
+                    SettingsButton(name: "Invite Friends", imageName: "person.2", imageColor: .purple) {
+                        isPresentingInviteFriends = true
+                    }
+                    
+                    SettingsButton(name: "Rate the App", imageName: "star", imageColor: .yellow) {
+                        openAppStore()
+                    }
+                }
+                .font(.system(size: 17, weight: .semibold))
+                .padding()
+                
+                Divider()
+                
+                VStack {
+                    SettingsButton(name: "Terms & Conditions", imageName: "text.book.closed", imageColor: .black) {
+                        isPresentingInviteFriends = true
+                    }
+                    
+                    SettingsButton(name: "Privacy Policy", imageName: "lock", imageColor: .green) {
+                        isPresentingInviteFriends = true
+                    }
+                }
+                .font(.system(size: 17, weight: .semibold))
+                .padding()
+                
+                Divider()
+                
+                VStack {
+                    SettingsButton(name: "App's version: 1.0", imageName: "apps.iphone", imageColor: .gray) {
+                        
+                    }
+                    
+                    SettingsButton(name: "Contact Us", imageName: "tray", imageColor: .blue) {
+                        openMailApp()
+                    }
+                }
+                .font(.system(size: 17, weight: .semibold))
+                .padding()
+                
+                Divider()
+                
+                VStack {
+                    SettingsButton(name: "Delete", imageName: "trash", imageColor: .red) {
+                        isDeleted = true
+                    }
+                    
+                    SettingsButton(name: "Sign Out", imageName: "rectangle.portrait.and.arrow.right.fill", imageColor: .orange) {
+                        isSignOut = true
+                    }
+                }
+                .font(.system(size: 17, weight: .semibold))
+                .padding()
+                
+                
+            }
+            
+            
+            
+            if isSignOut {
+                AlertView(title: "Attention!", message: "Do you really want to sign out your account?") { success in
+                    if success {
+                        signOut()
+                    } else {
+                        isSignOut = false
+                    }
+                }
+            }
+            
+            if isDeleted {
+                AlertView(title: "Attention!", message: "Do you really want to delete your account? You lose all your information, without permission to return them back!") { success in
+                    if success {
+                        delete()
+                    } else {
+                        isDeleted = false
+                    }
+                }
+            }
+            
+            if isError {
+                AlertView(title: "Error", message: error?.localizedDescription ?? "Error occured") { success in
+                    
+                }
+            }
+            
+        }
+        
+    }
+    
+    func signOut() {
+        isSignOut = false
+        try? Auth.auth().signOut()
+        GIDSignIn.sharedInstance.signOut()
+        firebaseDBManager.setDefaultValue()
+        withAnimation(.easeInOut) {
+            logStatus = false
+        }
+    }
+    
+    func delete() {
+        isDeleted = false
+        loginModel.deleteAccount { error in
+            if let error = error {
+                isError = true
+                self.error = error
+            } else {
+                firebaseDBManager.setDefaultValue()
+                withAnimation(.easeInOut) {
+                    logStatus = false
+                }
+            }
+        }
+    }
+    
+    private func openAppStore() {
         if let url = URL(string: "itms-apps://itunes.apple.com/app/your-app-id") { // Замените "your-app-id" на фактический идентификатор вашего приложения
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
-    var body: some View {
-        
-        VStack {
-            Button {
-                isPresentingInviteFriends = true
-            } label: {
-                HStack {
-                    Text("Invite Friends")
-                        .font(.system(size: 20, weight: .regular, design: .default))
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 8, height: 10)
-                        .opacity(0.3)
-                }
-            }
-            .alert(isPresented: $isPresentingInviteFriends) {
-                Alert(title: Text("Referral link"), message: Text("Coming soon..."), dismissButton: .cancel(Text("OK")))
-            }
-            .padding()
-            .background(Color.gray.opacity(0.35))
-            .cornerRadius(20)
-            
-            Button {
-                openAppStore()
-//                isPresentingRateView = true
-            } label: {
-                HStack {
-                    Text("Rate the App")
-                        .font(.system(size: 20, weight: .regular, design: .default))
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 8, height: 10)
-                        .opacity(0.3)
-                }
-            }
-            .padding()
-            .background(Color.gray.opacity(0.35))
-            .cornerRadius(20)
+    private func openMailApp() {
+        let emailURL = URL(string: "mailto:\(email)")
+        if let url = emailURL, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-        
-        .font(.system(size: 20, weight: .semibold))
-        .foregroundColor(.white)
-        .padding()
-        
-        Divider()
-        
-        VStack {
-            Button {
-                
-            } label: {
-                HStack {
-                    Text("Terms & Conditions")
-                        .font(.system(size: 20, weight: .regular, design: .default))
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 8, height: 10)
-                        .foregroundColor(.white)
-                        .opacity(0.3)
-                }
-            }
-            .padding()
-            .background(Color.gray.opacity(0.35))
-            .cornerRadius(20)
-            
-            Button {
-                
-            } label: {
-                HStack {
-                    Text("Privacy & Policy")
-                        .font(.system(size: 20, weight: .regular, design: .default))
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 8, height: 10)
-                        .foregroundColor(.white)
-                        .opacity(0.3)
-                }
-            }
-            .padding()
-            .background(Color.gray.opacity(0.35))
-            .cornerRadius(20)
-            
-        }
-        .font(.system(size: 20, weight: .semibold))
-        .foregroundColor(.white)
-        .padding()
-        
-        Divider()
-        
-        
-        VStack {
-            Button {
-                isDeleted = true
-            } label: {
-                HStack {
-                    Text("Delete Account")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20, weight: .regular, design: .default))
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 8, height: 10)
-                        .foregroundColor(.white)
-                        .opacity(0.3)
-                }
-            }
-            .alert(isPresented: $isDeleted) {
-                Alert(title: Text("Attention!"), message: Text("Do you really want to delete your account? You lose all your information, without permission to return them back!"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
-                    loginModel.deleteAccount { error in
-                        if let error = error {
-                            isError = true
-                            self.error = error
-                        } else {
-                            firebaseDBManager.setDefaultValue()
-                            withAnimation(.easeInOut) {
-                                logStatus = false
-                            }
-                        }
-                    }
-                }))
-                    }
-            .padding()
-            .background(Color.gray.opacity(0.35))
-            .cornerRadius(20)
-            
-            Button {
-                isSignOut = true
-            } label: {
-                HStack {
-                    
-                    Text("Sign Out")
-                    
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .frame(width: 8, height: 10)
-                        .foregroundColor(.red)
-                        .opacity(0.5)
-                }
-            }
-            .alert(isPresented: $isSignOut) {
-                Alert(title: Text("Attention!"), message: Text("Do you really want to sign out your account?"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
-                    try? Auth.auth().signOut()
-                    GIDSignIn.sharedInstance.signOut()
-                    firebaseDBManager.setDefaultValue()
-                    withAnimation(.easeInOut) {
-                        logStatus = false
-                    }
-                }))
-                    }
-            
-            .padding()
-            .background(Color.red.opacity(0.35))
-            .cornerRadius(20)
-            .foregroundColor(.red)
-        }
-        .font(.system(size: 20, weight: .semibold))
-        .padding()
-        .alert("Error", isPresented: $isError) {
-            Text("Good")
-        } message: {
-            Text(error?.localizedDescription ?? "Ooops, something went wrong.")
-        }
+    }
+    
+}
 
-        Spacer()
+struct SettingsButton: View {
+    var name: String
+    var imageName: String
+    var imageColor: Color
+    var action: () -> Void
+    
+    var body: some View {
+        Button {
+            withAnimation {
+                action()
+            }
+        } label: {
+            HStack {
+                
+                HStack(alignment: .center, spacing: 15) {
+                    
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(imageColor)
+                        .overlay {
+                            Image(systemName: imageName)
+                                .foregroundColor(.white)
+                                .frame(width: 5, height: 5)
+                        }
+                    
+                    Text(name)
+                        .foregroundColor(.white)
+                        .font(.system(size: 18, weight: .regular, design: .default))
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .resizable()
+                    .frame(width: 8, height: 10)
+                    .foregroundColor(.white)
+                    .opacity(0.5)
+            }
+            .padding()
+            .background(Color.gray.opacity(0.35))
+            .cornerRadius(20)
+            .foregroundColor(.white)
+        }
+        
+        
     }
 }
 

@@ -9,14 +9,19 @@ import Firebase
 import GoogleSignIn
 
 struct VCProfileView: View {
+    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     
     @Binding var isShowingProfileView: Bool
-    @State private var curHeight: CGFloat = 450
+    @State private var curHeight: CGFloat = 530
     
-    let minHeight: CGFloat = 440
-    let maxHeight: CGFloat = 480
+    let minHeight: CGFloat = 520
+    let maxHeight: CGFloat = 580
+    
+    @State var startAnimationPoint: UnitPoint = .topTrailing
+    @State var endAnimationPoint: UnitPoint = .trailing
     
     @Environment(\.presentationMode) var presentationMode
+    
     @State var startPoint: UnitPoint = .topTrailing
     @State var endPoint: UnitPoint = .trailing
     @State var isPresentingInviteFriends: Bool = false
@@ -28,11 +33,12 @@ struct VCProfileView: View {
     
     @State var error: Error? = nil
     
+    @State private var email: String = "voolcoinsomnia@gmail.com"
+    
     @StateObject var loginModel: LoginViewModel = .init()
     
     @AppStorage("log_status") var logStatus: Bool = false
     
-    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     
     
     var userModel: VCUserModel?
@@ -62,21 +68,22 @@ struct VCProfileView: View {
     }
     
     var profileView: some View {
-        VStack {
-            
-            ZStack {
-                Capsule()
-                    .frame(width: 40, height: 6)
-                    .foregroundColor(.gray.opacity(0.5))
-            }
-            .frame(height: 40)
-            .frame(maxWidth: .infinity)
-            .background(Color.white.opacity(0.00001))
-            
+        ZStack {
             VStack {
-                HStack {
+                
+                ZStack {
+                    Capsule()
+                        .frame(width: 40, height: 6)
+                        .foregroundColor(.gray.opacity(0.5))
+                }
+                .frame(height: 40)
+                .frame(maxWidth: .infinity)
+                .background(Color.white.opacity(0.00001))
+                
+                VStack {
+                    //                HStack {
                     VStack {
-                        Circle()
+                        RoundedRectangle(cornerRadius: 25, style: .continuous)
                             .overlay(content: {
                                 if let name = firebaseDBManager.userModel?.name, let firstLetter = name.capitalized.first {
                                     Text(String(firstLetter))
@@ -85,135 +92,134 @@ struct VCProfileView: View {
                                 } else {
                                     Text("")
                                 }
-
+                                
                             })
                             .frame(width: 100, height: 100)
                             .foregroundColor(.gray.opacity(0.9))
                         
-                        VStack {
+                        VStack(alignment: .center, spacing: 5) {
                             
                             Text(firebaseDBManager.userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "????")")
                                 .font(.system(size: 25, weight: .bold, design: .rounded))
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
+                            
+                            
                             
                             HStack {
+                                Text("Total amount:")
+                                    .font(.system(size: 18, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
                                 
-                               
+                                Text("\((String(format: "%.1f", firebaseDBManager.cardAmount)))")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 21, weight: .regular, design: .default))
                                 
-                                RoundedRectangle(cornerRadius: 15)
-                                    .fill(Color.black)
-                                    .frame(width: 150, height: 80)
-                                    .overlay {
-                                        VStack(alignment: .center, spacing: 5) {
-                                            Text("Total amount")
-                                                .font(.system(size: 18, weight: .bold, design: .default))
-                                                .foregroundColor(.white)
-                                            Capsule()
-                                                .fill(Color.green)
-                                                .frame(height: 40)
-                                                .overlay {
-                                                    HStack {
-                                                        Image(systemName: "chart.line.uptrend.xyaxis.circle.fill")
-                                                            .resizable()
-                                                            .frame(width: 25, height: 25)
-                                                            .foregroundColor(.white)
-                                                        Text("\((String(format: "%.1f", firebaseDBManager.cardAmount)))")
-                                                            .foregroundColor(.white)
-                                                            .font(.system(size: 21, weight: .bold, design: .default))
-                                                    }
-                                                }
-                                                .padding(.horizontal)
-                                            
-                                        }
-                                    }
-                            }
-                        }
-                    }
-                }
-                
-                Spacer()
-                
-                Button {
-                    isDeleted = true
-                } label: {
-                    HStack {
-                        Text("Delete Account")
-                            .font(.system(size: 20, weight: .regular, design: .default))
-                            .foregroundColor(.black)
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .resizable()
-                            .frame(width: 8, height: 10)
-                            .opacity(0.3)
-                            .foregroundColor(.black)
-                    }
-                }
-                .alert(isPresented: $isDeleted) {
-                    Alert(title: Text("Attention!"), message: Text("Do you really want to delete your account? You lose all your information, without permission to return them back!"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
-                        loginModel.deleteAccount { error in
-                            if let error = error {
-                                isError = true
-                                self.error = error
-                            } else {
-                                firebaseDBManager.setDefaultValue()
-                                withAnimation(.easeInOut) {
-                                    logStatus = false
+                                if firebaseDBManager.cardAmount > 0 {
+                                    
+                                    Image(systemName: "chart.line.uptrend.xyaxis.circle.fill")
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(.green)
                                 }
+                                
+                                
                             }
+                            
+                            
                         }
-                    }))
+                        .padding()
+                        
+                        Divider()
+                        
+                    }
+                    
+                    SettingsButton(name: "Contact Us", imageName: "tray", imageColor: .blue) {
+                        openMailApp()
+                    }
+                    
+                    SettingsButton(name: "Delete", imageName: "trash", imageColor: .red) {
+                        isDeleted = true
+                    }
+                    
+                    SettingsButton(name: "Sign Out", imageName: "rectangle.portrait.and.arrow.right.fill", imageColor: .orange) {
+                        isSignOut = true
+                    }
+                    
                 }
-                .padding()
-                .background(Color.gray.opacity(0.35))
-                .cornerRadius(20)
-                
-                Button {
-                    isSignOut = true
-                } label: {
-                    HStack {
-                        Text("Sign Out")
-                            .font(.system(size: 20, weight: .bold, design: .default))
-                            .foregroundColor(.red)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .resizable()
-                            .frame(width: 8, height: 10)
-                            .opacity(0.3)
-                            .foregroundColor(.red)
+                .padding(.horizontal, 30)
+                .padding(.bottom, 35)
+            }
+            .frame(height: curHeight)
+            .frame(maxWidth: .infinity)
+            .background(
+                ZStack {
+                    VCLinearGradientView(startPoint: startAnimationPoint, endPoint: endAnimationPoint)
+                        .cornerRadius(30)
+                }
+            )
+            
+            
+            if isSignOut {
+                AlertView(title: "Attention!", message: "Do you really want to sign out your account?") { success in
+                    if success {
+                        signOut()
+                    } else {
+                        isSignOut = false
                     }
                 }
-                .alert(isPresented: $isSignOut) {
-                    Alert(title: Text("Attention!"), message: Text("Do you really want to sign out your account?"), primaryButton: .default(Text("No")), secondaryButton: .destructive(Text("Yes"), action: {
-                        try? Auth.auth().signOut()
-                        GIDSignIn.sharedInstance.signOut()
-                        firebaseDBManager.setDefaultValue()
-                        withAnimation(.easeInOut) {
-                            logStatus = false
-                        }
-                    }))
+                .padding(.bottom, 100)
+            }
+            
+            if isDeleted {
+                AlertView(title: "Attention!", message: "Do you really want to delete your account? You lose all your information, without permission to return them back!") { success in
+                    if success {
+                        delete()
+                    } else {
+                        isDeleted = false
+                    }
                 }
-                .padding()
-                .background(Color.red.opacity(0.35))
-                .cornerRadius(20)
+                .padding(.bottom, 100)
             }
-            .padding(.horizontal, 30)
-            .padding(.bottom, 35)
+            
+            if isError {
+                AlertView(title: "Error", message: error?.localizedDescription ?? "Error occured") { success in
+                }
+                .padding(.bottom, 100)
+            }
+            
         }
-        .frame(height: curHeight)
-        .frame(maxWidth: .infinity)
-        .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(.white)
+        
+    }
+
+    func signOut() {
+        isSignOut = false
+        try? Auth.auth().signOut()
+        GIDSignIn.sharedInstance.signOut()
+        firebaseDBManager.setDefaultValue()
+        withAnimation(.easeInOut) {
+            logStatus = false
+        }
+    }
+    
+    func delete() {
+        isDeleted = false
+        loginModel.deleteAccount { error in
+            if let error = error {
+                isError = true
+                self.error = error
+            } else {
+                firebaseDBManager.setDefaultValue()
+                withAnimation(.easeInOut) {
+                    logStatus = false
+                }
             }
-        )
-        .alert("Error", isPresented: $isError) {
-            Text("Good")
-        } message: {
-            Text(error?.localizedDescription ?? "Ooops, something went wrong.")
+        }
+    }
+    
+    private func openMailApp() {
+        let emailURL = URL(string: "mailto:\(email)")
+        if let url = emailURL, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
@@ -224,14 +230,15 @@ struct VCProfileView: View {
                 let dragAmount = val.translation.height - prevDragTranslation.height
                 
                 if curHeight > maxHeight || curHeight < minHeight {
-                    curHeight -= dragAmount / 12
+                    curHeight -= dragAmount / 25
+                    curHeight = 530
                 } else {
                     curHeight -= dragAmount
                     print(curHeight)
                     
-                    if curHeight < 400 {
+                    if curHeight < 510 {
                         isShowingProfileView = false
-                        curHeight = 400
+                        curHeight = 530
                     }
                 }
                 

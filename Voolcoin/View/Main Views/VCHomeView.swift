@@ -22,9 +22,10 @@ struct VCHomeView: View {
     
     
     var body: some View {
-        NavigationView {
-            
-            if firebaseDBManager.isDataFetched {
+        if firebaseDBManager.isDataFetched {
+            NavigationView {
+                
+                
                 
                 ZStack {
                     VCLinearGradientView()
@@ -101,28 +102,32 @@ struct VCHomeView: View {
                             Alert(title: Text("atte"), message: Text("error"), dismissButton: .cancel(Text("OK")))
                         }
                         .padding()
-
+                        
                     }
                     
                     VCProfileView(isShowingProfileView: $showProfileView, userModel: firebaseDBManager.userModel)
                     
                 }
+                
                 .fullScreenCover(isPresented: $isPresentingTransactionsView, onDismiss: {
                     chosenType = .all
                 }) {
                     VCAllTransactionsView(isPresenting: $isPresentingTransactionsView, chosenType: $chosenType, transactions: firebaseDBManager.transactions ?? [])
                     
                 }
-                .refreshable {
-                    firebaseDBManager.fetchData()
-                }
+                
+                .navigationBarBackButtonHidden(true)
+                .navigationBarHidden(true)
             }
+            .refreshable {
+                firebaseDBManager.fetchData()
+            }
+        }
             else {
                 VCProgressView()
             }
-        }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarHidden(true)
+        
+        
     }
 }
 

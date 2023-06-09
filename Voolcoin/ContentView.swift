@@ -23,6 +23,7 @@ struct ContentView: View {
                 .environmentObject(firebaseDBManager)
                 .environmentObject(adManager)
                 
+                
         } else {
             WelcomeScreenView()
                 .preferredColorScheme(.light)
