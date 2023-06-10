@@ -35,7 +35,7 @@ struct VCCardView: View {
                         
                         Image("voolCoin")
                             .resizable()
-                            .frame(width: 35, height: 35)
+                            .frame(width: 37, height: 37)
                         
                         Text("\((String(format: "%.1f", firebaseDMManager.cardAmount) ))")
                             .font(.system(size: 45, weight: .bold))
@@ -87,7 +87,7 @@ struct VCCardView: View {
                     
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.gray.opacity(0.5))
-                        .frame(width: 130, height: 50)
+                        .frame(width: 140, height: 50)
                         .overlay {
                             HStack {
                                 Button {
@@ -106,7 +106,7 @@ struct VCCardView: View {
                                 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("Outcome")
-                                        .font(.system(size: 15, weight: .light, design: .default))
+                                        .font(.system(size: 14, weight: .light, design: .default))
                                         .opacity(0.9)
                                         .foregroundColor(.white)
                                     

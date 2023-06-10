@@ -22,14 +22,14 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     @AppStorage("log_status") var logStatus: Bool = false
-//    @AppStorage("name_status") var nameStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
     
     @Published var nonce: String = ""
     
     @Published var isLoginSuccessed = false
 
     
-    func appleAuthenticate(credential: ASAuthorizationAppleIDCredential) {
+    func appleAuthenticate(credential: ASAuthorizationAppleIDCredential, completion: @escaping ((Bool) -> Void)) {
         
         guard let token = credential.identityToken else {
             print("error with firebase")
@@ -47,22 +47,20 @@ class LoginViewModel: ObservableObject {
         Auth.auth().signIn(with: fireBaseCredential) { result, err in
             if let error = err {
                 print(error.localizedDescription)
+                completion(false)
             }
             
             print("Logged in Success")
             
+            
             guard let userId = result?.user.uid else {return}
             
-            //Create and save username to database
-            DatabaseViewModel().saveUserModelToFirestore(userId: userId) { success, error in
-                if success {
-                    print("It succeeded")
-                } else if let error = error {
-                    print(error)
-                }
-            }
             
-            withAnimation(.easeInOut) {self.logStatus = true}
+            completion(true)
+            //Create and save username to database
+
+            
+            
         }
     }
     
@@ -95,19 +93,22 @@ class LoginViewModel: ObservableObject {
                 
                 guard let user = res?.user else {return}
                 
-                completion(true)
+                
                 
                 //Create and save username to database
                 DatabaseViewModel().saveUserModelToFirestore(userId: user.uid) { success, error in
                     if success {
                         print("It succeeded")
-                        completion(true)
+                        
                     } else if let error = error {
                         print(error)
                     }
                 }
                 
-                withAnimation(.easeInOut) {self.logStatus = true}
+                
+                
+                completion(true)
+                
             }
         }
     }

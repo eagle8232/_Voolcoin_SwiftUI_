@@ -24,7 +24,7 @@
 "Read our Terms & Conditions." = "اقرأ الشروط والأحكام الخاصة بنا.";
 "Settings" = "إعدادات";
 "Invite Friends" = "ادعو أصدقاء";
-"Rate the App" = "قيم التطبيق";
+"Rate The App" = "قيم التطبيق";
 "Terms & Conditions" = "البنود و الظروف";
 "Privacy & Policy" = "سياسة الخصوصية";
 "Delete Account" = "حذف الحساب";
@@ -47,16 +47,22 @@
 
 
 
-"No transactions yet" = "No transactions yet";
-"Your next generation of financial platform" = "Your next generation of financial platform";
-"Making money has never been so easy" = "Making money has never been so easy";
-"Watch ads and make money" = "Watch ads and make money";
-"Watch the ads and earn voolcoins, which you can then exchange into real money*" = "Watch the ads and earn voolcoins, which you can then exchange into real money*";
-"Coin exchange will be implemented in future updates" = "Coin exchange will be implemented in future updates";
-"This is just the beginning" = "This is just the beginning";
-"Thank you for choosing us, let’s get started" = "Thank you for choosing us, let’s get started";
-"Welcome to Voolcoin" = "Welcome to Voolcoin";
-"If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com";
+"No transactions yet" = "لا توجد معاملات حتى الآن";
+"Your next generation of financial platform" = "جيلك القادم من المنصة المالية";
+"Making money has never been so easy" = "كسب المال لم يكن أبدا بهذه السهولة";
+"Watch ads and make money" = "مشاهدة الإعلانات وكسب المال";
+"Watch the ads and earn voolcoins, which you can then exchange into real money*" = "شاهد الإعلانات واكسب voolcoins ، والتي يمكنك بعد ذلك استبدالها بأموال حقيقية *";
+"Coin exchange will be implemented in future updates" = "سيتم تنفيذ تبادل العملات في التحديثات المستقبلية";
+"This is just the beginning" = "هذه ليست سوى البداية";
+"Thank you for choosing us, let’s get started" = "شكرًا لاختيارك لنا ، فلنبدأ";
+"Welcome to Voolcoin" = "مرحبًا بك في Voolcoin";
+"If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "إذا كان لديك أي مشاكل أو اقتراحات لتحسين منتجاتنا ، راسلنا عبر البريد الإلكتروني: voolcoinsomnia@gmail.com";
 
-"Referral link" = "Referral link";
-"Coming soon..." = "Coming soon...";
+"Referral link" = "رابط الإحالة";
+"Coming soon..." = "قريباً...";
+
+"Contact Us" = "اتصل بنا";
+"App's version: 1.0" = "إصدار التطبيق: 1.0";
+"Rewards" = "المكافآت";
+"Error" = "خطأ";
+"Total amount:" = "المبلغ الإجمالي:";

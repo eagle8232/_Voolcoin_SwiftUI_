@@ -6,57 +6,62 @@
   
 */
 
-"Welcome back" = "Welcome back";
-"Income" = "Income";
-"Outcome" = "Outcome";
-"Daily rewards" = "Daily rewards";
-"The chance to win rewards from 0.1 to 10 voolcoins" = "The chance to win rewards from 0.1 to 10 voolcoins";
-"Transactions" = "Transactions";
-"See all" = "See all";
-"Next" = "Next";
-"Let's get started" = "Let's get started";
-"Sign In" = "Sign In";
-"Sign Out" = "Sign Out";
-"Sign in with Apple" = "Sign in with Apple";
-"Sign in with Google" = "Sign in with Google";
+"Welcome back" = "Bem-vindo de volta";
+"Income" = "Rendimento";
+"Outcome" = "Resultado";
+"Daily rewards" = "Recompensas diárias";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "A oportunidade de ganhar prémios de 0,1 a 10 voolcoins";
+"Transactions" = "Transacções";
+"See all" = "Ver tudo";
+"Next" = "Seguinte";
+"Let's get started" = "Vamos começar";
+"Sign In" = "Iniciar sessão";
+"Sign Out" = "Sair";
+"Sign in with Apple" = "Iniciar sessão com a Apple";
+"Sign in with Google" = "Iniciar sessão com a Google";
 
-"You are completely safe." = "You are completely safe.";
-"Read our Terms & Conditions." = "Read our Terms & Conditions.";
-"Settings" = "Settings";
-"Invite Friends" = "Invite Friends";
-"Rate the App" = "Rate the App";
-"Terms & Conditions" = "Terms & Conditions";
-"Privacy & Policy" = "Privacy & Policy";
-"Delete Account" = "Delete Account";
-"Attention!" = "Attention!";
+"You are completely safe." = "Está completamente seguro.";
+"Read our Terms & Conditions." = "Leia os nossos Termos e Condições.";
+"Settings" = "Definições";
+"Invite Friends" = "Convidar amigos";
+"Rate The App" = "Avaliar a aplicação";
+"Terms & Conditions" = "Termos e condições";
+"Privacy & Policy" = "Privacidade e política";
+"Delete Account" = "Eliminar conta";
+"Attention!" = "Atenção!";
 
-"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Do you really want to delete your account? You lose all your information, without permission to return them back!";
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Quer mesmo apagar a sua conta? Perde todas as suas informações, sem autorização para as devolver!";
 
-"Do you really want to sign out your account?" = "Do you really want to sign out your account?";
+"Do you really want to sign out your account?" = "Quer mesmo encerrar a sua conta?";
 
-"No" = "No";
-"Yes" = "Yes";
-"Transactions" = "Transactions";
-"Unlock voolcoins" = "Unlock voolcoins";
-"Claim" = "Claim";
-"Error" = "Error";
-"Reward not loaded. Please try again later." = "Reward not loaded. Please try again later.";
+"No" = "Não";
+"Yes" = "Sim";
+"Transactions" = "Transacções";
+"Unlock voolcoins" = "Desbloquear voolcoins";
+"Claim" = "Reclamação";
+"Error" = "Erro";
+"Reward not loaded. Please try again later." = "O prémio não foi carregado. Por favor, tente novamente mais tarde.";
 
-"Come back tomorrow" = "Come back tomorrow";
-"Unclock other card" = "Unclock other card";
-"My Profile" = "My Profile";
+"Come back tomorrow" = "Voltar amanhã";
+"Unclock other card" = "Desbloquear outra placa";
+"My Profile" = "O meu perfil";
 
 
-"No transactions yet" = "No transactions yet";
-"Your next generation of financial platform" = "Your next generation of financial platform";
-"Making money has never been so easy" = "Making money has never been so easy";
-"Watch ads and make money" = "Watch ads and make money";
-"Watch the ads and earn voolcoins, which you can then exchange into real money*" = "Watch the ads and earn voolcoins, which you can then exchange into real money*";
-"Coin exchange will be implemented in future updates" = "Coin exchange will be implemented in future updates";
-"This is just the beginning" = "This is just the beginning";
-"Thank you for choosing us, let’s get started" = "Thank you for choosing us, let’s get started";
-"Welcome to Voolcoin" = "Welcome to Voolcoin";
-"If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com";
+"No transactions yet" = "Ainda não há transacções";
+"Your next generation of financial platform" = "A sua próxima geração de plataforma financeira";
+"Making money has never been so easy" = "Ganhar dinheiro nunca foi tão fácil";
+"Watch ads and make money" = "Ver anúncios e ganhar dinheiro";
+"Watch the ads and earn voolcoins, which you can then exchange into real money*" = "Veja os anúncios e ganhe voolcoins, que pode depois trocar por dinheiro real*";
+"Coin exchange will be implemented in future updates" = "A troca de moedas será implementada em futuras actualizações";
+"This is just the beginning" = "Isto é apenas o começo";
+"Thank you for choosing us, let’s get started" = "Obrigado por nos ter escolhido, vamos começar";
+"Welcome to Voolcoin" = "Bem-vindo à Voolcoin";
+"If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "Se tiver algum problema ou sugestão para melhorar o nosso produto, envie-nos um e-mail para: voolcoinsomnia@gmail.com";
 
-"Referral link" = "Referral link";
-"Coming soon..." = "Coming soon...";
+"Referral link" = "Ligação de referência";
+"Coming soon..." = "Em breve...";
+
+"Contact Us" = "Contactar-nos";
+"App's version: 1.0" = "Versão da aplicação: 1.0";
+"Rewards" = "Prémios";
+"Total amount:" = "Montante total:";

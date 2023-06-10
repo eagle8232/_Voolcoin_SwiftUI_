@@ -9,8 +9,8 @@ import SwiftUI
 import FirebaseAuth
 
 struct VCHomeView: View {
+    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     
-    @Environment(\.presentationMode) var presentationMode
     @State var isPresentingTransactionsView: Bool = false
     @State var errorHandling: Bool = false
     
@@ -18,14 +18,11 @@ struct VCHomeView: View {
     
     @State var chosenType: TransactionType = .all
     
-    @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     
     
     var body: some View {
         if firebaseDBManager.isDataFetched {
             NavigationView {
-                
-                
                 
                 ZStack {
                     VCLinearGradientView()
@@ -60,7 +57,7 @@ struct VCHomeView: View {
                                         .fontWeight(.light)
                                         .foregroundColor(.white)
                                     
-                                    Text(firebaseDBManager.userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "")")
+                                    Text(firebaseDBManager.userModel?.name ?? "Person")
                                         .font(.system(size: 25, weight: .bold, design: .default))
                                         .foregroundColor(.white)
                                     
@@ -80,8 +77,8 @@ struct VCHomeView: View {
                                         }
                                     
                                 }
-                                .navigationBarTitle("")
-                                .navigationBarBackButtonHidden(true)
+                                
+                                
                             }
                             
                             Spacer()
@@ -123,9 +120,9 @@ struct VCHomeView: View {
                 firebaseDBManager.fetchData()
             }
         }
-            else {
-                VCProgressView()
-            }
+        else {
+            VCProgressView()
+        }
         
         
     }

@@ -1,0 +1,65 @@
+/* 
+  Localizable.strings
+  Voolcoin
+
+  Created by Babayev Kamran on 30.05.23.
+  
+*/
+
+"Welcome back" = "欢迎回来";
+"Income" = "收入";
+"Outcome" = "结果";
+"Daily rewards" = "每日奖励";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "有机会赢得从0.1到10个伍尔币的奖励";
+"Transactions" = "交易";
+"See all" = "查看全部";
+"Next" = "下一页";
+"Let's get started" = "让我们开始吧";
+"Sign In" = "登录";
+"Sign Out" = "签出";
+"Sign in with Apple" = "用Apple登录";
+"Sign in with Google" = "用Google登录";
+
+"You are completely safe." = "你是完全安全的。";
+"Read our Terms & Conditions." = "阅读我们的条款和条件。";
+"Settings" = "设置";
+"Invite Friends" = "邀请朋友";
+"Rate The App" = "评价该应用程序";
+"Terms & Conditions" = "条款和条件";
+"Privacy & Policy" = "隐私与政策";
+"Delete Account" = "删除账户";
+"Attention!" = "注意!";
+
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "你真的想删除你的账户吗？你失去了你所有的信息，没有权限把它们还给你！这是不可能的！";
+
+"Do you really want to sign out your account?" = "你真的想签出你的账户吗？";
+
+"No" = "没有";
+"Yes" = "是";
+"Unlock voolcoins" = "解锁voolcoins";
+"Claim" = "要求";
+"Error" = "误差";
+"Reward not loaded. Please try again later." = "奖励未加载。请稍后再试。";
+
+"Come back tomorrow" = "明天再来吧";
+"Unclock other card" = "解除对其他卡的限制";
+"My Profile" = "我的资料";
+
+"No transactions yet" = "尚无交易";
+"Your next generation of financial platform" = "您的下一代金融平台";
+"Making money has never been so easy" = "赚钱从来没有这么容易过";
+"Watch ads and make money" = "观看广告并挣钱";
+"Watch the ads and earn voolcoins, which you can then exchange into real money*" = "观看广告并赚取voolcoins，然后你可以将其兑换成真钱*。";
+"Coin exchange will be implemented in future updates" = "硬币兑换将在未来的更新中实施";
+"This is just the beginning" = "这只是一个开始";
+"Thank you for choosing us, let’s get started" = "感谢你选择我们，让我们开始吧";
+"Welcome to Voolcoin" = "欢迎来到Voolcoin";
+"If you have any problems or suggestions for improving our product, email us: voolcoinsomnia@gmail.com" = "如果您有任何问题或改进我们产品的建议，请发电子邮件给我们：voolcoinsomnia@gmail.com";
+
+"Referral link" = "推荐链接";
+"Coming soon..." = "即将推出...";
+
+"Contact Us" = "联系我们";
+"App's version: 1.0" = "应用程序的版本：1.0";
+"Rewards" = "奖励";
+"Total amount:" = "总金额:";

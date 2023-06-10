@@ -43,6 +43,7 @@
 		8C0B14CC2A191D11005FA310 /* WelcomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */; };
 		8C0B14D02A192C26005FA310 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */; };
 		8C1B54E12A2756FA0054B95C /* VCProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B54E02A2756FA0054B95C /* VCProgressView.swift */; };
+		8C23546D2A3353A5008C6346 /* VCNameCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23546C2A3353A5008C6346 /* VCNameCreationView.swift */; };
 		8C30018E2A0A3AA00081053A /* VCRewardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C30018D2A0A3AA00081053A /* VCRewardModel.swift */; };
 		8C3001922A0A66FF0081053A /* VCSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3001912A0A66FE0081053A /* VCSegmentedControl.swift */; };
 		8C67250A2A2584A600B58A61 /* PageIntroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6725092A2584A600B58A61 /* PageIntroModel.swift */; };
@@ -96,6 +97,7 @@
 		8C0B14CB2A191D11005FA310 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenView.swift; sourceTree = "<group>"; };
 		8C0B14CF2A192C26005FA310 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		8C1B54E02A2756FA0054B95C /* VCProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCProgressView.swift; sourceTree = "<group>"; };
+		8C23546C2A3353A5008C6346 /* VCNameCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCNameCreationView.swift; sourceTree = "<group>"; };
 		8C30018D2A0A3AA00081053A /* VCRewardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRewardModel.swift; sourceTree = "<group>"; };
 		8C3001912A0A66FE0081053A /* VCSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSegmentedControl.swift; sourceTree = "<group>"; };
 		8C6725092A2584A600B58A61 /* PageIntroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageIntroModel.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		8CA5A96A2A1E5DD900BC5E7A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8CCA75302A0CABB200911B4F /* VoolcoinModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VoolcoinModel.xcdatamodel; sourceTree = "<group>"; };
 		8CCA75322A0CAF8300911B4F /* VoolcoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoolcoinManager.swift; sourceTree = "<group>"; };
+		8CD235082A33DBDA00F2F360 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8CD4D0C72A2E083500A91055 /* VCBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCBlurView.swift; sourceTree = "<group>"; };
 		8CF5F92F2A025DCA00CF6262 /* Voolcoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voolcoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF5F9322A025DCA00CF6262 /* VoolcoinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoolcoinApp.swift; sourceTree = "<group>"; };
@@ -267,6 +270,7 @@
 				8C67250B2A25867E00B58A61 /* CustomIndicatorView.swift */,
 				8C1B54E02A2756FA0054B95C /* VCProgressView.swift */,
 				8CD4D0C72A2E083500A91055 /* VCBlurView.swift */,
+				8C23546C2A3353A5008C6346 /* VCNameCreationView.swift */,
 			);
 			path = "Submain Views";
 			sourceTree = "<group>";
@@ -446,6 +450,7 @@
 				tr,
 				ar,
 				"pt-PT",
+				"zh-Hans",
 			);
 			mainGroup = 8CF5F9262A025DCA00CF6262;
 			packageReferences = (
@@ -546,6 +551,7 @@
 				8CF5F9352A025DCA00CF6262 /* ContentView.swift in Sources */,
 				69ADAE3F2A03791A00843713 /* VCDetailsView.swift in Sources */,
 				692C86BF2A331EEB00980506 /* AlertView.swift in Sources */,
+				8C23546D2A3353A5008C6346 /* VCNameCreationView.swift in Sources */,
 				691922302A2CAA27000CEF87 /* FirebaseDBManager.swift in Sources */,
 				6976D1DF2A02E4AD006C2CC5 /* VCDailyRewardView.swift in Sources */,
 				692BA9C42A09300100202993 /* VCDailyRewardsViewModel.swift in Sources */,
@@ -583,6 +589,7 @@
 				8C6725182A25988E00B58A61 /* tr */,
 				8C6725192A25989300B58A61 /* ar */,
 				8C67251A2A2598D500B58A61 /* pt-PT */,
+				8CD235082A33DBDA00F2F360 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

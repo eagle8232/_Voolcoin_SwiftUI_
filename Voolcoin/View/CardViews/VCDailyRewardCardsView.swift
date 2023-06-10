@@ -40,7 +40,7 @@ struct DailyRewards: View {
                 
                 
                 
-                if isShowCard || isShowCardAfterTime {
+                if isShowCard && !(rewardModel.watchedCards["card3"] ?? false) {
                     VCDailyRewardCardView(isWatchedCard: watchedCard)
                 } else {
                     VCBlockedCardView()

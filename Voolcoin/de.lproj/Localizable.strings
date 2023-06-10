@@ -9,8 +9,8 @@
 "Welcome back" = "Demnächst...";
 "Income" = "Einkommen";
 "Outcome" = "Ergebnis";
-"Daily rewards" = "Tägliche belohnungen";
-"The chance to win rewards from 0.1 to 10 voolcoins" = "Die Chance, Belohnungen von 0,1 bis 10 voolcoins zu gewinnen";
+"Daily rewards" = "Tägliche Belohnungen";
+"The chance to win rewards from 0.1 to 10 voolcoins" = "Die Chance, Belohnungen von 0,1 bis 10 Voolcoins zu gewinnen";
 "Transactions" = "Transaktionen";
 "See all" = "Alle sehen";
 "Next" = "Weiter";
@@ -21,18 +21,18 @@
 "Sign in with Google" = "Mit Google anmelden";
 
 "You are completely safe." = "Sie sind völlig sicher.";
-"Read our Terms & Conditions." = "Lesen sie unsere allgemeinen geschäftsbedingungen.";
+"Read our Terms & Conditions." = "Lesen Sie unsere Allgemeinen Geschäftsbedingungen.";
 "Settings" = "Einstellungen";
 "Invite Friends" = "Freunde einladen";
-"Rate the App" = "Bewerten sie die app";
-"Terms & Conditions" = "Bedingungen & konditionen";
+"Rate The App" = "Bewerten sie die App";
+"Terms & Conditions" = "Bedingungen & Konditionen";
 "Privacy & Policy" = "Datenschutz & Politik";
 "Delete Account" = "Konto löschen";
 "Attention!" = "Achtung!";
 
-"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Wollen sie ihr konto wirklich löschen? Sie verlieren alle ihre informationen, ohne die erlaubnis, sie zurückzugeben!";
+"Do you really want to delete your account? You lose all your information, without permission to return them back!" = "Wollen Sie Ihr Konto wirklich löschen? Sie verlieren alle Ihre Informationen, ohne die Erlaubnis, sie zurückzugeben!";
 
-"Do you really want to sign out your account?" = "Möchten sie ihr konto wirklich abmelden?";
+"Do you really want to sign out your account?" = "Möchten Sie Ihr Konto wirklich abmelden?";
 
 "No" = "Nein";
 "Yes" = "Ja";
@@ -40,7 +40,7 @@
 "Unlock voolcoins" = "Voolcoins freischalten";
 "Claim" = "Anspruch";
 "Error" = "Fehler";
-"Reward not loaded. Please try again later." = "Belohnung nicht geladen. Bitte versuchen sie es später noch einmal.";
+"Reward not loaded. Please try again later." = "Belohnung nicht geladen. Bitte versuchen Sie es später noch einmal.";
 
 "Come back tomorrow" = "Kommen Sie morgen wieder";
 "Unclock other card" = "Andere Karte enttakten";
@@ -61,3 +61,8 @@
 
 "Referral link" = "Verweis-Link";
 "Coming soon..." = "Demnächst...";
+
+"Contact Us" = "Kontakt";
+"App's version: 1.0" = "Version der Anwendung: 1.0";
+"Rewards" = "Belohnungen";
+"Total amount:" = "Gesamtbetrag:";

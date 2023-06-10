@@ -71,9 +71,17 @@ struct VCDailyRewardsState: View {
                 .fill(watchedAmount == 3 ? .green : .yellow)
                 .frame(width: 85, height: 30)
                 .overlay {
-                    Text("\(watchedAmount)/3 Rewards")
-                        .font(.system(size: 12))
-                        .foregroundColor(.black)
+                    
+                    HStack(alignment: .center, spacing: 2) {
+                        
+                        Text("\(watchedAmount)/3")
+                            .font(.system(size: 12))
+                            .foregroundColor(.black)
+                        
+                        Text("Rewards")
+                            .font(.system(size: 12))
+                            .foregroundColor(.black)
+                    }
                 }
         }
     }

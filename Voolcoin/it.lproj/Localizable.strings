@@ -24,7 +24,7 @@
 "Read our Terms & Conditions." = "Leggete i nostri Termini e condizioni.";
 "Settings" = "Impostazioni";
 "Invite Friends" = "Invitare gli amici";
-"Rate the App" = "Valutare l'applicazione";
+"Rate The App" = "Valutare l'applicazione";
 "Terms & Conditions" = "Termini & Condizioni";
 "Privacy & Policy" = "Privacy & Politica";
 "Delete Account" = "Cancellare l'account";
@@ -60,3 +60,8 @@
 
 "Referral link" = "Link di riferimento";
 "Coming soon..." = "Prossimamente...";
+
+"Contact Us" = "Contatto";
+"App's version: 1.0" = "Versione dell'applicazione: 1.0";
+"Rewards" = "Premi";
+"Total amount:" = "Importo totale:";

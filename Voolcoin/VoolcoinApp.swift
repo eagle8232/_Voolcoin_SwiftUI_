@@ -15,7 +15,6 @@ struct VoolcoinApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject var manager: VoolcoinManager = VoolcoinManager()
     
     init() {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
@@ -24,7 +23,6 @@ struct VoolcoinApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, manager.container.viewContext)
         }
     }
 }

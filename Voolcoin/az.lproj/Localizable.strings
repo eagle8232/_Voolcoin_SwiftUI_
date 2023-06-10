@@ -24,7 +24,7 @@
 "Read our Terms & Conditions." = "Qayda və Şərtlərimizi oxuyun.";
 "Settings" = "Parametrlər";
 "Invite Friends" = "Dostları Dəvət Etmək";
-"Rate the App" = "Tətbiqi qiymətləndirin";
+"Rate The App" = "Tətbiqi qiymətləndirin";
 "Terms & Conditions" = "Şərtlər və qaydalar";
 "Privacy & Policy" = "Gizlilik Siyasəti";
 "Delete Account" = "Hesabı Sil";
@@ -58,3 +58,8 @@
 
 "Referral link" = "İstinad linki";
 "Coming soon..." = "Tezliklə...";
+
+"Contact Us" = "Əlaqə saxlayın";
+"App's version: 1.0" = "Proqramın versiyası: 1.0";
+"Rewards" = "Mükafatlar";
+"Total amount:" = "Ümumi miqdar:";

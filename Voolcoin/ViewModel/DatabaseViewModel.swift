@@ -80,7 +80,7 @@ extension DatabaseViewModel {
         if let userModel = userModel {
             let user = ["name": userModel.name] as [String: Any]
             
-            userRef.updateData(user) { error in
+            userRef.setData(user) { error in
                 if let error = error {
                     print("Error updating userModel info in Firestore: \(error.localizedDescription)")
                     completion(false, error)
@@ -255,6 +255,8 @@ extension DatabaseViewModel {
                 if let user = user, error == nil {
                     userModel = VCUserModel(name: user["name"] as! String, email: email)
                     completion(userModel, true)
+                    print(userId)
+                    print(userModel?.name)
                 } else if let error = error {
                     print(error)
                     print("erroooooooooorrr in user data")

@@ -51,7 +51,7 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     func loadAd() {
         
         let request = GADRequest()
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["eabfbb8f46892d02e3ce765b77e9752e"]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["b136fc524c09a9bdc02fd318a52fcf88", "8b4fb722d123c7b1100a4275f458e362", "ce0b72bf211b0fd9a27480978527062e"]
         
 //        GADInterstitialAd
         GADRewardedInterstitialAd.load(withAdUnitID: adUnitId, request: request) { ad, error in

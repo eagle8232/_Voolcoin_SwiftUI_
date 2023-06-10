@@ -68,6 +68,7 @@ struct VCSettingsButtonsView: View {
     @State var error: Error? = nil
     
     @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
     
     @StateObject var loginModel: LoginViewModel = .init()
     
@@ -80,11 +81,11 @@ struct VCSettingsButtonsView: View {
             ScrollView {
                 
                 VStack {
-                    SettingsButton(name: "Invite Friends", imageName: "person.2", imageColor: .purple) {
+                    SettingsButton(name: NSLocalizedString("Invite Friends", comment: ""), imageName: "person.2", imageColor: .purple) {
                         isPresentingInviteFriends = true
                     }
                     
-                    SettingsButton(name: "Rate the App", imageName: "star", imageColor: .yellow) {
+                    SettingsButton(name: NSLocalizedString("Rate the App", comment: ""), imageName: "star", imageColor: .yellow) {
                         openAppStore()
                     }
                 }
@@ -94,11 +95,11 @@ struct VCSettingsButtonsView: View {
                 Divider()
                 
                 VStack {
-                    SettingsButton(name: "Terms & Conditions", imageName: "text.book.closed", imageColor: .black) {
+                    SettingsButton(name: NSLocalizedString("Terms & Conditions", comment: ""), imageName: "text.book.closed", imageColor: .black) {
                         isPresentingInviteFriends = true
                     }
                     
-                    SettingsButton(name: "Privacy Policy", imageName: "lock", imageColor: .green) {
+                    SettingsButton(name: NSLocalizedString("Privacy & Policy", comment: ""), imageName: "lock", imageColor: .green) {
                         isPresentingInviteFriends = true
                     }
                 }
@@ -108,11 +109,11 @@ struct VCSettingsButtonsView: View {
                 Divider()
                 
                 VStack {
-                    SettingsButton(name: "App's version: 1.0", imageName: "apps.iphone", imageColor: .gray) {
+                    SettingsButton(name: NSLocalizedString("App's version: 1.0", comment: ""), imageName: "apps.iphone", imageColor: .gray) {
                         
                     }
                     
-                    SettingsButton(name: "Contact Us", imageName: "tray", imageColor: .blue) {
+                    SettingsButton(name: NSLocalizedString("Contact Us", comment: ""), imageName: "tray", imageColor: .blue) {
                         openMailApp()
                     }
                 }
@@ -122,11 +123,11 @@ struct VCSettingsButtonsView: View {
                 Divider()
                 
                 VStack {
-                    SettingsButton(name: "Delete", imageName: "trash", imageColor: .red) {
+                    SettingsButton(name: NSLocalizedString("Delete Account", comment: ""), imageName: "trash", imageColor: .red) {
                         isDeleted = true
                     }
                     
-                    SettingsButton(name: "Sign Out", imageName: "rectangle.portrait.and.arrow.right.fill", imageColor: .orange) {
+                    SettingsButton(name: NSLocalizedString("Sign Out", comment: ""), imageName: "rectangle.portrait.and.arrow.right.fill", imageColor: .orange) {
                         isSignOut = true
                     }
                 }
@@ -139,7 +140,7 @@ struct VCSettingsButtonsView: View {
             
             
             if isSignOut {
-                AlertView(title: "Attention!", message: "Do you really want to sign out your account?") { success in
+                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to sign out your account?", comment: "")) { success in
                     if success {
                         signOut()
                     } else {
@@ -149,7 +150,7 @@ struct VCSettingsButtonsView: View {
             }
             
             if isDeleted {
-                AlertView(title: "Attention!", message: "Do you really want to delete your account? You lose all your information, without permission to return them back!") { success in
+                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to delete your account? You lose all your information, without permission to return them back!", comment: "")) { success in
                     if success {
                         delete()
                     } else {
@@ -159,7 +160,7 @@ struct VCSettingsButtonsView: View {
             }
             
             if isError {
-                AlertView(title: "Error", message: error?.localizedDescription ?? "Error occured") { success in
+                AlertView(title: NSLocalizedString("Error", comment: ""), message: error?.localizedDescription ?? "Error occured") { success in
                     
                 }
             }
@@ -169,17 +170,18 @@ struct VCSettingsButtonsView: View {
     }
     
     func signOut() {
-        isSignOut = false
+        isSignOut = true
         try? Auth.auth().signOut()
         GIDSignIn.sharedInstance.signOut()
         firebaseDBManager.setDefaultValue()
         withAnimation(.easeInOut) {
             logStatus = false
+            nameStatus = false
         }
     }
     
     func delete() {
-        isDeleted = false
+        isDeleted = true
         loginModel.deleteAccount { error in
             if let error = error {
                 isError = true
@@ -188,6 +190,7 @@ struct VCSettingsButtonsView: View {
                 firebaseDBManager.setDefaultValue()
                 withAnimation(.easeInOut) {
                     logStatus = false
+                    nameStatus = false
                 }
             }
         }

@@ -19,6 +19,8 @@ struct VCAllTransactionsView: View {
     @State var date: Date?
     @State var type: TransactionType = .income
     
+    @State var totalAmount: Double = 0.0
+    
     @State private var currentDate = Date()
     
     var transactions: [VCTransactionModel]
@@ -35,79 +37,39 @@ struct VCAllTransactionsView: View {
                 VCLinearGradientView()
                 
                 VStack {
-                    HStack {
-                        
-                        Button {
-                            self.currentDate = Calendar.current.date(byAdding: .day, value: -1, to: self.currentDate)!
-                        } label: {
-                            RoundedRectangle(cornerRadius: 15)
-                                .overlay {
-                                    Image(systemName: "chevron.left")
-                                        .foregroundColor(.white)
-                                }
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.gray.opacity(0.4))
-                        }
-                        
-                        DatePicker("Pick a date", selection: $currentDate, displayedComponents: .date)
-                            .labelsHidden()
-                    
-                    
-                        Button {
-                            self.currentDate = Calendar.current.date(byAdding: .day, value: 1, to: self.currentDate)!
-                        } label: {
-                            RoundedRectangle(cornerRadius: 15)
-                                .overlay {
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.white)
-                                }
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.gray.opacity(0.4))
-                        }
-                        
-                    }
-                    .padding()
                     
                     VCSegmentedControl(chosenType: $chosenType)
                     
+                    DateView(currentDate: $currentDate, totalAmount: $totalAmount)
                     
-                    ScrollView(showsIndicators: false) {
-                        ForEach(Array(transactions.enumerated()).reversed(), id: \.1.date) { (index, transactionModel) in
-                            if isSameDay(currentDateString: currentDate.toString(format: "yyyy-MM-dd HH:mm:ss"), rewardedDateString: transactionModel.date) {
-                                VCTransactionView(chosenType: $chosenType, transaction: transactionModel)
-                            } else {
-                                
-                                VStack(alignment: .center) {
-                                    HStack(spacing: 10) {
-                                        Image(systemName: "xmark")
-                                            .foregroundColor(Color.red)
-                                            .frame(width: 40, height: 40)
-                                            .background(.black.opacity(0.7), in: Circle())
-
-                                        VStack(alignment: .leading) {
-                                            Text("No transactions yet")
-                                                .foregroundColor(.white.opacity(0.7))
-                                                .fontWeight(.medium)
-
-                                            Text("0 voolcoins")
-                                                .font(.system(size: 15, weight: .semibold, design: .default))
-                                                .lineLimit(1)
-                                                .foregroundColor(Color.red)
-                                        }
-
-
-                                    }
-                                    .frame(width: 283, height: 45, alignment: .center)
+                    ZStack {
+                        Color.black.opacity(0.75)
+                            .ignoresSafeArea()
+                        
+                        VStack(alignment: .center) {
+                            HStack {
+                                Text("Transactions")
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.white)
+                                totalAmount(totalAmount: totalAmount)
                                     .padding()
-                                    .background(Color.gray.opacity(0.35))
-                                    .cornerRadius(20)
+                            }
+                            ScrollView(showsIndicators: false) {
+                                ForEach(Array(transactions.enumerated()).reversed(), id: \.1.date) { (index, transactionModel) in
+                                    if isSameDay(currentDateString: currentDate.toString(format: "yyyy-MM-dd HH:mm:ss"), rewardedDateString: transactionModel.date) {
+                                        VCTransactionView(chosenType: $chosenType, transaction: transactionModel)
+                                            .onAppear {
+                                                totalAmount += transactionModel.amount
+                                            }
+                                    }
                                 }
                                 
                             }
+                            .ignoresSafeArea()
                         }
                         
                     }
-                    .ignoresSafeArea()
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -133,6 +95,24 @@ struct VCAllTransactionsView: View {
         
     }
     
+    func totalAmount(totalAmount: Double) -> some View {
+        RoundedRectangle(cornerRadius: 10)
+            .frame(width: 150, height: 35)
+            .foregroundColor(.yellow)
+            .overlay {
+                HStack(alignment: .center, spacing: 2) {
+                    
+                    Text("Total Amount:")
+                        .foregroundColor(.black)
+                        .font(.system(size: 15, weight: .semibold, design: .default))
+                    
+                    Text(String(format: "%.1f", totalAmount))
+                        .foregroundColor(.black)
+                        .font(.system(size: 15, weight: .semibold, design: .default))
+                }
+            }
+    }
+    
     func isSameDay(currentDateString: String, rewardedDateString: String) -> Bool {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -146,6 +126,49 @@ struct VCAllTransactionsView: View {
         let components2 = calendar.dateComponents([.day, .month, .year], from: rewardedDate)
         
         return components1.day == components2.day
+    }
+}
+
+struct DateView: View {
+    @Binding var currentDate: Date
+    @Binding var totalAmount: Double
+    var body: some View {
+        HStack {
+            
+            Button {
+                currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+                totalAmount = 0
+            } label: {
+                RoundedRectangle(cornerRadius: 15)
+                    .overlay {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color.gray.opacity(0.4))
+            }
+            
+            DatePicker("Pick a date", selection: $currentDate, displayedComponents: .date)
+                .labelsHidden()
+        
+        
+            Button {
+                currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+                totalAmount = 0
+            } label: {
+                RoundedRectangle(cornerRadius: 15)
+                    .overlay {
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color.gray.opacity(0.4))
+            }
+        }
+        .padding(.bottom)
+        .onChange(of: currentDate) { newValue in
+            totalAmount = 0
+        }
     }
 }
 

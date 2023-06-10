@@ -16,10 +16,15 @@ import GoogleSignInSwift
 struct SignInScreenView: View {
     
     @EnvironmentObject var firebaseDBManager: FirebaseDBManager
-    @State var isPresentingTransactionsView: Bool = false
+    
+    @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
     
     @StateObject var loginModel: LoginViewModel = .init()
-    @FocusState var isEnabled: Bool
+    
+    @State var isPresentingHomeView: Bool = false
+    @State var goToNameCreation: Bool = false
+    
     
     var body: some View {
         
@@ -41,41 +46,57 @@ struct SignInScreenView: View {
                         .padding(.bottom, 30)
                         .foregroundColor(.black)
                     
-
+                    
                     SocalLoginButton(image: Image(uiImage: #imageLiteral(resourceName: "apple")), text: Text("Sign in with Apple")
                         .foregroundColor(.black))
-                        .overlay {
-                            SignInWithAppleButton { (request) in
-                                loginModel.nonce = randomNonceString()
-                                request.requestedScopes = [.email, .fullName]
-                                request.nonce = sha256(loginModel.nonce)
-
-                            } onCompletion: { (result) in
-                                switch result {
-
-                                case .success(let user):
-                                    print("success")
-
-                                    guard let credential = user.credential as? ASAuthorizationAppleIDCredential else {
-                                        print("error with firebase")
-                                        return
-                                    }
-
-                                    loginModel.appleAuthenticate(credential: credential)
-
-                                case .failure(let error):
-                                    print(error.localizedDescription)
+                    .overlay {
+                        SignInWithAppleButton { (request) in
+                            loginModel.nonce = randomNonceString()
+                            request.requestedScopes = [.email, .fullName]
+                            request.nonce = sha256(loginModel.nonce)
+                            
+                        } onCompletion: { (result) in
+                            switch result {
+                                
+                            case .success(let user):
+                                print("success")
+                                
+                                
+                                guard let credential = user.credential as? ASAuthorizationAppleIDCredential else {
+                                    print("error with firebase")
+                                    return
                                 }
+                                
+                                loginModel.appleAuthenticate(credential: credential) { success in
+                                    if success {
+                                        
+                                        print("did success")
+                                        
+                                        
+                                        firebaseDBManager.fetchData()
+                                        
+                                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
+                                            
+                                            if firebaseDBManager.userModel?.name.count ?? 0 > 0 {
+                                                logStatus = true
+                                            } else {
+                                                nameStatus = true
+                                            }
+                                        }
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                
+                            case .failure(let error):
+                                print(error.localizedDescription)
                             }
-                            .frame(width: 300)
-                            .blendMode(.overlay)
                         }
+                        .frame(width: 300)
+                        .blendMode(.overlay)
+                    }
                     
-//                    Button {
-//
-//                    } label: {
-//
-//                    }
                     
                     SocalLoginButton(image: Image(uiImage: #imageLiteral(resourceName: "google")), text: Text("Sign in with Google").foregroundColor(.black))
                         .padding(.vertical)
@@ -84,7 +105,11 @@ struct SignInScreenView: View {
                                 loginModel.signInWithGoogle { success in
                                     if success {
                                         firebaseDBManager.fetchData()
+                                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
+                                            self.logStatus = true
+                                        }
                                     }
+                                    print("success: \(success)")
                                 }
                             }
                             .frame(width: 255)
@@ -113,15 +138,16 @@ struct SignInScreenView: View {
                         .foregroundColor(.pink)
                         .multilineTextAlignment(.center)
                 }
-
+                
             }
+            
             .alert(loginModel.errorMessage, isPresented: $loginModel.showError, actions: {
                 
             })
             .padding()
         }
-        .fullScreenCover(isPresented: $isPresentingTransactionsView) {
-            VCHomeView()
+        .fullScreenCover(isPresented: $goToNameCreation) {
+            VCNameCreationView()
         }
         
     }

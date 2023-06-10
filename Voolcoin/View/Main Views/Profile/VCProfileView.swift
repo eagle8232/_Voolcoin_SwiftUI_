@@ -38,6 +38,7 @@ struct VCProfileView: View {
     @StateObject var loginModel: LoginViewModel = .init()
     
     @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
     
     
     
@@ -90,7 +91,10 @@ struct VCProfileView: View {
                                         .foregroundColor(.white)
                                         .font(.system(size: 40))
                                 } else {
-                                    Text("")
+                                    let name = "\(UserDefaults.standard.string(forKey: "userName") ?? "Person")"
+                                    Text(String(name.capitalized.first ?? "P"))
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 40))
                                 }
                                 
                             })
@@ -99,9 +103,15 @@ struct VCProfileView: View {
                         
                         VStack(alignment: .center, spacing: 5) {
                             
-                            Text(firebaseDBManager.userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "????")")
-                                .font(.system(size: 25, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
+                            if firebaseDBManager.userModel?.name == "" {
+                                Text("\(UserDefaults.standard.string(forKey: "userName") ?? "Person")")
+                                    .font(.system(size: 25, weight: .bold, design: .default))
+                                    .foregroundColor(.white)
+                            } else {
+                                Text(firebaseDBManager.userModel?.name ?? "\(UserDefaults.standard.string(forKey: "userName") ?? "Person")")
+                                    .font(.system(size: 25, weight: .bold, design: .default))
+                                    .foregroundColor(.white)
+                            }
                             
                             
                             
@@ -133,15 +143,15 @@ struct VCProfileView: View {
                         
                     }
                     
-                    SettingsButton(name: "Contact Us", imageName: "tray", imageColor: .blue) {
+                    SettingsButton(name: NSLocalizedString("Contact Us", comment: ""), imageName: "tray", imageColor: .blue) {
                         openMailApp()
                     }
                     
-                    SettingsButton(name: "Delete", imageName: "trash", imageColor: .red) {
+                    SettingsButton(name: NSLocalizedString("Delete Account", comment: ""), imageName: "trash", imageColor: .red) {
                         isDeleted = true
                     }
                     
-                    SettingsButton(name: "Sign Out", imageName: "rectangle.portrait.and.arrow.right.fill", imageColor: .orange) {
+                    SettingsButton(name: NSLocalizedString("Sign Out", comment: ""), imageName: "rectangle.portrait.and.arrow.right.fill", imageColor: .orange) {
                         isSignOut = true
                     }
                     
@@ -154,13 +164,13 @@ struct VCProfileView: View {
             .background(
                 ZStack {
                     VCLinearGradientView(startPoint: startAnimationPoint, endPoint: endAnimationPoint)
-                        .cornerRadius(30)
+//                        .cornerRadius(30)
                 }
             )
             
             
             if isSignOut {
-                AlertView(title: "Attention!", message: "Do you really want to sign out your account?") { success in
+                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to sign out your account?", comment: "")) { success in
                     if success {
                         signOut()
                     } else {
@@ -171,7 +181,7 @@ struct VCProfileView: View {
             }
             
             if isDeleted {
-                AlertView(title: "Attention!", message: "Do you really want to delete your account? You lose all your information, without permission to return them back!") { success in
+                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to delete your account? You lose all your information, without permission to return them back!", comment: "")) { success in
                     if success {
                         delete()
                     } else {
@@ -182,7 +192,7 @@ struct VCProfileView: View {
             }
             
             if isError {
-                AlertView(title: "Error", message: error?.localizedDescription ?? "Error occured") { success in
+                AlertView(title: NSLocalizedString("Error", comment: ""), message: error?.localizedDescription ?? "Error occured") { success in
                 }
                 .padding(.bottom, 100)
             }
@@ -198,6 +208,7 @@ struct VCProfileView: View {
         firebaseDBManager.setDefaultValue()
         withAnimation(.easeInOut) {
             logStatus = false
+            nameStatus = false
         }
     }
     
@@ -211,6 +222,7 @@ struct VCProfileView: View {
                 firebaseDBManager.setDefaultValue()
                 withAnimation(.easeInOut) {
                     logStatus = false
+                    nameStatus = false
                 }
             }
         }

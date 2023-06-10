@@ -11,6 +11,7 @@ import CoreData
 struct ContentView: View {
     
     @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("name_status") var nameStatus: Bool = false
     
     var firebaseDBManager = FirebaseDBManager()
     var adManager = AdManager()
@@ -22,14 +23,19 @@ struct ContentView: View {
                 .preferredColorScheme(.dark)
                 .environmentObject(firebaseDBManager)
                 .environmentObject(adManager)
-                
-                
+            
+            
+        }
+        else if nameStatus {
+            VCNameCreationView()
+                .environmentObject(firebaseDBManager)
+            
         } else {
             WelcomeScreenView()
                 .preferredColorScheme(.light)
                 .environmentObject(firebaseDBManager)
         }
-
+        
     }
 }
 
