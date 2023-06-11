@@ -21,25 +21,35 @@ struct AlertView: View {
     var body: some View {
         
         RoundedRectangle(cornerRadius: 15)
-            .fill(Color.clear)
-            .frame(width: 260, height: 260)
+            .fill(Color.white)
+            .frame(width: 240, height: 240)
             .overlay {
                 ZStack {
-                    BlurView(style: .light)
-                        .cornerRadius(15)
+//                    BlurView(style: .light)
+//                        .cornerRadius(15)
                     
-                    VStack(alignment: .center) {
-                        Text(title)
-                            .font(.title2)
+                    VStack(alignment: .center, spacing: 15) {
                         
-                        Text(message)
-                            .font(.title3)
+                        VStack(spacing: 5) {
+                            Text(title)
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.black)
                             
-                        switch alertType {
-                        case .alert:
-                            alertButtons()
-                        case .error:
-                            errorButton()
+                            Text(message)
+                                .font(.system(size: 15, weight: .regular, design: .rounded))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.black)
+                        }
+                        
+                        VStack {
+                            
+                            switch alertType {
+                            case .alert:
+                                    alertButtons()
+                            case .error:
+                                errorButton()
+                            }
                         }
                         
                     }
@@ -56,9 +66,10 @@ struct AlertView: View {
             } label: {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(.green)
-                    .frame(height: 30)
+                    .frame(width: 90, height: 30)
                     .overlay {
                         Text("Yes")
+                            .foregroundColor(.white)
                     }
             }
             
@@ -67,9 +78,10 @@ struct AlertView: View {
             } label: {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(.red)
-                    .frame(height: 30)
+                    .frame(width: 90, height: 30)
                     .overlay {
                         Text("No")
+                            .foregroundColor(.white)
                     }
             }
         }
@@ -81,10 +93,25 @@ struct AlertView: View {
         } label: {
             RoundedRectangle(cornerRadius: 15)
                 .fill(.green)
-                .frame(height: 30)
+                .frame(width: 90, height: 30)
                 .overlay {
                     Text("OK")
+                        .foregroundColor(.white)
                 }
+        }
+    }
+}
+
+struct AlertView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black
+            
+            VStack {
+                AlertView(title: "Attention!", message: "Do you really want to delete your account? You lose all your information, without permission to return them back" , alertType: .alert) { success in
+                    
+                }
+            }
         }
     }
 }

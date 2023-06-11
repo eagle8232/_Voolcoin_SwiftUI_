@@ -61,6 +61,8 @@ struct VCSettingsButtonsView: View {
     
     @Binding var isPresentingRateView: Bool
     @State var isPresentingInviteFriends: Bool = false
+    @State var isPresentionAboutView: Bool = false
+    
     @State var isSignOut: Bool = false
     @State var isDeleted: Bool = false
     @State var isError: Bool = false
@@ -85,7 +87,7 @@ struct VCSettingsButtonsView: View {
                         isPresentingInviteFriends = true
                     }
                     
-                    SettingsButton(name: NSLocalizedString("Rate the App", comment: ""), imageName: "star", imageColor: .yellow) {
+                    SettingsButton(name: NSLocalizedString("Rate The App", comment: ""), imageName: "star", imageColor: .yellow) {
                         openAppStore()
                     }
                 }
@@ -96,11 +98,11 @@ struct VCSettingsButtonsView: View {
                 
                 VStack {
                     SettingsButton(name: NSLocalizedString("Terms & Conditions", comment: ""), imageName: "text.book.closed", imageColor: .black) {
-                        isPresentingInviteFriends = true
+                        openSafari()
                     }
                     
                     SettingsButton(name: NSLocalizedString("Privacy & Policy", comment: ""), imageName: "lock", imageColor: .green) {
-                        isPresentingInviteFriends = true
+                        openSafari()
                     }
                 }
                 .font(.system(size: 17, weight: .semibold))
@@ -109,8 +111,8 @@ struct VCSettingsButtonsView: View {
                 Divider()
                 
                 VStack {
-                    SettingsButton(name: NSLocalizedString("App's version: 1.0", comment: ""), imageName: "apps.iphone", imageColor: .gray) {
-                        
+                    SettingsButton(name: NSLocalizedString("About App", comment: ""), imageName: "apps.iphone", imageColor: .gray) {
+                        isPresentionAboutView.toggle()
                     }
                     
                     SettingsButton(name: NSLocalizedString("Contact Us", comment: ""), imageName: "tray", imageColor: .blue) {
@@ -144,7 +146,9 @@ struct VCSettingsButtonsView: View {
                     if success {
                         signOut()
                     } else {
-                        isSignOut = false
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isSignOut = false
+                        }
                     }
                 }
             }
@@ -154,15 +158,36 @@ struct VCSettingsButtonsView: View {
                     if success {
                         delete()
                     } else {
-                        isDeleted = false
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isDeleted = false
+                        }
                     }
                 }
             }
             
             if isError {
                 AlertView(title: NSLocalizedString("Error", comment: ""), message: error?.localizedDescription ?? "Error occured", alertType: .error) { success in
-                    
+                    isError = false
                 }
+                .onAppear {
+                    isDeleted = false
+                }
+            }
+            
+            if isPresentingInviteFriends {
+                AlertView(title: NSLocalizedString("Referral link", comment: ""), message: NSLocalizedString("Coming soon...", comment: ""), alertType: .error) { success in
+                    if success {
+                        
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isPresentingInviteFriends = false
+                        }
+                        
+                    }
+                }
+            }
+            
+            if isPresentionAboutView {
+                AboutAppView()
             }
             
         }
@@ -197,7 +222,7 @@ struct VCSettingsButtonsView: View {
     }
     
     private func openAppStore() {
-        if let url = URL(string: "itms-apps://itunes.apple.com/app/your-app-id") { // Замените "your-app-id" на фактический идентификатор вашего приложения
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/com.insomnia.Voolcoin") { // Замените "your-app-id" на фактический идентификатор вашего приложения
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
@@ -206,6 +231,12 @@ struct VCSettingsButtonsView: View {
         let emailURL = URL(string: "mailto:\(email)")
         if let url = emailURL, UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    private func openSafari() {
+        if let url = URL(string: "https://www.apple.com") {
+            UIApplication.shared.open(url)
         }
     }
     
@@ -260,8 +291,8 @@ struct SettingsButton: View {
 }
 
 
-struct VCSettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        VCSettingsView()
-    }
-}
+//struct VCSettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VCSettingsView()
+//    }
+//}

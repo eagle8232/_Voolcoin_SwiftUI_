@@ -6,8 +6,8 @@
   
 */
 
-"Welcome back" = "Demnächst...";
-"Income" = "Einkommen";
+"Welcome back" = "Willkommen zurück";
+"Income" = "Erträge";
 "Outcome" = "Ergebnis";
 "Daily rewards" = "Tägliche Belohnungen";
 "The chance to win rewards from 0.1 to 10 voolcoins" = "Die Chance, Belohnungen von 0,1 bis 10 Voolcoins zu gewinnen";
@@ -63,6 +63,24 @@
 "Coming soon..." = "Demnächst...";
 
 "Contact Us" = "Kontakt";
-"App's version: 1.0" = "Version der Anwendung: 1.0";
-"Rewards" = "Belohnungen";
-"Total amount:" = "Gesamtbetrag:";
+"About App" = "Über App";
+"Rewards" = "Prämien";
+"Total Amount:" = "Gesamtbetrag:";
+"Version: 1.0" = "Version: 1.0";
+
+
+"Exchange Voolcoins" = "Voolcoins umtauschen";
+"Coming soon!" = "Demnächst!";
+"We understand your dedication and time invested in our app. Rest assured, your efforts are valuable to us. We are diligently working to introduce new crypto coins that will provide additional opportunities for growth and exploration. Stay tuned for updates, as we continue to enhance your crypto experience. Thank you for being a part of our community!" = "Wir verstehen Ihr Engagement und die Zeit, die Sie in unsere App investieren. Seien Sie versichert, dass Ihre Bemühungen für uns wertvoll sind. Wir arbeiten fleißig an der Einführung neuer Krypto-Münzen, die zusätzliche Möglichkeiten für Wachstum und Erkundung bieten werden. Bleiben Sie auf dem Laufenden, denn wir werden Ihr Krypto-Erlebnis weiter verbessern. Vielen Dank, dass Sie ein Teil unserer Gemeinschaft sind!";
+
+"Tap." = "Tap.";
+"Watch." = "Watch.";
+"Earn." = "Earn.";
+
+"Great!" = "Great!";
+
+"Thank you for your dedication and the time you are investing in our app. We truly appreciate your efforts, and want you to know how valuable they are to us. Rest assured, we are working hard to bring new crypto coins into the app, which will offer you more opportunities to grow and explore. Stay tuned for updates as we strive to enhance your crypto experience. We sincerely thank you for being a part of our community!" = "Vielen Dank für Ihr Engagement und die Zeit, die Sie in unsere App investieren. Wir schätzen Ihre Bemühungen sehr und möchten, dass Sie wissen, wie wertvoll sie für uns sind. Seien Sie versichert, wir arbeiten hart daran, neue Kryptomünzen in die App zu integrieren, die Ihnen mehr Möglichkeiten zum Wachsen und Erkunden bieten. Bleiben Sie auf dem Laufenden, um Updates zu erhalten, während wir uns bemühen, Ihr Krypto-Erlebnis zu verbessern. Wir danken Ihnen herzlich dafür, dass Sie Teil unserer Gemeinschaft sind!";
+
+"As we continue to expand our offerings, we are also exploring partnerships with leading blockchain projects and industry experts. This will enable us to bring you the latest insights and innovations in the world of cryptocurrency." = "Während wir unser Angebot weiter ausbauen, prüfen wir auch Partnerschaften mit führenden Blockchain-Projekten und Branchenexperten. Dadurch können wir Ihnen die neuesten Erkenntnisse und Innovationen in der Welt der Kryptowährungen bieten.";
+
+"Your support and participation play a vital role in shaping the future of our app. Together, we are building a vibrant community of crypto enthusiasts, and we are excited to have you on board for this journey. Thank you once again for your unwavering dedication and trust in our app." = "Ihre Unterstützung und Teilnahme spielen eine entscheidende Rolle bei der Gestaltung der Zukunft unserer App. Gemeinsam bauen wir eine lebendige Community von Krypto-Enthusiasten auf und freuen uns, Sie auf dieser Reise an Bord zu haben. Nochmals vielen Dank für Ihren unerschütterlichen Einsatz und Ihr Vertrauen in unsere App.";

@@ -40,8 +40,6 @@ struct VCProfileView: View {
     @AppStorage("log_status") var logStatus: Bool = false
     @AppStorage("name_status") var nameStatus: Bool = false
     
-    
-    
     var userModel: VCUserModel?
     
     var body: some View {
@@ -50,7 +48,7 @@ struct VCProfileView: View {
             if isShowingProfileView {
                 
                 BlurView(style: .systemUltraThinMaterialDark)
-
+                
                 Color.black
                     .opacity(0.3)
                     .ignoresSafeArea()
@@ -116,7 +114,7 @@ struct VCProfileView: View {
                             
                             
                             HStack {
-                                Text("Total amount:")
+                                Text("Total Amount:")
                                     .font(.system(size: 18, weight: .medium, design: .default))
                                     .foregroundColor(.white)
                                 
@@ -164,7 +162,7 @@ struct VCProfileView: View {
             .background(
                 ZStack {
                     VCLinearGradientView(startPoint: startAnimationPoint, endPoint: endAnimationPoint)
-//                        .cornerRadius(30)
+                    //                        .cornerRadius(30)
                 }
             )
             
@@ -174,7 +172,9 @@ struct VCProfileView: View {
                     if success {
                         signOut()
                     } else {
-                        isSignOut = false
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isSignOut = false
+                        }
                     }
                 }
                 .padding(.bottom, 100)
@@ -185,7 +185,9 @@ struct VCProfileView: View {
                     if success {
                         delete()
                     } else {
-                        isDeleted = false
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isDeleted = false
+                        }
                     }
                 }
                 .padding(.bottom, 100)
@@ -193,6 +195,10 @@ struct VCProfileView: View {
             
             if isError {
                 AlertView(title: NSLocalizedString("Error", comment: ""), message: error?.localizedDescription ?? "Error occured", alertType: .alert) { success in
+                    isError = false
+                }
+                .onAppear {
+                    isDeleted = false
                 }
                 .padding(.bottom, 100)
             }
@@ -200,7 +206,7 @@ struct VCProfileView: View {
         }
         
     }
-
+    
     func signOut() {
         isSignOut = false
         try? Auth.auth().signOut()

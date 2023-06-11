@@ -25,6 +25,7 @@ struct ContentView: View {
                 .environmentObject(adManager)
             
             
+            
         }
         else if nameStatus {
             VCNameCreationView()

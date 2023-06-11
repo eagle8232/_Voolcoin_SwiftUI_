@@ -15,10 +15,24 @@ struct VCCardView: View {
     @Binding var isPresentingInfoView: Bool
     @Binding var chosenType: TransactionType
     
+    var textOfOutcome = NSLocalizedString("Outcome", comment: "")
+    
     
     var cardAmount: Double = 0.0
     var lastIncome: Double = 0.0
     var lastOutcome: Double = 0.0
+    
+    private func calculateWidth(word: String) -> CGFloat {
+        let wordWidth = word.size(withAttributes: [.font: UIFont.systemFont(ofSize: 14)]).width
+        print(word.count)
+        if word.count > 6 {
+            print(word.count)
+            return 145
+        }
+        
+        return 130
+         // Add padding to the word's width
+    }
     
     var body: some View {
         
@@ -30,18 +44,7 @@ struct VCCardView: View {
                 .shadow(color: .green, radius: 5)
             
             HStack {
-                Button {
-                    withAnimation(.easeInOut) {
-                        isPresentingInfoView = true
-                    }
-                } label: {
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.gray)
-                        .frame(width: 20, height: 20)
-                        .overlay {
-                            Image(systemName: "info")
-                        }
-                }
+                
                 VStack(spacing: 15) {
                     
                     HStack {
@@ -62,6 +65,20 @@ struct VCCardView: View {
                         Text("≈ $\((String(format: "%.1f", firebaseDMManager.cardAmount * 0) ))")
                             .foregroundColor(Color(.gray).opacity(0.8))
                             .font(.system(size: 21))
+                        
+                        Button {
+                            withAnimation(.easeInOut) {
+                                isPresentingInfoView = true
+                            }
+                        } label: {
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color.gray.opacity(0.6))
+                                .frame(width: 23, height: 23)
+                                .overlay {
+                                    Image(systemName: "info")
+                                        .opacity(0.7)
+                                }
+                        }
                     }
                     
                     HStack(spacing: 15) {
@@ -84,7 +101,7 @@ struct VCCardView: View {
                                     
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text("Income")
-                                            .font(.system(size: 15, weight: .light, design: .default))
+                                            .font(.system(size: 14, weight: .light, design: .default))
                                             .opacity(0.9)
                                             .foregroundColor(.white)
                                         
@@ -99,10 +116,9 @@ struct VCCardView: View {
                                 .padding(.horizontal)
                             }
                         
-                        
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color.gray.opacity(0.5))
-                            .frame(width: 140, height: 50)
+                            .frame(width: calculateWidth(word: textOfOutcome), height: 50)
                             .overlay {
                                 HStack {
                                     Button {
@@ -120,7 +136,7 @@ struct VCCardView: View {
                                     Spacer()
                                     
                                     VStack(alignment: .leading, spacing: 4) {
-                                        Text("Outcome")
+                                        Text(textOfOutcome)
                                             .font(.system(size: 14, weight: .light, design: .default))
                                             .opacity(0.9)
                                             .foregroundColor(.white)

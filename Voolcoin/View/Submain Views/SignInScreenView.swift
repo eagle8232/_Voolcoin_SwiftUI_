@@ -139,6 +139,7 @@ struct SignInScreenView: View {
                 }
                 
             }
+            .padding()
             
             if loginModel.showError {
                 AlertView(title: "Error", message: loginModel.errorMessage, alertType: .error) { _ in

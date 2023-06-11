@@ -44,8 +44,12 @@ struct DailyRewards: View {
                 let watchedCard = rewardModel.watchedCards[cardKey] ?? false
                 let isShowCard = rewardModel.watchedCards["card\(Int(cardKey.dropFirst(4))! - 1)"] ?? true
                 
-                if isShowCard && !(rewardModel.watchedCards["card3"] ?? false) {
+                let lastWatchedCard = (rewardModel.watchedCards["card3"] ?? false)
+                
+                if isShowCard && !lastWatchedCard {
                     VCDailyRewardCardView(isWatchedCard: watchedCard)
+                } else if lastWatchedCard {
+                    VCBlockedCardView(rewardState: .watched)
                 } else {
                     VCBlockedCardView()
                 }

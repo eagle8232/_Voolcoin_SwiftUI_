@@ -40,21 +40,14 @@ struct VCAllTransactionsView: View {
                     
                     VCSegmentedControl(chosenType: $chosenType)
                     
-                    DateView(currentDate: $currentDate, totalAmount: $totalAmount)
-                    
-                    ZStack {
-                        Color.black.opacity(0.75)
-                            .ignoresSafeArea()
+                    VStack(alignment: .center, spacing: -10) {
                         
-                        VStack(alignment: .center) {
-                            HStack {
-                                Text("Transactions")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color.white)
-                                totalAmount(totalAmount: totalAmount)
-                                    .padding()
-                            }
+                        DateView(currentDate: $currentDate, totalAmount: $totalAmount)
+                        
+                        Voolcoin.totalAmount(totalAmount: totalAmount)
+                            .padding()
+                    }
+                        
                             ScrollView(showsIndicators: false) {
                                 ForEach(Array(transactions.enumerated()).reversed(), id: \.1.date) { (index, transactionModel) in
                                     if isSameDay(currentDateString: currentDate.toString(format: "yyyy-MM-dd HH:mm:ss"), rewardedDateString: transactionModel.date) {
@@ -68,8 +61,6 @@ struct VCAllTransactionsView: View {
                             }
                             .ignoresSafeArea()
                         }
-                        
-                    }
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -98,7 +89,7 @@ struct VCAllTransactionsView: View {
     func totalAmount(totalAmount: Double) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .frame(width: 150, height: 35)
-            .foregroundColor(.yellow)
+            .foregroundColor(.yellow.opacity(0.65))
             .overlay {
                 HStack(alignment: .center, spacing: 2) {
                     
@@ -127,7 +118,6 @@ struct VCAllTransactionsView: View {
         
         return components1.day == components2.day
     }
-}
 
 struct DateView: View {
     @Binding var currentDate: Date
@@ -177,3 +167,5 @@ struct VCTransactionVieww_Previews: PreviewProvider {
         VCAllTransactionsView(isPresenting: .constant(true), chosenType: .constant(.all), transactions: [VCTransactionModel(type: .income, amount: 5.43, date: "")])
     }
 }
+
+

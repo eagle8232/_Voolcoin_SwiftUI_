@@ -30,7 +30,7 @@ struct VCDailyRewardCardView: View {
                     .fill(.gray).opacity(0.3)
                     .blur(radius: 5)
                     .frame(width: 95, height: 150)
-                    .shadow(color: .green, radius: isGlowing ? 39 : 0)
+                    .shadow(color: .green, radius: isGlowing ? 69 : 0)
                     .onAppear {
                         startGlowAnimation()
                     }

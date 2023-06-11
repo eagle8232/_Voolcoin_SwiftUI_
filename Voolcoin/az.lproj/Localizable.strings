@@ -60,6 +60,24 @@
 "Coming soon..." = "Tezliklə...";
 
 "Contact Us" = "Əlaqə saxlayın";
-"App's version: 1.0" = "Proqramın versiyası: 1.0";
-"Rewards" = "Mükafatlar";
-"Total amount:" = "Ümumi miqdar:";
+"About App" = "Proqram haqqında";
+"Rewards" = "Mükafat";
+"Total Amount:" = "Ümumi miqdar:";
+"Version: 1.0" = "Versiya: 1.0";
+
+
+"Exchange Voolcoins" = "Voolcoins mübadiləsi";
+"Coming soon!" = "Tezliklə!";
+"We understand your dedication and time invested in our app. Rest assured, your efforts are valuable to us. We are diligently working to introduce new crypto coins that will provide additional opportunities for growth and exploration. Stay tuned for updates, as we continue to enhance your crypto experience. Thank you for being a part of our community!" = "Tətbiqimizə sərf etdiyiniz fədakarlığı və vaxtınızı başa düşürük. Əmin olun, səyləriniz bizim üçün dəyərlidir. Biz böyümə və kəşfiyyat üçün əlavə imkanlar təmin edəcək yeni kriptovalyutaları təqdim etmək üçün səylə çalışırıq. Kriptovalyuta təcrübənizi təkmilləşdirməyə davam etdiyimiz üçün yeniləmələr üçün bizi izləyin. Cəmiyyətimizin bir hissəsi olduğunuz üçün təşəkkür edirik!";
+
+"Tap." = "Bas.";
+"Watch." = "Bax.";
+"Earn." = "Qazan.";
+
+"Great!" = "Əla!";
+
+"Thank you for your dedication and the time you are investing in our app. We truly appreciate your efforts, and want you to know how valuable they are to us. Rest assured, we are working hard to bring new crypto coins into the app, which will offer you more opportunities to grow and explore. Stay tuned for updates as we strive to enhance your crypto experience. We sincerely thank you for being a part of our community!" = "Fədakarlığınıza və tətbiqimizə sərmayə qoyduğunuz vaxta görə təşəkkür edirik. Biz sizin səylərinizi həqiqətən yüksək qiymətləndiririk və onların bizim üçün nə qədər dəyərli olduğunu bilmənizi istəyirik. Əmin olun, biz sizə böyümək və araşdırmaq üçün daha çox imkanlar təqdim edəcək yeni kripto sikkələri tətbiqə gətirmək üçün çox çalışırıq. Kriptovalyuta təcrübənizi təkmilləşdirməyə çalışdığımız üçün yeniləmələr üçün bizi izləyin. Cəmiyyətimizin bir hissəsi olduğunuz üçün sizə səmimi qəlbdən təşəkkür edirik!";
+
+"As we continue to expand our offerings, we are also exploring partnerships with leading blockchain projects and industry experts. This will enable us to bring you the latest insights and innovations in the world of cryptocurrency." = "Təkliflərimizi genişləndirməyə davam etdikcə, biz həmçinin aparıcı blokçeyn layihələri və sənaye ekspertləri ilə tərəfdaşlığı araşdırırıq. Bu, sizə kriptovalyuta dünyasında ən son anlayışları və yenilikləri çatdırmağa imkan verəcək.";
+
+"Your support and participation play a vital role in shaping the future of our app. Together, we are building a vibrant community of crypto enthusiasts, and we are excited to have you on board for this journey. Thank you once again for your unwavering dedication and trust in our app." = "Dəstəyiniz və iştirakınız tətbiqimizin gələcəyinin formalaşmasında mühüm rol oynayır. Birlikdə biz kriptovalyuta həvəskarlarından ibarət canlı icma qururuq və sizi bu səyahətdə görməkdən məmnunuq. Tətbiqimizə sarsılmaz sədaqətinizə və etibarınıza görə bir daha təşəkkür edirik.";

@@ -12,5 +12,7 @@ enum DateFormatKey: String {
 }
 
 enum AppStrings: String {
-    case info = "We have some crypto coins lined up for future release. We understand your dedication and time invested in our app. Rest assured, your efforts are valuable to us. We are diligently working to introduce new crypto coins that will provide additional opportunities for growth and exploration. Stay tuned for updates, as we continue to enhance your crypto experience. Thank you for being a part of our community"
+    case info1 = "Thank you for your dedication and the time you are investing in our app. We truly appreciate your efforts, and want you to know how valuable they are to us. Rest assured, we are working hard to bring new crypto coins into the app, which will offer you more opportunities to grow and explore. Stay tuned for updates as we strive to enhance your crypto experience. We sincerely thank you for being a part of our community!"
+    case info2 = "As we continue to expand our offerings, we are also exploring partnerships with leading blockchain projects and industry experts. This will enable us to bring you the latest insights and innovations in the world of cryptocurrency."
+    case info3 = "Your support and participation play a vital role in shaping the future of our app. Together, we are building a vibrant community of crypto enthusiasts, and we are excited to have you on board for this journey. Thank you once again for your unwavering dedication and trust in our app."
 }

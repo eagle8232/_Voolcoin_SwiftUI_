@@ -62,7 +62,25 @@
 "Coming soon..." = "قريباً...";
 
 "Contact Us" = "اتصل بنا";
-"App's version: 1.0" = "إصدار التطبيق: 1.0";
+"About App" = "حول التطبيق";
 "Rewards" = "المكافآت";
 "Error" = "خطأ";
-"Total amount:" = "المبلغ الإجمالي:";
+"Total Amount:" = "المبلغ الإجمالي:";
+"Version: 1.0" = "1.0 إصدار";
+
+
+"Exchange Voolcoins" = "تبادل Voolcoins";
+"Coming soon!" = "قريباً!";
+"We understand your dedication and time invested in our app. Rest assured, your efforts are valuable to us. We are diligently working to introduce new crypto coins that will provide additional opportunities for growth and exploration. Stay tuned for updates, as we continue to enhance your crypto experience. Thank you for being a part of our community!" = "نحن نتفهم تفانيك ووقتك المستثمر في تطبيقنا. كن مطمئنًا ، جهودك قيمة بالنسبة لنا. نحن نعمل بجد لتقديم عملات رقمية جديدة من شأنها أن توفر فرصًا إضافية للنمو والاستكشاف. ترقبوا التحديثات ، حيث نواصل تحسين تجربة التشفير الخاصة بك. شكرا لكونك جزء من مجتمعنا!";
+
+"Tap." = "مقبض.";
+"Watch." = "يشاهد.";
+"Earn." = "يكسب.";
+
+"Great!" = "عظيم!";
+
+"Thank you for your dedication and the time you are investing in our app. We truly appreciate your efforts, and want you to know how valuable they are to us. Rest assured, we are working hard to bring new crypto coins into the app, which will offer you more opportunities to grow and explore. Stay tuned for updates as we strive to enhance your crypto experience. We sincerely thank you for being a part of our community!" = "شكرًا لك على تفانيك والوقت الذي تستثمره في تطبيقنا. نحن نقدر جهودك حقًا ، ونريدك أن تعرف مدى قيمتها بالنسبة لنا. كن مطمئنًا ، نحن نعمل بجد لجلب عملات تشفير جديدة إلى التطبيق ، والتي ستوفر لك المزيد من الفرص للنمو والاستكشاف. ترقبوا التحديثات لأننا نسعى جاهدين لتحسين تجربة التشفير الخاصة بك. نشكرك بصدق على كونك جزءًا من مجتمعنا!";
+
+"As we continue to expand our offerings, we are also exploring partnerships with leading blockchain projects and industry experts. This will enable us to bring you the latest insights and innovations in the world of cryptocurrency." = "بينما نواصل توسيع عروضنا ، فإننا نستكشف أيضًا شراكات مع مشاريع blockchain الرائدة وخبراء الصناعة. سيمكننا ذلك من تقديم أحدث الأفكار والابتكارات في عالم العملة المشفرة.";
+
+"Your support and participation play a vital role in shaping the future of our app. Together, we are building a vibrant community of crypto enthusiasts, and we are excited to have you on board for this journey. Thank you once again for your unwavering dedication and trust in our app." = "يلعب دعمك ومشاركتك دورًا حيويًا في تشكيل مستقبل تطبيقنا. معًا ، نبني مجتمعًا نابضًا بالحياة من عشاق العملات المشفرة ، ويسعدنا انضمامك إلينا في هذه الرحلة. شكرًا لك مرة أخرى على تفانيك وثقتك في تطبيقنا.";

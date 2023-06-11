@@ -7,8 +7,8 @@
 */
 
 "Welcome back" = "Bem-vindo de volta";
-"Income" = "Rendimento";
-"Outcome" = "Resultado";
+"Income" = "Lucro";
+"Outcome" = "Efeito";
 "Daily rewards" = "Recompensas diárias";
 "The chance to win rewards from 0.1 to 10 voolcoins" = "A oportunidade de ganhar prémios de 0,1 a 10 voolcoins";
 "Transactions" = "Transacções";
@@ -38,7 +38,7 @@
 "Yes" = "Sim";
 "Transactions" = "Transacções";
 "Unlock voolcoins" = "Desbloquear voolcoins";
-"Claim" = "Reclamação";
+"Claim" = "Queixa";
 "Error" = "Erro";
 "Reward not loaded. Please try again later." = "O prémio não foi carregado. Por favor, tente novamente mais tarde.";
 
@@ -62,6 +62,24 @@
 "Coming soon..." = "Em breve...";
 
 "Contact Us" = "Contactar-nos";
-"App's version: 1.0" = "Versão da aplicação: 1.0";
+"About App" = "Sobre a aplicação";
 "Rewards" = "Prémios";
-"Total amount:" = "Montante total:";
+"Total Amount:" = "Montante total:";
+"Version: 1.0" = "Versão: 1.0";
+
+
+"Exchange Voolcoins" = "Trocar Voolcoins";
+"Coming soon!" = "Em breve!";
+"We understand your dedication and time invested in our app. Rest assured, your efforts are valuable to us. We are diligently working to introduce new crypto coins that will provide additional opportunities for growth and exploration. Stay tuned for updates, as we continue to enhance your crypto experience. Thank you for being a part of our community!" = "Compreendemos a sua dedicação e o tempo investido na nossa aplicação. Pode ter a certeza de que os seus esforços são valiosos para nós. Estamos a trabalhar diligentemente para introduzir novas criptomoedas que proporcionarão oportunidades adicionais de crescimento e exploração. Fique atento às atualizações, pois continuamos a aprimorar sua experiência com criptografia. Obrigado por fazeres parte da nossa comunidade!";
+
+"Tap." = "Tocar.";
+"Watch." = "Assistir.";
+"Earn." = "Ganhar.";
+
+"Great!" = "Ótimo!";
+
+"Thank you for your dedication and the time you are investing in our app. We truly appreciate your efforts, and want you to know how valuable they are to us. Rest assured, we are working hard to bring new crypto coins into the app, which will offer you more opportunities to grow and explore. Stay tuned for updates as we strive to enhance your crypto experience. We sincerely thank you for being a part of our community!" = "Obrigado pela sua dedicação e pelo tempo que está investindo em nosso app. Nós realmente apreciamos seus esforços e queremos que você saiba como eles são valiosos para nós. Fique tranquilo, estamos trabalhando duro para trazer novas criptomoedas para o aplicativo, o que oferecerá a você mais oportunidades de crescimento e exploração. Fique atento às atualizações enquanto nos esforçamos para aprimorar sua experiência criptográfica. Agradecemos sinceramente por fazer parte da nossa comunidade!";
+
+"As we continue to expand our offerings, we are also exploring partnerships with leading blockchain projects and industry experts. This will enable us to bring you the latest insights and innovations in the world of cryptocurrency." = "À medida que continuamos a expandir nossas ofertas, também estamos explorando parcerias com os principais projetos de blockchain e especialistas do setor. Isso nos permitirá trazer a você os insights e inovações mais recentes no mundo das criptomoedas.";
+
+"Your support and participation play a vital role in shaping the future of our app. Together, we are building a vibrant community of crypto enthusiasts, and we are excited to have you on board for this journey. Thank you once again for your unwavering dedication and trust in our app." = "Seu apoio e participação desempenham um papel vital na formação do futuro de nosso aplicativo. Juntos, estamos construindo uma comunidade vibrante de entusiastas de criptomoedas e estamos entusiasmados em tê-lo conosco nesta jornada. Obrigado mais uma vez por sua dedicação inabalável e confiança em nosso aplicativo.";

@@ -17,6 +17,8 @@ struct VCHomeView: View {
     @State var errorHandling: Bool = false
     
     @State var showProfileView: Bool = false
+    @State var showInfoView: Bool = false
+    
     
     @State var chosenType: TransactionType = .all
     
@@ -28,7 +30,7 @@ struct VCHomeView: View {
                 
                 ZStack {
                     VCLinearGradientView()
-                        .edgesIgnoringSafeArea(.all)
+                        .ignoresSafeArea(edges: [.leading, .bottom, .trailing])
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         
@@ -42,6 +44,7 @@ struct VCHomeView: View {
                                     .overlay {
                                         Button {
                                             showProfileView = true
+                                            isPresentingInfoView = false
                                         } label: {
                                             Image(systemName: "person")
                                                 .resizable()
