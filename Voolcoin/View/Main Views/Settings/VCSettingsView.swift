@@ -140,7 +140,7 @@ struct VCSettingsButtonsView: View {
             
             
             if isSignOut {
-                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to sign out your account?", comment: "")) { success in
+                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to sign out your account?", comment: ""), alertType: .alert) { success in
                     if success {
                         signOut()
                     } else {
@@ -150,7 +150,7 @@ struct VCSettingsButtonsView: View {
             }
             
             if isDeleted {
-                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to delete your account? You lose all your information, without permission to return them back!", comment: "")) { success in
+                AlertView(title: NSLocalizedString("Attention!", comment: ""), message: NSLocalizedString("Do you really want to delete your account? You lose all your information, without permission to return them back!", comment: ""), alertType: .alert) { success in
                     if success {
                         delete()
                     } else {
@@ -160,7 +160,7 @@ struct VCSettingsButtonsView: View {
             }
             
             if isError {
-                AlertView(title: NSLocalizedString("Error", comment: ""), message: error?.localizedDescription ?? "Error occured") { success in
+                AlertView(title: NSLocalizedString("Error", comment: ""), message: error?.localizedDescription ?? "Error occured", alertType: .error) { success in
                     
                 }
             }

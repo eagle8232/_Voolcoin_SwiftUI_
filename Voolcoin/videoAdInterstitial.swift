@@ -25,8 +25,9 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     var rewardedAd: GADRewardedInterstitialAd?
     var dailyRewardVM = VCDailyRewardsViewModel()
     
-    var onDismiss: ((VCTransactionModel, VCRewardModel) -> Void)?
+    var onDismiss: ((VCTransactionModel, VCRewardModel, (Bool, String)?) -> Void)?
     
+    var error: (Bool, String)?
     
     
     @Published var watchedAmount: Int = 0
@@ -58,6 +59,7 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
             if let error = error {
                 self.isRewardLoaded = false
                 print("Loading failed with error: \(error)")
+                self.error = (true, error.localizedDescription)
             } else {
                 ATTrackingManager.requestTrackingAuthorization { status in
                     switch status {
@@ -82,7 +84,7 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
         }
     }
     
-    func showAd(watchedCards: [String : Bool], rewards: [String : Double], watchedAmount: Int, onDismiss: @escaping (VCTransactionModel, VCRewardModel) -> Void) {
+    func showAd(watchedCards: [String : Bool], rewards: [String : Double], watchedAmount: Int, onDismiss: @escaping (VCTransactionModel, VCRewardModel, (Bool, String)?) -> Void) {
         guard let rewardedInterstitialAd = rewardedAd else {
             isRewardLoaded = false
             return print("Ad wasn't ready.")
@@ -113,7 +115,6 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
     func rewardTheUser(watchedCards: [String: Bool], rewards: [String: Double], watchedAmount: Int) {
         self.watchedAmount = watchedAmount
         
-        
         if (watchedCards["card1"] ?? false) {
             self.watchedCards = watchedCards
             self.rewards = rewards
@@ -136,10 +137,8 @@ final class Rewarded: NSObject, GADFullScreenContentDelegate {
             rewardModel = dailyRewardVM.saveDefaultRewardInfo(rewardAmount: rewardAmount)
         }
         
-        print(rewardModel)
-        
         let transaction = VCTransactionModel(id: nil, type: .income, amount: rewardAmount, date: today)
         
-        onDismiss?(transaction, rewardModel ?? VCRewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: ""))
+        onDismiss?(transaction, rewardModel ?? VCRewardModel(watchedCards: [:], rewardAmount: [:], watchedAmount: 0, rewardedDate: ""), self.error)
     }
 }

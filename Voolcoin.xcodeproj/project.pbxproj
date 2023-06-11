@@ -33,6 +33,7 @@
 		693164E72A24E4E000FF37CB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 693164E62A24E4E000FF37CB /* FirebaseStorage */; };
 		6937AF392A073E5000466471 /* VCRateAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6937AF382A073E5000466471 /* VCRateAppView.swift */; };
 		6937AF3C2A074EAC00466471 /* VCCustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6937AF3B2A074EAC00466471 /* VCCustomTransition.swift */; };
+		6969E8012A356084006F4AEE /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969E8002A356084006F4AEE /* InfoView.swift */; };
 		6976D1DF2A02E4AD006C2CC5 /* VCDailyRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976D1DE2A02E4AD006C2CC5 /* VCDailyRewardView.swift */; };
 		6976D1E22A02E607006C2CC5 /* VCDailyRewardCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976D1E12A02E607006C2CC5 /* VCDailyRewardCardsView.swift */; };
 		6976D1E62A02EEA5006C2CC5 /* VCCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976D1E52A02EEA5006C2CC5 /* VCCardView.swift */; };
@@ -85,6 +86,7 @@
 		693164CE2A248E3A00FF37CB /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		6937AF382A073E5000466471 /* VCRateAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRateAppView.swift; sourceTree = "<group>"; };
 		6937AF3B2A074EAC00466471 /* VCCustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCustomTransition.swift; sourceTree = "<group>"; };
+		6969E8002A356084006F4AEE /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		6976D1DE2A02E4AD006C2CC5 /* VCDailyRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCDailyRewardView.swift; sourceTree = "<group>"; };
 		6976D1E12A02E607006C2CC5 /* VCDailyRewardCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCDailyRewardCardsView.swift; sourceTree = "<group>"; };
 		6976D1E52A02EEA5006C2CC5 /* VCCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCardView.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				8C1B54E02A2756FA0054B95C /* VCProgressView.swift */,
 				8CD4D0C72A2E083500A91055 /* VCBlurView.swift */,
 				8C23546C2A3353A5008C6346 /* VCNameCreationView.swift */,
+				6969E8002A356084006F4AEE /* InfoView.swift */,
 			);
 			path = "Submain Views";
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				8CF5F93C2A025DCB00CF6262 /* Persistence.swift in Sources */,
 				8C0359902A065C76002E164A /* videoAdInterstitial.swift in Sources */,
 				692BA9C12A092FF100202993 /* VCTransactionModel.swift in Sources */,
+				6969E8012A356084006F4AEE /* InfoView.swift in Sources */,
 				8CCA75332A0CAF8300911B4F /* VoolcoinManager.swift in Sources */,
 				8C0B14D02A192C26005FA310 /* CreateAccountView.swift in Sources */,
 				6937AF392A073E5000466471 /* VCRateAppView.swift in Sources */,

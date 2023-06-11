@@ -22,6 +22,12 @@ struct VCDailyRewardCardsView: View {
             HStack {
                 DailyRewards(rewardModel: rewardModel, isShowCardAfterTime: isShowCardAfterTime)
             }
+            
+            if adManager.error.0 {
+                AlertView(title: "Error", message: adManager.error.1, alertType: .error) { _ in
+                    adManager.error.0 = false
+                }
+            }
         }
     }
     
@@ -37,8 +43,6 @@ struct DailyRewards: View {
             ForEach(Array(rewardModel.watchedCards.keys.sorted()), id: \.self) { cardKey in
                 let watchedCard = rewardModel.watchedCards[cardKey] ?? false
                 let isShowCard = rewardModel.watchedCards["card\(Int(cardKey.dropFirst(4))! - 1)"] ?? true
-                
-                
                 
                 if isShowCard && !(rewardModel.watchedCards["card3"] ?? false) {
                     VCDailyRewardCardView(isWatchedCard: watchedCard)

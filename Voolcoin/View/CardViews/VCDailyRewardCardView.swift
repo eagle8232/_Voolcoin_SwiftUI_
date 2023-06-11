@@ -18,9 +18,9 @@ struct VCDailyRewardCardView: View {
     @EnvironmentObject var adManager: AdManager
     @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     @State var isRewardLoaded: Bool = false
+    @State var isGlowing = false
     
     var isWatchedCard: Bool = false
-    var tappedCards: TappedCard = .tappedCard1
     
     var body: some View {
         
@@ -30,30 +30,37 @@ struct VCDailyRewardCardView: View {
                     .fill(.gray).opacity(0.3)
                     .blur(radius: 5)
                     .frame(width: 95, height: 150)
+                    .shadow(color: .green, radius: isGlowing ? 39 : 0)
+                    .onAppear {
+                        startGlowAnimation()
+                    }
                     .overlay {
                         Button {
-                            guard let watchedCards = firebaseDBManager.rewardModel?.watchedCards,
-                                  let rewardAmount = firebaseDBManager.rewardModel?.rewardAmount,
-                                  let watchedAmount = firebaseDBManager.rewardModel?.watchedAmount else {
-                                return
-                            }
-                            adManager.intersitial?.showAd(watchedCards: watchedCards, rewards: rewardAmount, watchedAmount: watchedAmount, onDismiss: {  transaction, rewardModel  in
+                            let watchedCards = firebaseDBManager.rewardModel?.watchedCards ?? [:]
+                            let rewardAmount = firebaseDBManager.rewardModel?.rewardAmount ?? [:]
+                            let watchedAmount = firebaseDBManager.rewardModel?.watchedAmount ?? 0
+
+                            adManager.intersitial?.showAd(watchedCards: watchedCards, rewards: rewardAmount, watchedAmount: watchedAmount, onDismiss: {  transaction, rewardModel, error  in
                                 
-                                guard let userId = Auth.auth().currentUser?.uid else {return}
-                                
-                                print(transaction)
-                                DatabaseViewModel().saveTransactionsToFirestore(userId: userId, transaction: transaction)
-                                
-                                DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: rewardModel)
-                                
-                                firebaseDBManager.transactions?.append(transaction)
-                                firebaseDBManager.rewardModel = rewardModel
-                                firebaseDBManager.rewardState = (rewardModel.watchedCards["card3"] ?? false) ? .watched : .unwatched
-                                firebaseDBManager.calculateCardAmount()
-                                
-                                firebaseDBManager.isShowCardAfterTime = true
-                                
-                                adManager.intersitial = Rewarded()
+                                if let error = error {
+                                    adManager.error = error
+                                } else {
+                                    guard let userId = Auth.auth().currentUser?.uid else {return}
+                                    
+                                    print(transaction)
+                                    DatabaseViewModel().saveTransactionsToFirestore(userId: userId, transaction: transaction)
+                                    
+                                    DatabaseViewModel().saveDailyRewardsInfoToFirestore(userId: userId, dailyRewardsModel: rewardModel)
+                                    
+                                    firebaseDBManager.transactions?.append(transaction)
+                                    firebaseDBManager.rewardModel = rewardModel
+                                    firebaseDBManager.rewardState = (rewardModel.watchedCards["card3"] ?? false) ? .watched : .unwatched
+                                    firebaseDBManager.calculateCardAmount()
+                                    
+                                    firebaseDBManager.isShowCardAfterTime = true
+                                    
+                                    adManager.intersitial = Rewarded()
+                                }
                                 
                             })
                             
@@ -89,9 +96,6 @@ struct VCDailyRewardCardView: View {
                                 }
                             }
                         }
-                        .alert(isPresented: $isRewardLoaded) {
-                            Alert(title: Text("Error"), message: Text("Reward not loaded. Please try again later."), dismissButton: .default(Text("ОК")))
-                        }
                         
                     }
                     .cornerRadius(20)
@@ -120,6 +124,12 @@ struct VCDailyRewardCardView: View {
                     }
                     .cornerRadius(20)
             }
+        }
+    }
+    
+    private func startGlowAnimation() {
+        withAnimation(Animation.easeInOut(duration: 0.8).repeatForever()) {
+            isGlowing = true
         }
     }
 }

@@ -22,9 +22,6 @@ struct SignInScreenView: View {
     
     @StateObject var loginModel: LoginViewModel = .init()
     
-    @State var isPresentingHomeView: Bool = false
-    @State var goToNameCreation: Bool = false
-    
     
     var body: some View {
         
@@ -104,7 +101,9 @@ struct SignInScreenView: View {
                             GoogleSignInButton {
                                 loginModel.signInWithGoogle { success in
                                     if success {
+                                        
                                         firebaseDBManager.fetchData()
+                                        
                                         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
                                             self.logStatus = true
                                         }
@@ -141,13 +140,11 @@ struct SignInScreenView: View {
                 
             }
             
-            .alert(loginModel.errorMessage, isPresented: $loginModel.showError, actions: {
-                
-            })
-            .padding()
-        }
-        .fullScreenCover(isPresented: $goToNameCreation) {
-            VCNameCreationView()
+            if loginModel.showError {
+                AlertView(title: "Error", message: loginModel.errorMessage, alertType: .error) { _ in
+                    loginModel.showError = false
+                }
+            }
         }
         
     }

@@ -12,7 +12,10 @@ struct VCCardView: View {
     @EnvironmentObject var firebaseDMManager: FirebaseDBManager
     
     @Binding var isPresentingTransactionsView: Bool
+    @Binding var isPresentingInfoView: Bool
     @Binding var chosenType: TransactionType
+    
+    
     var cardAmount: Double = 0.0
     var lastIncome: Double = 0.0
     var lastOutcome: Double = 0.0
@@ -26,100 +29,113 @@ struct VCCardView: View {
                 .cornerRadius(20)
                 .shadow(color: .green, radius: 5)
             
-            
-            VStack(spacing: 15) {
-                
-                HStack {
+            HStack {
+                Button {
+                    withAnimation(.easeInOut) {
+                        isPresentingInfoView = true
+                    }
+                } label: {
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color.gray)
+                        .frame(width: 20, height: 20)
+                        .overlay {
+                            Image(systemName: "info")
+                        }
+                }
+                VStack(spacing: 15) {
                     
                     HStack {
                         
-                        Image("voolCoin")
-                            .resizable()
-                            .frame(width: 37, height: 37)
+                        HStack {
+                            
+                            Image("voolCoin")
+                                .resizable()
+                                .frame(width: 37, height: 37)
+                            
+                            Text("\((String(format: "%.1f", firebaseDMManager.cardAmount) ))")
+                                .font(.system(size: 45, weight: .bold))
+                                .padding(.bottom, 5)
+                                .foregroundColor(.white)
+                            
+                        }
                         
-                        Text("\((String(format: "%.1f", firebaseDMManager.cardAmount) ))")
-                            .font(.system(size: 45, weight: .bold))
-                            .padding(.bottom, 5)
-                            .foregroundColor(.white)
-                        
+                        Text("≈ $\((String(format: "%.1f", firebaseDMManager.cardAmount * 0) ))")
+                            .foregroundColor(Color(.gray).opacity(0.8))
+                            .font(.system(size: 21))
                     }
                     
-                    Text("≈ $\((String(format: "%.1f", firebaseDMManager.cardAmount * 0) ))")
-                        .foregroundColor(Color(.gray).opacity(0.8))
-                        .font(.system(size: 21))
-                }
-                
-                HStack(spacing: 15) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.gray.opacity(0.5))
-                        .frame(width: 130, height: 50)
-                        .overlay {
-                            HStack {
-                                Button {
-                                    isPresentingTransactionsView = true
-                                    chosenType = .income
-                                } label: {
-                                    Image(systemName: "arrow.down")
-                                        .foregroundColor(Color.green)
-                                        .frame(width: 40, height: 40)
-                                        .background(.white.opacity(0.7), in: RoundedRectangle(cornerRadius: 15))
-                                }
-                                
-                                Spacer()
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Income")
-                                        .font(.system(size: 15, weight: .light, design: .default))
-                                        .opacity(0.9)
-                                        .foregroundColor(.white)
+                    HStack(spacing: 15) {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.gray.opacity(0.5))
+                            .frame(width: 130, height: 50)
+                            .overlay {
+                                HStack {
+                                    Button {
+                                        isPresentingTransactionsView = true
+                                        chosenType = .income
+                                    } label: {
+                                        Image(systemName: "arrow.down")
+                                            .foregroundColor(Color.green)
+                                            .frame(width: 40, height: 40)
+                                            .background(.white.opacity(0.7), in: RoundedRectangle(cornerRadius: 15))
+                                    }
                                     
-                                    Text("\((String(format: "%.1f", lastIncome) ))")
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        .lineLimit(1)
-                                        .fixedSize()
-                                        .foregroundColor(.white)
+                                    Spacer()
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Income")
+                                            .font(.system(size: 15, weight: .light, design: .default))
+                                            .opacity(0.9)
+                                            .foregroundColor(.white)
+                                        
+                                        Text("\((String(format: "%.1f", lastIncome) ))")
+                                            .font(.callout)
+                                            .fontWeight(.semibold)
+                                            .lineLimit(1)
+                                            .fixedSize()
+                                            .foregroundColor(.white)
+                                    }
                                 }
+                                .padding(.horizontal)
                             }
-                            .padding(.horizontal)
-                        }
-                    
-                    
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.gray.opacity(0.5))
-                        .frame(width: 140, height: 50)
-                        .overlay {
-                            HStack {
-                                Button {
-                                    isPresentingTransactionsView = true
-                                    chosenType = .outcome
-                                } label: {
+                        
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.gray.opacity(0.5))
+                            .frame(width: 140, height: 50)
+                            .overlay {
+                                HStack {
+                                    Button {
+                                        isPresentingTransactionsView = true
+                                        chosenType = .outcome
+                                    } label: {
+                                        
+                                        
+                                        Image(systemName: "arrow.up")
+                                            .foregroundColor(Color.red)
+                                            .frame(width: 40, height: 40)
+                                            .background(.white.opacity(0.7), in: RoundedRectangle(cornerRadius: 15))
+                                    }
                                     
+                                    Spacer()
                                     
-                                    Image(systemName: "arrow.up")
-                                        .foregroundColor(Color.red)
-                                        .frame(width: 40, height: 40)
-                                        .background(.white.opacity(0.7), in: RoundedRectangle(cornerRadius: 15))
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Outcome")
+                                            .font(.system(size: 14, weight: .light, design: .default))
+                                            .opacity(0.9)
+                                            .foregroundColor(.white)
+                                        
+                                        Text("\((String(format: "%.1f", lastOutcome) ))")
+                                            .font(.callout)
+                                            .fontWeight(.semibold)
+                                            .lineLimit(1)
+                                            .fixedSize()
+                                            .foregroundColor(.white)
+                                    }
                                 }
-                                
-                                Spacer()
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Outcome")
-                                        .font(.system(size: 14, weight: .light, design: .default))
-                                        .opacity(0.9)
-                                        .foregroundColor(.white)
-                                    
-                                    Text("\((String(format: "%.1f", lastOutcome) ))")
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        .lineLimit(1)
-                                        .fixedSize()
-                                        .foregroundColor(.white)
-                                }
+                                .padding()
                             }
-                            .padding()
-                        }
+                    }
                 }
             }
         }
@@ -131,6 +147,6 @@ struct VCCardView: View {
 
 struct VCCardView_Previews: PreviewProvider {
     static var previews: some View {
-        VCCardView(isPresentingTransactionsView: .constant(true), chosenType: .constant(.all), cardAmount: 0)
+        VCCardView(isPresentingTransactionsView: .constant(true), isPresentingInfoView: .constant(true), chosenType: .constant(.all), cardAmount: 0)
     }
 }

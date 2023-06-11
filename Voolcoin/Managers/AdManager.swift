@@ -13,14 +13,13 @@ import FirebaseAuth
 class AdManager: ObservableObject {
     @Published var intersitial: Rewarded?
     @Published var watchedCard: Bool = false
+    @Published var error: (Bool, String) = (false, "")
     
     init() {
         intersitial = Rewarded()
     }
     
-//    func showAd(completion: @escaping ((Bool) -> Void)) {
-        
-//    }
+    
     
     
 }

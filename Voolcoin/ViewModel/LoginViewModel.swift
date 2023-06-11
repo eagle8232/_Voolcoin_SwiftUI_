@@ -12,11 +12,7 @@ import AuthenticationServices
 import GoogleSignIn
 
 class LoginViewModel: ObservableObject {
-//    @Published var mobileNumber: String = ""
-//    @Published var otpCode: String = ""
-    
     @Published var CLIENT_CODE: String = ""
-//    @Published var showOTPField: Bool = false
     
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
@@ -47,6 +43,7 @@ class LoginViewModel: ObservableObject {
         Auth.auth().signIn(with: fireBaseCredential) { result, err in
             if let error = err {
                 print(error.localizedDescription)
+                self.errorMessage = error.localizedDescription
                 completion(false)
             }
             
@@ -58,9 +55,6 @@ class LoginViewModel: ObservableObject {
             
             completion(true)
             //Create and save username to database
-
-            
-            
         }
     }
     
@@ -74,6 +68,7 @@ class LoginViewModel: ObservableObject {
             
             if let error = error {
                 print(error.localizedDescription)
+                self.errorMessage = error.localizedDescription
             }
             
             guard
@@ -87,6 +82,7 @@ class LoginViewModel: ObservableObject {
             Auth.auth().signIn(with: credential) { res, error in
                 if let error = error {
                     print(error.localizedDescription)
+                    self.errorMessage = error.localizedDescription
                     completion(false)
                     return
                 }
@@ -99,15 +95,18 @@ class LoginViewModel: ObservableObject {
                 DatabaseViewModel().saveUserModelToFirestore(userId: user.uid) { success, error in
                     if success {
                         print("It succeeded")
-                        
+                        completion(true)
                     } else if let error = error {
                         print(error)
+                        self.errorMessage = error.localizedDescription
                     }
                 }
                 
-                
-                
                 completion(true)
+                
+                
+                
+//                completion(true)
                 
             }
         }

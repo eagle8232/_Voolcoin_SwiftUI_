@@ -12,6 +12,8 @@ struct VCHomeView: View {
     @EnvironmentObject var firebaseDBManager: FirebaseDBManager
     
     @State var isPresentingTransactionsView: Bool = false
+    @State var isPresentingInfoView: Bool = false
+    
     @State var errorHandling: Bool = false
     
     @State var showProfileView: Bool = false
@@ -83,7 +85,7 @@ struct VCHomeView: View {
                             
                             Spacer()
                             
-                            VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, chosenType: $chosenType, lastIncome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Income"}?.amount ?? 0, lastOutcome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Outcome"}?.amount ?? 0)
+                            VCCardView(isPresentingTransactionsView: $isPresentingTransactionsView, isPresentingInfoView: $isPresentingInfoView, chosenType: $chosenType, lastIncome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Income"}?.amount ?? 0, lastOutcome: firebaseDBManager.transactions?.last {$0.type.rawValue == "Outcome"}?.amount ?? 0)
                             
                             Spacer()
                             
@@ -103,6 +105,10 @@ struct VCHomeView: View {
                     }
                     
                     VCProfileView(isShowingProfileView: $showProfileView, userModel: firebaseDBManager.userModel)
+                    
+                    if isPresentingInfoView {
+                        InfoView(isPresentingInfoView: $isPresentingInfoView)
+                    }
                     
                 }
                 
