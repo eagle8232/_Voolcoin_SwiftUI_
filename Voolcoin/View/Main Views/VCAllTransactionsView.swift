@@ -167,5 +167,3 @@ struct VCTransactionVieww_Previews: PreviewProvider {
         VCAllTransactionsView(isPresenting: .constant(true), chosenType: .constant(.all), transactions: [VCTransactionModel(type: .income, amount: 5.43, date: "")])
     }
 }
-
-

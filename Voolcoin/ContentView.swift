@@ -24,8 +24,6 @@ struct ContentView: View {
                 .environmentObject(firebaseDBManager)
                 .environmentObject(adManager)
             
-            
-            
         }
         else if nameStatus {
             VCNameCreationView()

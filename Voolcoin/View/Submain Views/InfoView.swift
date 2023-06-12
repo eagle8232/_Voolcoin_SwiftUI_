@@ -10,54 +10,60 @@ import Charts
 import FirebaseAuth
 
 struct InfoView: View {
+    
     @Binding var isPresentingInfoView: Bool
-    let infoText1 = NSLocalizedString(AppStrings.info1.rawValue, comment: "")
-    let infoText2 = NSLocalizedString(AppStrings.info2.rawValue, comment: "")
-    let infoText3 = NSLocalizedString(AppStrings.info3.rawValue, comment: "")
     
-    let tapWord = NSLocalizedString("Tap.", comment: "")
-    let watchWord = NSLocalizedString("Watch.", comment: "")
-    let earnWord = NSLocalizedString("Earn.", comment: "")
-    
-    let greatWord = NSLocalizedString("Great!", comment: "")
     var body: some View {
         ZStack {
-            Color.white
-                .ignoresSafeArea()
+            
+            Color.white.edgesIgnoringSafeArea(.all)
             
             ScrollView(showsIndicators: false) {
-                VStack {
-                    Image("coin")
+                
+                VStack(alignment: .center, spacing: 20) {
+                    Image("voolcoin_icon")
                         .resizable()
                         .frame(width: 300, height: 300)
                     
-                    VStack(alignment: .leading, spacing: 20) {
+                    HStack {
+                        
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.green)
+                            .overlay {
+                                Image(systemName: "repeat.circle.fill")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 22, weight: .light, design: .rounded))
+                            }
                         
                         
-                        Text("\(tapWord)\n\(watchWord)\n\(earnWord)")
+                        
+                        Text("Exchange Voolcoins")
                             .foregroundColor(.black)
-                            .font(.system(size: 45, weight: .black))
+                            .font(.system(size: 22, weight: .semibold, design: .rounded))
                             .opacity(0.8)
-                            .padding(.horizontal)
-                        
-                        VStack(alignment: .leading) {
-                            Text("\(infoText1)\n")
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.black)
-                                .font(.system(size: 17, weight: .thin, design: .rounded))
-                            Text("\(infoText2)\n")
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.black)
-                                .font(.system(size: 17, weight: .thin, design: .rounded))
-                            Text("\(infoText3)\n")
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.black)
-                                .font(.system(size: 17, weight: .thin, design: .rounded))
-                            
-                        }
-                        .padding(.horizontal)
+                            .multilineTextAlignment(.center)
                         
                     }
+                    
+                    VStack {
+                        Text("Coming soon!")
+                            .foregroundColor(.black)
+                            .font(.system(size: 50, weight: .bold))
+                            .multilineTextAlignment(.center)
+                            .opacity(0.8)
+                    }
+                    
+                    VStack(spacing: 0) {
+                        
+                        Text("We understand your dedication and time invested in our app. Rest assured, your efforts are valuable to us. We are diligently working to introduce new crypto coins that will provide additional opportunities for growth and exploration. Stay tuned for updates, as we continue to enhance your crypto experience. Thank you for being a part of our community!")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.black)
+                            .font(.system(size: 16, weight: .thin, design: .rounded))
+                    }
+                    .padding()
+                    
+                    
                     
                     Button {
                         withAnimation(.easeInOut) {
@@ -68,14 +74,17 @@ struct InfoView: View {
                             .frame(width: 100, height: 50)
                             .foregroundColor(.green)
                             .overlay {
-                                Text(greatWord)
+                                Text("Great!")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 17, weight: .black))
+                                    .font(.system(size: 18, weight: .black))
                             }
                     }
                     .padding()
+                    
+                    
                 }
             }
+            
         }
     }
 }
@@ -86,34 +95,3 @@ struct InfoView_Previews: PreviewProvider {
         InfoView(isPresentingInfoView: .constant(true))
     }
 }
-
-
-//struct InfoView: View {
-//    @Binding var isPresentingInfoView: Bool
-//
-//    var body: some View {
-//        ZStack {
-//            BlurView(style: .light)
-//                .ignoresSafeArea()
-//                .onTapGesture {
-//                    withAnimation(.easeIn(duration: 0.9)) {
-//                        isPresentingInfoView = false
-//                    }
-//                }
-//
-//            RoundedRectangle(cornerRadius: 15)
-//                .fill(Color.white)
-//                .frame(width: 300, height: 350)
-//                .overlay {
-//                    VStack {
-//                        Text(AppStrings.info.rawValue)
-//                            .font(.system(size: 18, weight: .semibold))
-//
-//                    }
-//                    .foregroundColor(Color.black)
-//                }
-//        }
-//
-//    }
-//}
-

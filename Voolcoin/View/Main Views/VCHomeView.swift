@@ -30,7 +30,7 @@ struct VCHomeView: View {
                 
                 ZStack {
                     VCLinearGradientView()
-                        .ignoresSafeArea(edges: [.leading, .bottom, .trailing])
+                        .edgesIgnoringSafeArea(.all)
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         
